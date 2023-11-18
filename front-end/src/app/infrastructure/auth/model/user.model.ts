@@ -1,5 +1,4 @@
 export interface User {
-    id: number;
     email: string;
     password: string;
     name: string;
@@ -9,7 +8,7 @@ export interface User {
     phoneNumber: string;
     profession: string;
     companyInformation: string;
-    role: UserRole; 
+    confirmationPassword: string;
   }
   
 export enum UserRole {

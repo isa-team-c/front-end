@@ -1,1 +1,47 @@
-<p>registration works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+</head>
+<body>
+    <div class="registrationComponent"></div>
+    <div class="user-form-container">
+        <h2>User Information</h2>
+        <form [formGroup] = "registrationForm" id="userForm" (ngSubmit)="onSubmit()">
+            <label for="email">Email:</label>
+            <input type="email" id="email" formControlName="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" formControlName="password" required>
+
+            <label for="confirmationPassword">Confirm Password:</label>
+            <input type="password" id="confirmationPassword" formControlName="confirmationPassword" required [ngStyle]="{'border-color': (submitted && registrationForm.get('confirmationPassword')?.invalid) || (registrationForm.get('confirmationPassword')?.value !== registrationForm.get('password')?.value) ? 'red' : ''}">
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" formControlName="name" required>
+
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" formControlName="surname" required>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" formControlName="city" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" formControlName="country" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" formControlName="phoneNumber" required>
+
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" formControlName="profession" required>
+
+            <label for="companyInformation">Company Information:</label>
+            <textarea id="companyInformation" formControlName="companyInformation" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

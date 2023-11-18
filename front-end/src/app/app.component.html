@@ -1,6 +1,5 @@
 
 <style>
-  @import url('https://cdn.jsdelivr.net/npm/fontsource-circular:@latest');
 
   .toolbar {
     position: absolute;
@@ -17,7 +16,7 @@
   }
 
   .medbooking-text {
-    font-family: 'Circular', sans-serif;
+    font-family: sans-serif;
     font-weight: 700;
     font-size: 24px;
     margin-left: 90px;
@@ -55,17 +54,15 @@
   .registration:hover {
     background-color: white; 
     color: #2f8cc3; 
-  }
+  }</style>
 
-</style>
-
+<router-outlet></router-outlet>
 <div class="toolbar">
   <div class="medbooking-text">MedBooking</div>
   <div class="profile">
     <button class="login">Log in</button>
-    <button class="registration">Sign up</button>
-  </div>
-     
+    <button class="registration" (click) = "register()">Sign up</button>
+  </div>     
 </div>
 
 
