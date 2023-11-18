@@ -1,0 +1,55 @@
+#profile {
+    max-width: 600px;
+    margin: 150px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family:sans-serif;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: inline-block;
+    width: 150px;
+    font-weight:bold;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  span {
+    display: inline-block;
+    width: calc(100% - 170px);
+  }
+
+  button {
+    background-color: #007bff; /* Plava boja */
+    color: #fff; /* Bela boja teksta */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3; 
+  }
+
+  .save-button {
+    margin-right: 10px;
+  }
+  
+  .cancel-button {
+    background-color: #a29999; 
+  }
+  
+  .cancel-button:hover {
+    background-color: #686767; 
+  }
+  
