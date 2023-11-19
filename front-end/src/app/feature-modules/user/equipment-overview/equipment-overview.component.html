@@ -1,20 +1,29 @@
 <div id="equipment-overview">    
-    <table class="equipment-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Type</th>
-          <th>Quantity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let equipment of equipment">
-          <td>{{ equipment.name }}</td>
-          <td>{{ equipment.description }}</td>
-          <td>{{ equipment.type }}</td>
-          <td>{{ equipment.quantity }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <input type="text" [(ngModel)]="searchQuery" (input)="filterEquipment()" placeholder="Search by Name">
+    
+    <select [(ngModel)]="selectedType" (change)="filterEquipment()">
+      <option value="" selected>All Types</option>
+      <option *ngFor="let type of getUniqueTypes()" [value]="type">{{ type }}</option>
+    </select>
+
+    <button (click)="resetFilters()">Reset Filters</button>
+  
+  <table class="equipment-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipment of filteredEquipment">
+        <td>{{ equipment.name }}</td>
+        <td>{{ equipment.description }}</td>
+        <td>{{ equipment.type }}</td>
+        <td>{{ equipment.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
