@@ -7,6 +7,7 @@ import { RegistrationComponent } from './infrastructure/auth/registration/regist
 import { CompanyModule } from './feature-modules/company/company.module';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CompanyAdministratorModule } from './feature-modules/company-administrator/company-administrator.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     CompanyModule,
     AppRoutingModule,
     HttpClientModule,
+    CompanyAdministratorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
