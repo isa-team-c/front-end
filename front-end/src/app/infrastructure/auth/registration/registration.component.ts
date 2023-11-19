@@ -31,27 +31,41 @@ export class RegistrationComponent implements OnInit {
     phoneNumber: new FormControl('', [Validators.required]),
     profession: new FormControl('', [Validators.required]),
     companyInformation: new FormControl('', [Validators.required]),
+    passwordMismatch: new FormControl(false),
     });
 
 
   onSubmit(): void {
     this.submitted = true;
-    console.log('Form value:', this.registrationForm.value);
-    console.log('Form validity:', this.registrationForm.valid);
-    const user: User = {
-      name: this.registrationForm.value.name || "",
-      surname: this.registrationForm.value.surname || "",
-      email: this.registrationForm.value.email || "",
-      password: this.registrationForm.value.password || "",
-      city: this.registrationForm.value.city || "",
-      country: this.registrationForm.value.country || "",
-      phoneNumber: this.registrationForm.value.phoneNumber || "",
-      profession: this.registrationForm.value.profession || "",
-      companyInformation: this.registrationForm.value.companyInformation || "",
-      confirmationPassword: this.registrationForm.value.confirmationPassword || ""
-    };
 
     if (this.registrationForm.valid) {
+      const password = this.registrationForm.value.password;
+      const confirmationPassword = this.registrationForm.value.confirmationPassword;
+
+      if (password !== confirmationPassword) {
+        this.registrationForm.controls['passwordMismatch'].setValue(true);
+        return;
+      }
+
+      this.registrationForm.controls['passwordMismatch'].setValue(false);
+
+      console.log('Form value:', this.registrationForm.value);
+      console.log('Form validity:', this.registrationForm.valid);
+      const user: User = {
+        name: this.registrationForm.value.name || "",
+        surname: this.registrationForm.value.surname || "",
+        email: this.registrationForm.value.email || "",
+        password: this.registrationForm.value.password || "",
+        city: this.registrationForm.value.city || "",
+        country: this.registrationForm.value.country || "",
+        phoneNumber: this.registrationForm.value.phoneNumber || "",
+        profession: this.registrationForm.value.profession || "",
+        companyInformation: this.registrationForm.value.companyInformation || "",
+        confirmationPassword: this.registrationForm.value.confirmationPassword || "",
+        isVerified: false
+      };
+
+    
       this.authService.register(user).subscribe({
         next: () => {
           this.router.navigate(['home']);

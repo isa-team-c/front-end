@@ -9,6 +9,7 @@ export interface User {
     profession: string;
     companyInformation: string;
     confirmationPassword: string;
+    isVerified: boolean;
   }
   
 export enum UserRole {

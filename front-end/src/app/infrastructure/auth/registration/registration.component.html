@@ -40,6 +40,10 @@
             <label for="companyInformation">Company Information:</label>
             <textarea id="companyInformation" formControlName="companyInformation" required></textarea>
 
+            <div *ngIf="registrationForm.get('passwordMismatch')?.value" class="alert alert-danger">
+                Password and Confirmation Password do not match.
+            </div>            
+
             <button type="submit">Submit</button>
         </form>
     </div>

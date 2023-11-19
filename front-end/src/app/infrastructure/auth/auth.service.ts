@@ -27,4 +27,26 @@ export class AuthService {
       );
   }
 
+  /*verifyUser(id: number) {
+    this.http.put(`http://localhost:8080/user/verify/${id}`, {})
+      .subscribe(
+        (response) => {
+          console.log('Verification successful:', response);
+          //this.router.navigate(['home']);
+        },
+        (error) => {
+          console.error('Verification failed:', error);
+        }
+      );
+  }*/
+  async verifyUser(id: number): Promise<void> {
+    try {
+      const response = await this.http.put(`http://localhost:8080/user/verify/${id}`, {}).toPromise();
+      console.log('Verification successful:', response);
+       this.router.navigate(['home']);
+    } catch (error) {
+      console.error('Verification failed:', error);
+    }
+  }
+
 }
