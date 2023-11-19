@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company creation</title>
+</head>
+<body>
+    <div class="registrationComponent"></div>
+    <div class="user-form-container">
+        <h2>Create a new company:</h2>
+        <form [formGroup] = "creationForm" id="userForm" (ngSubmit)="onSubmit()">
+          <label for="name">Name:</label>
+          <input type="text" id="name" formControlName="name" required>
+
+          <label for="name">Address:</label>
+          <input type="text" id="address" formControlName="address" required>
+
+          <label for="name">Description:</label>
+          <input type="text" id="description" formControlName="description" required>
+
+          <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -12,6 +12,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { AuthService } from './infrastructure/auth/auth.service';
 import { AuthModule } from './infrastructure/auth/auth.module';
 import { CompaniesOverviewComponent } from './feature-modules/company/companies-overview/companies-overview.component';
+import { CompanyModule } from './feature-modules/company/company.module';
+import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CompanyAdministratorModule } from './feature-modules/company-administrator/company-administrator.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,10 @@ import { CompaniesOverviewComponent } from './feature-modules/company/companies-
     AuthModule,
     HttpClientModule,
     UserModule
+    CompanyModule,
+    AppRoutingModule,
+    HttpClientModule,
+    CompanyAdministratorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
