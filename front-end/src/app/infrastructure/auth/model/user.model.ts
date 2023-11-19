@@ -9,6 +9,7 @@ export interface User {
   profession: string;
   companyInformation: string;
   confirmationPassword: string;
+  role: UserRole;
   isVerified: boolean;
 }
 

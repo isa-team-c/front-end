@@ -13,8 +13,6 @@ import { AuthService } from './infrastructure/auth/auth.service';
 import { AuthModule } from './infrastructure/auth/auth.module';
 import { CompaniesOverviewComponent } from './feature-modules/company/companies-overview/companies-overview.component';
 import { CompanyModule } from './feature-modules/company/company.module';
-import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
 import { CompanyAdministratorModule } from './feature-modules/company-administrator/company-administrator.module';
 
 @NgModule({
@@ -31,7 +29,7 @@ import { CompanyAdministratorModule } from './feature-modules/company-administra
     MatSliderModule,
     AuthModule,
     HttpClientModule,
-    UserModule
+    UserModule,
     CompanyModule,
     AppRoutingModule,
     HttpClientModule,
