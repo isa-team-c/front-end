@@ -15,10 +15,7 @@ import { CompaniesOverviewComponent } from './feature-modules/company/companies-
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegistrationComponent,
-    CompaniesOverviewComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
