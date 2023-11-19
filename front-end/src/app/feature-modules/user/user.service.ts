@@ -21,7 +21,7 @@ export class UserService {
   }
 
   searchCompanies(searchTerm: string): Observable<CompanyReview[]> {
-    let url = 'http://localhost:8080/api/companies/search?';
+    let url = 'http://localhost:8080/company/search?';
   
     if (searchTerm) {
       url += `searchTerm=${encodeURIComponent(searchTerm)}`;
