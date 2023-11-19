@@ -54,14 +54,30 @@
   .registration:hover {
     background-color: white; 
     color: #2f8cc3; 
+
+  .companies-button {
+    background-color: #2f8cc3;
+    border: none;
+    border-radius: 0; /* Remove border radius */
+    color: white;
+    padding: 15px 30px;
+    cursor: pointer;
+    margin-right: 100px;
+  }
+
+  .companies-button:hover {
+    background-color: white;
+    color: #2f8cc3;
+  }
   }</style>
 
 <router-outlet></router-outlet>
 <div class="toolbar">
   <div class="medbooking-text">MedBooking</div>
   <div class="profile">
+    <button class="companies-button">Companies</button>
     <button class="login">Log in</button>
-    <button class="registration" (click) = "register()">Sign up</button>
+    <button class="registration" (click) = "register()">Sign up</button>   
   </div>     
 </div>
 

@@ -7,16 +7,20 @@ import { RegistrationComponent } from './infrastructure/auth/registration/regist
 import { AuthService } from './infrastructure/auth/auth.service';
 import { AuthModule } from './infrastructure/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CompaniesOverviewComponent } from './feature-modules/company/companies-overview/companies-overview.component';
+import { UserModule } from './feature-modules/user/user.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CompaniesOverviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
