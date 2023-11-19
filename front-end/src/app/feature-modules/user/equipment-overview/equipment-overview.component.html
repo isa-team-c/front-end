@@ -1,0 +1,20 @@
+<div id="equipment-overview">    
+    <table class="equipment-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of equipment">
+          <td>{{ equipment.name }}</td>
+          <td>{{ equipment.description }}</td>
+          <td>{{ equipment.type }}</td>
+          <td>{{ equipment.quantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
