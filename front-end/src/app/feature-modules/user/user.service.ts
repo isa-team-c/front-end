@@ -3,6 +3,7 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs';
 import { Profile } from './model/profile.model';
+import { CompanyReview } from './model/company-review.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,15 @@ export class UserService {
 
   updateUserProfile(profile: Profile): Observable<Profile> {
     return this.http.put<Profile>('http://localhost:8080/api/regular/update', profile);
+  }
+
+  searchCompanies(searchTerm: string): Observable<CompanyReview[]> {
+    let url = 'http://localhost:8080/api/companies/search?';
+  
+    if (searchTerm) {
+      url += `searchTerm=${encodeURIComponent(searchTerm)}`;
+    }
+  
+    return this.http.get<CompanyReview[]>(url);
   }
 }

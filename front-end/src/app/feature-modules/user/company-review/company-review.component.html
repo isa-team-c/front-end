@@ -1,0 +1,34 @@
+<div id="company-review">
+<div>
+  <input class="search-input" [(ngModel)]="searchTerm" placeholder="Unesite naziv ili adresu" />
+    <button mat-raised-button color="primary"  class="search-button" (click)="onSearchClick()">Pretraži</button>
+</div>
+<div>
+  <mat-slider class="rating-slider" min="1" max="5" step="1"  >
+    <input  matSliderThumb [(ngModel)]="maxRating">
+  </mat-slider>
+  <mat-slider class="rating-slider" min="1" max="5" step="1"  >
+    <input  matSliderThumb [(ngModel)]="minRating">
+  </mat-slider>
+<div>
+<button *ngIf="!isFilterApplied" mat-stroked-button color="primary" (click)="filterByRating()">Filter</button>
+<button *ngIf="isFilterApplied" mat-raised-button (click)="resetRatingFilters()">Reset</button>
+</div>
+</div>
+<table class="company-table">
+  <thead>
+    <tr>
+      <th>Naziv</th>
+      <th>Adresa</th>
+      <th>Ocena</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let company of companies">
+      <td>{{ company.name }}</td>
+      <td>{{ company.address }}</td>
+      <td>{{ company.averageRating }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
