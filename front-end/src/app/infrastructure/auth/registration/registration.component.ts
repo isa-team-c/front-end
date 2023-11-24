@@ -71,6 +71,9 @@ export class RegistrationComponent implements OnInit {
         next: () => {
           this.router.navigate(['home']);
         },
+        error: () => {
+          alert('Registration failed')
+        }
       });
     }
   }
