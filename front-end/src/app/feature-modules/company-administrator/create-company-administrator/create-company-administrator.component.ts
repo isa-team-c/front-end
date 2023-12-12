@@ -16,6 +16,7 @@ import { User2, UserRole } from 'src/app/infrastructure/auth/model/user2.model';
 export class CreateCompanyAdministratorComponent implements OnInit {
   submitted = false;
   companies: Company[] = [];
+  selectedCompany: Company | undefined;
 
   ngOnInit() {
     this.service.getAllCompanies().subscribe((companies: Company[]) => {
@@ -37,7 +38,7 @@ export class CreateCompanyAdministratorComponent implements OnInit {
     profession: new FormControl('', [Validators.required]),
     companyInformation: new FormControl('', [Validators.required]),
     passwordMismatch: new FormControl(false),
-    company: new FormControl('', [Validators.required]),
+    company: new FormControl(null, [Validators.required]),
   });
 
 
@@ -99,5 +100,11 @@ export class CreateCompanyAdministratorComponent implements OnInit {
 
 
 
-
+  onCompanySelection(): void {
+    const selectedCompanyValue = this.creationForm.value.company;
+    console.log('Selected Company Value:', selectedCompanyValue);
+  }
+  
+  
+  
 }

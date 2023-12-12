@@ -41,8 +41,8 @@
             <textarea id="companyInformation" formControlName="companyInformation" required></textarea>
 
             <label for="company">Company:</label>
-            <select id="company" formControlName="company" required>
-                <option *ngFor="let company of companies" [value]="company">{{ company.name }}</option>
+            <select id="company" formControlName="company" required (change)="onCompanySelection()">
+                <option *ngFor="let company of companies" [ngValue]="company">{{ company.name }}</option>
             </select>
 
 
