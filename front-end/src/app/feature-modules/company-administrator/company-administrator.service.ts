@@ -10,18 +10,21 @@ import { CompanyAdministrator } from 'src/app/infrastructure/auth/model/company-
 })
 export class CompanyAdministratorService {
 
-  constructor(private http: HttpClient,
-    private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-    create(companyAdministrator: CompanyAdministrator): Observable<any> {
-      console.log("Creating company administrator: ", companyAdministrator);
-  
-      return this.http.post('http://localhost:8080/api/companyAdministrator/create', companyAdministrator)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error(error);
-          return throwError("Failed to create company administrator");
-        })
-      );
-    }
+  create(companyAdministrator: CompanyAdministrator): Observable<any> {
+    console.log("Creating company administrator: ", companyAdministrator);
+
+    return this.http.post('http://localhost:8080/api/companyAdministrator/create', companyAdministrator)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        return throwError("Failed to create company administrator");
+      })
+    );
+  }
+
+  getAllCompanies(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8080/company/all');
+  }
 }

@@ -8,7 +8,7 @@ body {
 }
 
 .user-form-container {
-    max-width: 400px; /* Smanjite maksimalnu širinu na 400px */
+    max-width: 400px;
     margin: 50px auto;
     background-color: #fff;
     padding: 20px;

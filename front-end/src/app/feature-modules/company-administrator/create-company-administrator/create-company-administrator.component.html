@@ -40,6 +40,12 @@
             <label for="companyInformation">Company Information:</label>
             <textarea id="companyInformation" formControlName="companyInformation" required></textarea>
 
+            <label for="company">Company:</label>
+            <select id="company" formControlName="company" required>
+                <option *ngFor="let company of companies" [value]="company">{{ company.name }}</option>
+            </select>
+
+
             <div *ngIf="creationForm.get('passwordMismatch')?.value" class="alert alert-danger">
                 Password and Confirmation Password do not match.
             </div>            
