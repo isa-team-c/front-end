@@ -14,6 +14,7 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { CompaniesOverviewComponent } from './feature-modules/company/companies-overview/companies-overview.component';
 import { CompanyModule } from './feature-modules/company/company.module';
 import { CompanyAdministratorModule } from './feature-modules/company-administrator/company-administrator.module';
+import { AdministratorModule } from './feature-modules/administrator/administrator.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CompanyAdministratorModule } from './feature-modules/company-administra
     CompanyModule,
     AppRoutingModule,
     HttpClientModule,
-    CompanyAdministratorModule
+    CompanyAdministratorModule,
+    AdministratorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
