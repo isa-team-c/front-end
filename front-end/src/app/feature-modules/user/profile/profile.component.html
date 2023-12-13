@@ -1,8 +1,8 @@
-<div id="profile" *ngIf="regularUser">
+<div id="profile" >
 <h1>Profile</h1>
 <div>
   <label for="name">Name</label>
-  <span *ngIf="!isEditing" id="name">{{ regularUser.user.name }}</span>
+  <span *ngIf="!isEditing" id="name">{{ regularUser?.user?.name }}</span>
   <input *ngIf="isEditing" id="name" [(ngModel)]="regularUser.user.name" />
 </div>
 <div>

@@ -8,6 +8,7 @@ import { VerificationComponent } from '../auth/verification/verification.compone
 import { EquipmentOverviewComponent } from 'src/app/feature-modules/user/equipment-overview/equipment-overview.component';
 import { CreateCompanyComponent } from 'src/app/feature-modules/company/create-company/create-company.component';
 import { CreateCompanyAdministratorComponent } from 'src/app/feature-modules/company-administrator/create-company-administrator/create-company-administrator.component';
+import { LoginComponent } from '../auth/login/login.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'equipment-overview' , component: EquipmentOverviewComponent},
   { path: '', component: AppComponent },
   { path: 'create-company', component: CreateCompanyComponent},
-  { path: 'create-company-administrator', component: CreateCompanyAdministratorComponent}
+  { path: 'create-company-administrator', component: CreateCompanyAdministratorComponent},
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

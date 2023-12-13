@@ -1,16 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
 import { environment } from 'src/env/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Profile } from './model/profile.model';
 import { CompanyReview } from './model/company-review.model';
+import { ApiService } from 'src/app/infrastructure/auth/service/api.service';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  currentUser!:any;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private apiService: ApiService) { }
+
+
+  getMyInfo(email: string): void {
+    this.http.get<User>('http://localhost:8080/user/getByEmail/' + email)
+      .subscribe(
+        user => {
+          console.log('Received User:', user);        
+          this.currentUser = user;
+          localStorage.setItem('user',JSON.stringify(this.currentUser));
+        },
+        error => {
+          console.error('Error fetching user info:', error);
+        }
+      );
+  }
+    
 
   getUserProfile(id: number): Observable<Profile> {
     return this.http.get<Profile>('http://localhost:8080/api/regular/' + id);
@@ -29,8 +50,9 @@ export class UserService {
   
     return this.http.get<CompanyReview[]>(url);
   }
-    getAllEquipment(): Observable<any[]> {
+   
+  getAllEquipment(): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/api/equipment/all`);
-    }
+  }
   
 }

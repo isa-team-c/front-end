@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { User, UserRole } from '../model/user.model';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-registration',
@@ -62,7 +62,7 @@ export class RegistrationComponent implements OnInit {
         profession: this.registrationForm.value.profession || "",
         companyInformation: this.registrationForm.value.companyInformation || "",
         confirmationPassword: this.registrationForm.value.confirmationPassword || "",
-        role: UserRole.ROLE_REGULAR,
+        role: { id: 1, name: 'ROLE_REGULAR_USER' },
         isVerified: false
       };
 

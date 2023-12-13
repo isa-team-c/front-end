@@ -62,11 +62,24 @@
 <div class="toolbar">
   <div class="medbooking-text">MedBooking</div>
   <div class="profile">
-    <button class="login">Log in</button>
-    <button class="registration" (click) = "register()">Sign up</button>   
-  </div>
-  
-  
-  
+    <ng-container *ngIf="!isUserLoggedIn(); else loggedInTemplate">
+      <button routerLink="/login" class="login">
+        <span>Login</span>
+      </button>
+      <button  (click)="register()" class="registration">
+        <span>Sign up</span>
+      </button>
+    </ng-container>
+    <ng-template #loggedInTemplate>
+      <button [matMenuTriggerFor]="userMenu" mat-button>
+        <span>Hello </span>
+      </button>
+      <button [matMenuTriggerFor]="userMenu" class="greeting-hamburger" mat-icon-button>
+      </button>
+    </ng-template>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="logout()">Log out</button>
+    </mat-menu>
+  </div> 
 </div>
 <router-outlet></router-outlet>

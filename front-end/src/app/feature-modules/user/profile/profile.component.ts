@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Profile } from '../model/profile.model';
 import { UserService } from '../user.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,20 +10,26 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit{
-
-  userId: number = 1;
   regularUser!: Profile;
   isEditing: boolean = false;
   originalUser: any;
+  userId: number | undefined;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private authService: AuthService) {}
 
-  ngOnInit() {
-    this.getUserProfile();
+
+  ngOnInit() {    
+    this.authService.user$.subscribe(user => {
+      if (user.id) {
+       this.userId = user.id;
+        
+        this.getUserProfile(this.userId);
+      }
+    })
   }
 
-  getUserProfile() {
-    this.userService.getUserProfile(this.userId).subscribe((profileData: Profile) => {
+  getUserProfile(userId: number) {
+    this.userService.getUserProfile(userId).subscribe((profileData: Profile) => {
       console.log('Profile data:', profileData);
       this.regularUser = profileData;
       console.log('Uspesno dobijen profil:', this.regularUser);

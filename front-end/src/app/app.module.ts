@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './infrastructure/auth/login/login.component';
 import { RegistrationComponent } from './infrastructure/auth/registration/registration.component';
 import { UserModule } from './feature-modules/user/user.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
@@ -14,6 +14,10 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { CompaniesOverviewComponent } from './feature-modules/company/companies-overview/companies-overview.component';
 import { CompanyModule } from './feature-modules/company/company.module';
 import { CompanyAdministratorModule } from './feature-modules/company-administrator/company-administrator.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { UserService } from './feature-modules/user/user.service';
+import { TokenInterceptor } from './infrastructure/auth/interceptor/TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -28,14 +32,18 @@ import { CompanyAdministratorModule } from './feature-modules/company-administra
     BrowserAnimationsModule,
     MatSliderModule,
     AuthModule,
-    HttpClientModule,
-    UserModule,
     CompanyModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CompanyAdministratorModule
+    CompanyAdministratorModule,
+    MatButtonModule,
+    MatMenuModule
   ],
-  providers: [],
+  providers: [ 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,     
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

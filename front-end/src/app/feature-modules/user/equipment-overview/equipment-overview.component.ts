@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Equipment } from '../model/equipment.model';
 import { UserService } from '../user.service';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-equipment-overview',
@@ -12,11 +13,13 @@ export class EquipmentOverviewComponent {
   filteredEquipment: Equipment[] = [];
   searchQuery: string = '';
   selectedType: string = '';
+  userEmail: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private authService: AuthService) {}
 
   ngOnInit() {
     this.loadEquipment();
+    this.userEmail = this.authService.user$.value.email;
   }
 
   loadEquipment() {

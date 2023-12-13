@@ -1,4 +1,7 @@
+import { Role } from "./role.model";
+
 export interface User {
+  id?: number;
   email: string;
   password: string;
   name: string;
@@ -9,12 +12,6 @@ export interface User {
   profession: string;
   companyInformation: string;
   confirmationPassword: string;
-  role: UserRole;
+  role: Role;
   isVerified: boolean;
-}
-
-export enum UserRole {
-  ROLE_REGULAR = 'ROLE_REGULAR',
-  ROLE_COMPANY_ADMIN = 'ROLE_COMPANY_ADMIN',
-  ROLE_SYSTEM_ADMIN = 'ROLE_SYSTEM_ADMIN',
 }
