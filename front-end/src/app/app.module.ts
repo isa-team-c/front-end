@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { UserService } from './feature-modules/user/user.service';
 import { TokenInterceptor } from './infrastructure/auth/interceptor/TokenInterceptor';
+import { AdministratorModule } from './feature-modules/administrator/administrator.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,11 @@ import { TokenInterceptor } from './infrastructure/auth/interceptor/TokenInterce
     CompanyModule,
     CompanyAdministratorModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    AppRoutingModule,
+    HttpClientModule,
+    CompanyAdministratorModule,
+    AdministratorModule,
   ],
   providers: [ 
     {
