@@ -23,4 +23,8 @@ export class CompanyService {
       })
     );
   }
+
+  getCompany(id: number): Observable<Company> {
+    return this.http.get<Company>('http://localhost:8080/company/get/'+ id);
+  }
 }

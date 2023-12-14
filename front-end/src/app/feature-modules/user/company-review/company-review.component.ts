@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CompanyReview } from '../model/company-review.model';
 import { UserService } from '../user.service';
 import {MatSliderModule, MatSliderThumb} from '@angular/material/slider';
+import { Router } from '@angular/router';
+import { Company } from 'src/app/infrastructure/auth/model/company.model';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class CompanyReviewComponent {
   maxRating: number = 5;
   isFilterApplied: boolean = false;
 
-  constructor(private userService: UserService) {}
+
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
       this.searchCompanies();
@@ -56,6 +59,11 @@ export class CompanyReviewComponent {
     this.maxRating = 5;
     this.isFilterApplied = false;
     this.searchCompanies();
+  }
+
+  onSeeMoreClicked(selectedCompany: CompanyReview) {
+    console.log('Company id:', selectedCompany.id);
+    this.router.navigate(['/company', selectedCompany.id]);
   }
 
 }

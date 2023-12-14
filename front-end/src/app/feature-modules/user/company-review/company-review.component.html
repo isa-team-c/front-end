@@ -23,6 +23,7 @@
       <th>Naziv</th>
       <th>Adresa</th>
       <th>Ocena</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,11 @@
       <td>{{ company.name }}</td>
       <td>{{ company.address }}</td>
       <td>{{ company.averageRating }}</td>
+      <td>
+        <button mat-stroked-button color="primary" (click)="onSeeMoreClicked(company)" >
+            See More
+        </button>
+    </td>
     </tr>
   </tbody>
 </table>
