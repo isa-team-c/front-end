@@ -5,8 +5,8 @@ import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { User } from './model/user.model';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/feature-modules/user/user.service';
-import { ApiService } from './service/api.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ApiService } from './service/api.service';
 
 
 @Injectable({

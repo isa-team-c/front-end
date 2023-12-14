@@ -4,7 +4,6 @@ import { environment } from 'src/env/environment';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Profile } from './model/profile.model';
 import { CompanyReview } from './model/company-review.model';
-import { ApiService } from 'src/app/infrastructure/auth/service/api.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Injectable({
@@ -14,8 +13,7 @@ export class UserService {
   currentUser!:any;
 
   constructor(
-    private http: HttpClient,
-    private apiService: ApiService) { }
+    private http: HttpClient) { }
 
 
   getMyInfo(email: string): void {
