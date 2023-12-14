@@ -1,4 +1,4 @@
-import { User2, UserRole } from './user2.model';
+import { User2 } from './user2.model';
 
 export interface Administrator {
   id: number;

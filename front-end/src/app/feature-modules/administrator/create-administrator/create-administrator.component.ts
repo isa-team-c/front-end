@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { AdministratorService } from '../administrator.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User2, UserRole } from 'src/app/infrastructure/auth/model/user2.model';
+import { User2 } from 'src/app/infrastructure/auth/model/user2.model';
 import { Administrator } from 'src/app/infrastructure/auth/model/administrator.model';
+import { Role } from 'src/app/infrastructure/auth/model/role.model';
 
 @Component({
   selector: 'app-create-administrator',
@@ -71,7 +72,7 @@ export class CreateAdministratorComponent implements OnInit {
         password: this.creationForm.value.password || "",
         phoneNumber: this.creationForm.value.phoneNumber || "",
         profession: this.creationForm.value.profession || "",
-        role: UserRole.ROLE_SYSTEM_ADMIN,
+        role: { id: 3, name: 'ROLE_ADMIN' },
         surname: this.creationForm.value.surname || ""
       };
 
