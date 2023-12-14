@@ -7,45 +7,45 @@
 </div>
 <div>
     <label for="surname">Surname</label>
-    <span *ngIf="!isEditing" id="surname">{{ regularUser.user.surname }}</span>
+    <span *ngIf="!isEditing" id="surname">{{ regularUser?.user?.surname }}</span>
     <input *ngIf="isEditing" id="surname" [(ngModel)]="regularUser.user.surname" />
   </div>
   <div>
     <label for="email">Email</label>
-    <span  id="email">{{ regularUser.user.email }}</span>
+    <span  id="email">{{ regularUser?.user?.email }}</span>
   </div>
   <div>
     <label  for="city">Country</label>
-    <span *ngIf="!isEditing" id="city">{{ regularUser.user.city }}</span>
+    <span *ngIf="!isEditing" id="city">{{ regularUser?.user?.city }}</span>
     <input *ngIf="isEditing" id="city" [(ngModel)]="regularUser.user.city" />
   </div>
   <div>
     <label for="country">City</label>
-    <span *ngIf="!isEditing" id="country">{{ regularUser.user.country }}</span>
+    <span *ngIf="!isEditing" id="country">{{ regularUser?.user?.country }}</span>
     <input *ngIf="isEditing" id="country" [(ngModel)]="regularUser.user.country" />
   </div>
   <div>
     <label for="phoneNumber">Phone</label>
-    <span *ngIf="!isEditing" id="phoneNumber">{{ regularUser.user.phoneNumber }}</span>
+    <span *ngIf="!isEditing" id="phoneNumber">{{ regularUser?.user?.phoneNumber }}</span>
     <input *ngIf="isEditing" id="phoneNumber" [(ngModel)]="regularUser.user.phoneNumber" />
   </div>
   <div>
     <label for="profession">Profession</label>
-    <span *ngIf="!isEditing" id="profession">{{ regularUser.user.profession }}</span>
+    <span *ngIf="!isEditing" id="profession">{{ regularUser?.user?.profession }}</span>
     <input *ngIf="isEditing" id="profession" [(ngModel)]="regularUser.user.profession" />
   </div>
   <div>
     <label for="companyInformation">Company information</label>
-    <span *ngIf="!isEditing" id="companyInformation">{{ regularUser.user.companyInformation }}</span>
+    <span *ngIf="!isEditing" id="companyInformation">{{ regularUser?.user?.companyInformation }}</span>
     <input *ngIf="isEditing" id="companyInformation" [(ngModel)]="regularUser.user.companyInformation" />
   </div>
   <div>
     <label for="role">User category</label>
-    <span id="role">{{ regularUser.user.role }}</span>
+    <span id="role">{{ regularUser?.user?.role }}</span>
   </div>
 <div>
   <label for="penalties">Penalties</label>
-  <span id="penalties">{{ regularUser.penalties }}</span>
+  <span id="penalties">{{ regularUser?.penalties }}</span>
 </div>
 <div *ngIf="isEditing">
     <button class="save-button" (click)="saveChanges()">Save</button>

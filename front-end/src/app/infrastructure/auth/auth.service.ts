@@ -100,17 +100,17 @@ export class AuthService {
     const user: User = {
       id: decodedToken.id,
       email: decodedToken.sub,
-      name: decodedToken.name,
-      surname: decodedToken.surname,
-      password: decodedToken.password,
-      city: decodedToken.city,
-      country: decodedToken.country,
-      phoneNumber: decodedToken.phoneNumber,
-      confirmationPassword: decodedToken.confirmationPassword,
-      isVerified: decodedToken.isVerified,
-      profession: decodedToken.profession,
-      companyInformation: decodedToken.companyInformation,
-      role: decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+      name: decodedToken.name || '',
+      surname: decodedToken.surname || '',
+      password: decodedToken.password || '',
+      city: decodedToken.city || '',
+      country: decodedToken.country || '',
+      phoneNumber: decodedToken.phoneNumber || '',
+      confirmationPassword: decodedToken.confirmationPassword || '',
+      isVerified: decodedToken.isVerified || '',
+      profession: decodedToken.profession || '',
+      companyInformation: decodedToken.companyInformation || '',
+      role: decodedToken.role || '',
     };
   
     this.user$.next(user);
