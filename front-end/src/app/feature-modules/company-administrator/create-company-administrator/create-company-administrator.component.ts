@@ -6,7 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CompanyAdministrator } from 'src/app/infrastructure/auth/model/company-administrator.model';
-import { User2, UserRole } from 'src/app/infrastructure/auth/model/user2.model';
+import { User2 } from 'src/app/infrastructure/auth/model/user2.model';
+import { Role } from 'src/app/infrastructure/auth/model/role.model';
 
 @Component({
   selector: 'app-create-company-administrator',
@@ -74,7 +75,7 @@ export class CreateCompanyAdministratorComponent implements OnInit {
         password: this.creationForm.value.password || "",
         phoneNumber: this.creationForm.value.phoneNumber || "",
         profession: this.creationForm.value.profession || "",
-        role: UserRole.ROLE_COMPANY_ADMIN,
+        role: { id: 2, name: 'ROLE_COMPANY_ADMIN' },
         surname: this.creationForm.value.surname || ""
       };
 

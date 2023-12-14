@@ -1,3 +1,5 @@
+import { Role } from "./role.model";
+
 export interface User2 {
     city: string;
     companyInformation: string;
@@ -8,13 +10,7 @@ export interface User2 {
     password: string;
     phoneNumber: string;
     profession: string;
-    role: UserRole;
+    role: Role;
     surname: string;
-  }
-  
-  export enum UserRole {
-    ROLE_REGULAR = 'ROLE_REGULAR',
-    ROLE_COMPANY_ADMIN = 'ROLE_COMPANY_ADMIN',
-    ROLE_SYSTEM_ADMIN = 'ROLE_SYSTEM_ADMIN',
   }
   
