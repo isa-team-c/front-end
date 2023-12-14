@@ -78,7 +78,8 @@ export class CreateAdministratorComponent implements OnInit {
 
       const administrator: Administrator = {
         id: 0,
-        user: user
+        user: user,
+        loggedInBefore: false,
       };
 
     
