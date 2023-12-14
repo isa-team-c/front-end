@@ -19,6 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UserService } from './feature-modules/user/user.service';
 import { TokenInterceptor } from './infrastructure/auth/interceptor/TokenInterceptor';
 import { AdministratorModule } from './feature-modules/administrator/administrator.module';
+import { ChangePasswordComponent } from './feature-modules/administrator/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { AdministratorModule } from './feature-modules/administrator/administrat
     AppRoutingModule,
     HttpClientModule,
     CompanyAdministratorModule,
-    AdministratorModule,
+    AdministratorModule
   ],
   providers: [ 
     {
