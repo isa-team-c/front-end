@@ -24,12 +24,29 @@
     margin-left: 220px;
   }
   
-  .equipment-table th, .company-table td {
+  .equipment-table th {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   }
   
   .equipment-table th {
+    background-color: #f2f2f2;
+  }
+
+  .appointments-table {
+    width: 70%;
+    margin-top: 70px;
+    border-collapse: collapse;
+    margin-left: 220px;
+  }
+  
+  .appointments-table th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .appointments-table th {
     background-color: #f2f2f2;
   }

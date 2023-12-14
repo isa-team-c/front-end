@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Company } from 'src/app/infrastructure/auth/model/company.model';
 import { CompanyService } from '../company.service';
 import { Equipment } from '../../user/model/equipment.model';
+import { Appointment } from '../model/appointment.model';
 
 @Component({
   selector: 'app-company-overview',
@@ -11,6 +12,7 @@ import { Equipment } from '../../user/model/equipment.model';
 })
 export class CompanyOverviewComponent {
   companyEquipment: Equipment[] = [];
+  companyAppointments: Appointment[] = [];
   company!: Company;
   companyId!: number;
 
@@ -27,6 +29,7 @@ export class CompanyOverviewComponent {
         }
     })
     this.loadEquipment();
+    this.loadAppointments();
   }
 
   loadEquipment() {
@@ -36,6 +39,17 @@ export class CompanyOverviewComponent {
       },
       (error) => {
         console.error('Error loading equipment:', error);
+      }
+    );
+  }
+
+  loadAppointments() {
+    this.service.getAllAppointmentsByCompany(this.companyId).subscribe(
+      (data) => {
+        this.companyAppointments = data;
+      },
+      (error) => {
+        console.error('Error loading appointments:', error);
       }
     );
   }

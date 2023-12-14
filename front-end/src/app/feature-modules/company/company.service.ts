@@ -31,4 +31,8 @@ export class CompanyService {
   getAllEquipmentByCompany(companyId: number): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/company/${companyId}/equipment`);
   }
+
+  getAllAppointmentsByCompany(companyId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/company/${companyId}/appointments`);
+  }
 }
