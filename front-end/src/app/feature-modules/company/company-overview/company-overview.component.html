@@ -13,7 +13,6 @@
                 <th>Type</th>
                 <th>Quantity</th>
                 <th>Action</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -23,13 +22,15 @@
                 <td>{{ equipment.type }}</td>
                 <td>{{ equipment.quantity }}</td>
                 <td>
-                    <!--<button (click)="reserveEquipment(equipment)">Reserve</button>-->
+                    <button (click)="chooseEquipment(equipment)">
+                        {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
+                      </button>
                 </td>
               </tr>
             </tbody>
           </table>
     </div>
-    <div>
+    <div *ngIf="showAppointments">
         <table class="appointments-table">
             <thead>
               <tr>
@@ -45,10 +46,14 @@
                 <td>{{ appointment.duration }}</td>
                 <td>{{ appointment.isFree }}</td>
                 <td>
-                    <!--<button (click)="reserveEquipment(equipment)">Reserve</button>-->
+                    <button (click)="chooseAppointment(appointment)">
+                        {{ appointment.isSelected ? 'Unchoose' : 'Choose' }}</button>
                 </td>
               </tr>
             </tbody>
           </table>
+    </div>
+    <div>
+        <button class="reserve" (click)="reserveEquipment()">Reserve</button>
     </div>
 </div>

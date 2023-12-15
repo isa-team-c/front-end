@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Company } from 'src/app/infrastructure/auth/model/company.model';
 import { Router } from '@angular/router';
+import { Reservation } from './model/reservation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,14 @@ export class CompanyService {
 
   getAllAppointmentsByCompany(companyId: number): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/company/${companyId}/appointments`);
+  }
+
+  reserveEquipment(equipmentId: number, appointmentId: number, userId: number): Observable<Reservation> {
+    const body = {
+      equipmentId: equipmentId,
+      appointmentId: appointmentId,
+      userId: userId
+    };
+    return this.http.post<Reservation>(`http://localhost:8080/reservation/${equipmentId}/${appointmentId}/${userId}`,body);
   }
 }
