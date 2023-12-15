@@ -1,5 +1,54 @@
-<div *ngIf="company">
-    <div class="company-title-section">
-        <h1 class="company-title">{{company.name}}</h1>
+<div>
+    <div class="company-title-section" *ngIf="company">
+        <h1 class="company-title">Company name: {{company.name}}</h1>
+        <h2>Company address: {{company.address}}</h2>
+        <h2>Company average-rating: {{company.averageRating}}</h2>
+    </div>
+    <div>
+        <table class="equipment-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Action</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipment of companyEquipment">
+                <td>{{ equipment.name }}</td>
+                <td>{{ equipment.description }}</td>
+                <td>{{ equipment.type }}</td>
+                <td>{{ equipment.quantity }}</td>
+                <td>
+                    <!--<button (click)="reserveEquipment(equipment)">Reserve</button>-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div>
+        <table class="appointments-table">
+            <thead>
+              <tr>
+                <th>Start Date</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of companyAppointments">
+                <td>{{ appointment.startDate }}</td>
+                <td>{{ appointment.duration }}</td>
+                <td>{{ appointment.isFree }}</td>
+                <td>
+                    <!--<button (click)="reserveEquipment(equipment)">Reserve</button>-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 </div>
