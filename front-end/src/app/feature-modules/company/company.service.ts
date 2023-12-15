@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CompanyService {
   
+  
   constructor(private http: HttpClient,
     private router: Router) { }
 
@@ -23,4 +24,18 @@ export class CompanyService {
       })
     );
   }
+
+  getCompany(id: number): Observable<Company> {
+    return this.http.get<Company>('http://localhost:8080/company/' + id);
+  }
+
+  updateCompany(company: Company): Observable<Company> {
+    return this.http.put<Company>('http://localhost:8080/company/update', company);
+  }
+
+  getCompanyForAdministrator(administratorId: number): Observable<Company> {
+    return this.http.get<Company>(`http://localhost:8080/company/company-for-admin/${administratorId}`);
+  }
+
+ 
 }

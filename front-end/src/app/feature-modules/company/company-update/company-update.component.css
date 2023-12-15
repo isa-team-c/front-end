@@ -1,0 +1,95 @@
+.company-details {
+    width: 60%;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.label-inline {
+  display: inline-block;
+  width: 120px; /* Prilagodite širinu prema potrebama */
+  text-align: left;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Uklonite margin-bottom za label-inline */
+.label-inline + * {
+  margin-bottom: 10px;
+}
+/* Styling for individual data fields */
+.data-field {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Styling for field labels */
+.data-field label {
+    font-weight: bold;
+}
+
+/* Styling for displayed data */
+.data-field span {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    flex: 1;
+    margin-left: 10px;
+    text-align: left;
+}
+  
+ /* Styling for form labels */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Styling for form inputs and textareas */
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Styling for save and cancel buttons */
+  .save-button,
+  .cancel-button {
+    padding: 8px 16px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Styling for buttons in edit mode */
+  .save-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  /* Styling for buttons in non-edit mode */
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .edit-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 8px 16px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

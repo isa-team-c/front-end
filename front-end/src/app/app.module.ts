@@ -19,6 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UserService } from './feature-modules/user/user.service';
 import { TokenInterceptor } from './infrastructure/auth/interceptor/TokenInterceptor';
 import { AdministratorModule } from './feature-modules/administrator/administrator.module';
+import { CompanyUpdateComponent } from './feature-modules/company/company-update/company-update.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,10 @@ import { AdministratorModule } from './feature-modules/administrator/administrat
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     UserModule,
     HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
     AuthModule,
@@ -48,6 +49,7 @@ import { AdministratorModule } from './feature-modules/administrator/administrat
       useClass: TokenInterceptor,
       multi: true,     
     },
+    
   ],
   bootstrap: [AppComponent]
 })

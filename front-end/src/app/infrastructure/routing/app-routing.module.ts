@@ -10,6 +10,8 @@ import { CreateCompanyComponent } from 'src/app/feature-modules/company/create-c
 import { CreateCompanyAdministratorComponent } from 'src/app/feature-modules/company-administrator/create-company-administrator/create-company-administrator.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { CreateAdministratorComponent } from 'src/app/feature-modules/administrator/create-administrator/create-administrator.component';
+import { CompanyUpdateComponent } from 'src/app/feature-modules/company/company-update/company-update.component';
+import { CompanyAdministratorUpdateComponent } from 'src/app/feature-modules/company-administrator/company-administrator-update/company-administrator-update.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'create-company-administrator', component: CreateCompanyAdministratorComponent},
   { path: 'login', component: LoginComponent},
   { path: 'create-administrator', component: CreateAdministratorComponent},
+  { path: 'company-update', component: CompanyUpdateComponent},
+  { path: 'company-administrator-update', component: CompanyAdministratorUpdateComponent}
 ];
 
 @NgModule({
