@@ -1,0 +1,87 @@
+.company-administrator-details {
+    width: 60%;
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Styling for individual data fields */
+.data-field {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Styling for field labels */
+.data-field label {
+    font-weight: bold;
+}
+
+/* Styling for displayed data */
+.data-field span {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    flex: 1;
+    margin-left: 10px;
+    text-align: left;
+}
+  
+ /* Styling for form labels */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Styling for form inputs and textareas */
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Styling for save and cancel buttons */
+  .save-button,
+  .cancel-button {
+    padding: 8px 16px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Styling for buttons in edit mode */
+  .save-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  /* Styling for buttons in non-edit mode */
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .display-data {
+    /* Dodajte željeni stil za prikaz podataka pre klika na "Edit" */
+    font-family: 'Vaš Font', sans-serif; /* Dodajte ime vašeg fonta ovde */
+    font-size: 16px;
+    color: #333;
+    /* Dodajte ostale stilove po potrebi */
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: 'Vaš Font', sans-serif; /* Dodajte ime vašeg fonta ovde */
+    font-size: 16px;
+  }

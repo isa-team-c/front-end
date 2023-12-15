@@ -14,6 +14,7 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { CompaniesOverviewComponent } from './feature-modules/company/companies-overview/companies-overview.component';
 import { CompanyModule } from './feature-modules/company/company.module';
 import { CompanyAdministratorModule } from './feature-modules/company-administrator/company-administrator.module';
+import { CompanyUpdateComponent } from './feature-modules/company/company-update/company-update.component';
 
 @NgModule({
   declarations: [
@@ -21,19 +22,16 @@ import { CompanyAdministratorModule } from './feature-modules/company-administra
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     UserModule,
     HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
     AuthModule,
-    HttpClientModule,
-    UserModule,
     CompanyModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CompanyAdministratorModule
+    CompanyAdministratorModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

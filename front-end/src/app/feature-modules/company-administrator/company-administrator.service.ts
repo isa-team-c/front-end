@@ -24,4 +24,12 @@ export class CompanyAdministratorService {
         })
       );
     }
+
+    updateCompanyAdministrator(companyAdministrator: CompanyAdministrator): Observable<CompanyAdministrator> {
+      return this.http.put<CompanyAdministrator>('http://localhost:8080/api/companyAdministrator/update', companyAdministrator);
+    }
+
+    getCompanyAdministrator(id: number): Observable<CompanyAdministrator> {
+      return this.http.get<CompanyAdministrator>('http://localhost:8080/api/companyAdministrator/' + id);
+    }
 }
