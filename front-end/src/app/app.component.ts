@@ -13,8 +13,6 @@ export class AppComponent {
   constructor(private router: Router, private authService: AuthService, private userService: UserService) {}
   title = 'MedBooking';
 
-  showChangePassword: boolean = true;
-
   ngOnInit(): void {
     this.checkIfUserExists();
   }
