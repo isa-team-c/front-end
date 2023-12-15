@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CompanyAdministrator } from 'src/app/infrastructure/auth/model/company-administrator.model';
 import { CompanyAdministratorService } from '../company-administrator.service';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-company-administrator-update',
@@ -12,7 +14,7 @@ import { CompanyAdministratorService } from '../company-administrator.service';
 export class CompanyAdministratorUpdateComponent implements OnInit {
   selectedCompanyAdministrator$: Observable<CompanyAdministrator> | undefined;
   isEditing: boolean = false;
-  administratorId: number = 1;
+  administratorId!: number;
 
   updateForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -23,10 +25,19 @@ export class CompanyAdministratorUpdateComponent implements OnInit {
 
   originalAdministrator: CompanyAdministrator | undefined;
   
-  constructor(private administratorService: CompanyAdministratorService) { }
+  constructor(private administratorService: CompanyAdministratorService, private authService: AuthService,private userService: UserService) { }
 
   ngOnInit(): void {
-    this.loadAdministratorForUpdate();
+    
+
+    this.authService.user$.subscribe(user => {
+      if (user.id) {
+       this.administratorId = user.id;
+        
+    
+       this.loadAdministratorForUpdate();
+      }
+    })
   }
 
   toggleEdit() {
