@@ -1,55 +1,54 @@
+/* Stilizacija za sve blokove */
 .company-administrator-details {
-    width: 60%;
-    margin: auto;
-    margin-top: 100px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+  width: 60%;
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+  max-width: 400px;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-/* Styling for individual data fields */
+/* Stilizacija za individualna polja */
 .data-field {
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Styling for field labels */
+/* Stilizacija za labelu polja */
 .data-field label {
-    font-weight: bold;
+  font-weight: bold;
+  width: 120px; /* Fiksirana širina labela */
 }
 
-/* Styling for displayed data */
+/* Stilizacija za prikazane podatke */
 .data-field span {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    flex: 1;
-    margin-left: 10px;
-    text-align: left;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  flex: 1;
+  margin-left: 10px;
+  text-align: left;
+  width: calc(100% - 150px); /* Širina za prikazane podatke (labela + margina) */
+  box-sizing: border-box;
 }
-  
- /* Styling for form labels */
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  /* Styling for form inputs and textareas */
-  .form-control {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Styling for save and cancel buttons */
-  .save-button,
+
+/* Stilizacija za form kontrole */
+.form-control {
+  width: calc(100% - 150px); /* Širina form kontrole */
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.save-button,
   .cancel-button {
     padding: 8px 16px;
     margin: 10px;
@@ -70,18 +69,35 @@
     color: white;
   }
 
-  .display-data {
-    /* Dodajte željeni stil za prikaz podataka pre klika na "Edit" */
-    font-family: 'Vaš Font', sans-serif; /* Dodajte ime vašeg fonta ovde */
-    font-size: 16px;
-    color: #333;
-    /* Dodajte ostale stilove po potrebi */
+  .edit-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 8px 16px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
-  .form-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-family: 'Vaš Font', sans-serif; /* Dodajte ime vašeg fonta ovde */
-    font-size: 16px;
-  }
+/* Dodatni stil za prikazane podatke */
+.display-data {
+  display: inline-block;
+  width: calc(50% - 18px); /* Prilagodite prema potrebama */
+  text-align: left;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Stilizacija za labelu forme */
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-family: 'Vaš Font', sans-serif; /* Dodajte ime vašeg fonta ovde */
+  font-size: 16px;
+}
+
+/* Stilizacija za dodatne elemente */
+.form-label + * {
+  margin-bottom: 10px;
+}

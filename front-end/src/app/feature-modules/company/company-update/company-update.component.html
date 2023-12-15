@@ -1,37 +1,37 @@
 <div *ngIf="selectedCompany$ | async as selectedCompany" class="company-details">
-  <form [formGroup] = "updateForm" id="userForm" (ngSubmit)="updateCompany()">
-  <h1>Company Details</h1>
+  <form [formGroup]="updateForm" id="userForm" (ngSubmit)="updateCompany()">
+    <h1>Company Details</h1>
   
-  <div class="form-group">
-    <label for="name">Name</label>
-    <span *ngIf="!isEditing" id="name">{{ originalCompany!.name! }}</span>
-    <input *ngIf="isEditing" id="name" formControlName="name" class="form-control" />
-  </div>
+    <div class="form-group data-field">
+      <label for="name" class="label-inline">Name:</label>
+      <span *ngIf="!isEditing" id="name">{{ originalCompany!.name! }}</span>
+      <input *ngIf="isEditing" id="name" formControlName="name" class="form-control" />
+    </div>
 
-  <div class="form-group">
-    <label for="address">Address</label>
-    <span *ngIf="!isEditing" id="address">{{ originalCompany!.address! }}</span>
-    <input *ngIf="isEditing" id="address" formControlName="address" class="form-control" />
-  </div>
+    <div class="form-group data-field">
+      <label for="address" class="label-inline">Address:</label>
+      <span *ngIf="!isEditing" id="address">{{ originalCompany!.address! }}</span>
+      <input *ngIf="isEditing" id="address" formControlName="address" class="form-control" />
+    </div>
 
-  <div class="form-group">
-    <label for="description">Description</label>
-    <span *ngIf="!isEditing" id="description">{{ originalCompany!.description! }}</span>
-    <textarea *ngIf="isEditing" id="description" formControlName="description" class="form-control"></textarea>
-  </div>
+    <div class="form-group data-field">
+      <label for="description" class="label-inline">Description:</label>
+      <span *ngIf="!isEditing" id="description">{{ originalCompany!.description! }}</span>
+      <textarea *ngIf="isEditing" id="description" formControlName="description" class="form-control"></textarea>
+    </div>
 
-  <div class="form-group">
-    <label for="averageRating">Average Rating</label>
-    <span *ngIf="!isEditing" id="averageRating">{{ originalCompany!.averageRating! }}</span>
-    <input *ngIf="isEditing" id="averageRating" formControlName="averageRating" class="form-control" />
-  </div>
+    <div class="form-group data-field">
+      <label for="averageRating" class="label-inline">Average Rating:</label>
+      <span *ngIf="!isEditing" id="averageRating">{{ originalCompany!.averageRating! }}</span>
+      <input *ngIf="isEditing" id="averageRating" formControlName="averageRating" class="form-control" />
+    </div>
 
-  <div *ngIf="isEditing">
-    <button class="save-button" (click)="updateCompany()">Save</button>
-    <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
-  </div>
-  <div *ngIf="!isEditing">
-    <button (click)="editCompany()">Edit</button>
-  </div>
-</form>
+    <div *ngIf="isEditing">
+      <button class="save-button" (click)="updateCompany()">Save</button>
+      <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
+    </div>
+    <div *ngIf="!isEditing">
+      <button (click)="editCompany()" class="edit-button">Edit</button>
+    </div>
+  </form>
 </div>

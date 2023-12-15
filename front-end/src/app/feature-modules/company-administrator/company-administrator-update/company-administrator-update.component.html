@@ -1,38 +1,37 @@
 <div *ngIf="selectedCompanyAdministrator$ | async as selectedCompanyAdministrator" class="company-administrator-details">
-    <form [formGroup]="updateForm" id="administratorForm" (ngSubmit)="updateCompanyAdministrator()">
-      <h1>Company Administrator Details</h1>
-    
-      <div class="form-group">
-        <label for="name" class="form-label">Name</label>
-        <span *ngIf="!isEditing" id="name" class="display-data">{{ originalAdministrator!.user.name }}</span>
-        <input *ngIf="isEditing" id="name" formControlName="name" class="form-control" />
-      </div>
+  <form [formGroup]="updateForm" id="administratorForm" (ngSubmit)="updateCompanyAdministrator()">
+    <h1>Company Administrator Details</h1>
   
-      <div class="form-group">
-        <label for="email" class="form-label">Email</label>
-        <span *ngIf="!isEditing" id="email" class="display-data">{{ originalAdministrator!.user.email }}</span>
-        <input *ngIf="isEditing" id="email" formControlName="email" class="form-control" />
-      </div>
-  
-      <div class="form-group">
-        <label for="phoneNumber" class="form-label">Phone Number</label>
-        <span *ngIf="!isEditing" id="phoneNumber" class="display-data">{{ originalAdministrator!.user.phoneNumber }}</span>
-        <input *ngIf="isEditing" id="phoneNumber" formControlName="phoneNumber" class="form-control" />
-      </div>
-  
-      <div class="form-group">
-        <label for="city" class="form-label">City</label>
-        <span *ngIf="!isEditing" id="city" class="display-data">{{ originalAdministrator!.user.city }}</span>
-        <input *ngIf="isEditing" id="city" formControlName="city" class="form-control" />
-      </div>
-  
-      <div *ngIf="isEditing">
-        <button class="save-button" (click)="updateCompanyAdministrator()">Save</button>
-        <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
-      </div>
-      <div *ngIf="!isEditing">
-        <button (click)="editCompanyAdministrator()">Edit</button>
-      </div>
-    </form>
-  </div>
-  
+    <div class="form-group data-field">
+      <label for="name" class="form-label">Name:</label>
+      <span *ngIf="!isEditing" id="name" class="display-data">{{ originalAdministrator!.user.name }}</span>
+      <input *ngIf="isEditing" id="name" formControlName="name" class="form-control" />
+    </div>
+
+    <div class="form-group data-field">
+      <label for="email" class="form-label">Email:</label>
+      <span *ngIf="!isEditing" id="email" class="display-data">{{ originalAdministrator!.user.email }}</span>
+      <input *ngIf="isEditing" id="email" formControlName="email" class="form-control" />
+    </div>
+
+    <div class="form-group data-field">
+      <label for="phoneNumber" class="form-label">Phone Number:</label>
+      <span *ngIf="!isEditing" id="phoneNumber" class="display-data">{{ originalAdministrator!.user.phoneNumber }}</span>
+      <input *ngIf="isEditing" id="phoneNumber" formControlName="phoneNumber" class="form-control" />
+    </div>
+
+    <div class="form-group data-field">
+      <label for="city" class="form-label">City:</label>
+      <span *ngIf="!isEditing" id="city" class="display-data">{{ originalAdministrator!.user.city }}</span>
+      <input *ngIf="isEditing" id="city" formControlName="city" class="form-control" />
+    </div>
+
+    <div *ngIf="isEditing">
+      <button class="save-button" (click)="updateCompanyAdministrator()">Save</button>
+      <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
+    </div>
+    <div *ngIf="!isEditing">
+      <button (click)="editCompanyAdministrator()" class="edit-button">Edit</button>
+    </div>
+  </form>
+</div>
