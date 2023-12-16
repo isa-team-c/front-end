@@ -1,0 +1,16 @@
+.appointments-table {
+    width: 70%;
+    margin-top: 200px;
+    border-collapse: collapse;
+    margin-left: 220px;
+  }
+  
+  .appointments-table th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .appointments-table th {
+    background-color: #f2f2f2;
+  }

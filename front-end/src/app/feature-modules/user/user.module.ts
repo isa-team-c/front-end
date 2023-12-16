@@ -7,13 +7,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { EquipmentOverviewComponent } from './equipment-overview/equipment-overview.component';
 import { FormsModule } from '@angular/forms';
+import { ReservedAppointmentsComponent } from './reserved-appointments/reserved-appointments.component';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
     CompanyReviewComponent,
-    EquipmentOverviewComponent
+    EquipmentOverviewComponent,
+    ReservedAppointmentsComponent
   ],
   imports: [
     CommonModule,
