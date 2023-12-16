@@ -36,13 +36,11 @@ export class ComplaintsOverviewComponent {
 
   onSubmit(complaint: Complaint) {
     const responseText = this.responseForm.get('response')?.value;
-    const user: User = complaint.userDto; // Assuming complaint.userDto contains user information
+    const user: User = complaint.userDto;
     if (responseText && user) {
       this.complaintService.sendResponse(user, responseText).subscribe(
         (response) => {
-          // Handle successful response sending
-          // For example, display a success message or update the UI
-          console.log('Response sent:', response);
+          alert('Response has been sent via mail!');
         },
         (error) => {
           // Handle error if the response fails to send

@@ -6,7 +6,7 @@
                 <th>User:</th>
                 <th>Company:</th>
                 <th>Complaint Content:</th>
-                <th>Reply:</th>
+                <th>Response:</th>
             </tr>
         </thead>
         <tbody>
@@ -16,8 +16,8 @@
                 <td>{{ complaint.complaintContent }}</td>
                 <td>
                     <form [formGroup]="responseForm" id="userForm" (ngSubmit)="onSubmit(complaint)">
-                      <label for="name">Response:</label>
-                      <input type="text" id="response" formControlName="response" required>
+                      <label for="name">Response:</label><br/>
+                      <textarea id="response" formControlName="response" required></textarea><br/>
                       <button type="submit">Submit</button>
                     </form>
                   </td>
