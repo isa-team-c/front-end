@@ -17,6 +17,7 @@ export class AuthService {
   profession:"" , confirmationPassword: "", companyInformation:"", isVerified:true , role: { id: 0, name: '' }});
   //user$ = new BehaviorSubject<User>({email: "", id: 0 });
   private access_token: string | null = null; 
+  isFirstLogin: boolean = false;
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -130,6 +131,20 @@ export class AuthService {
 
   getToken() {
     return this.access_token;
+  }
+
+  checkFirstLogin() {
+    const user = this.userService.currentUser; // Pretpostavka da postoji funkcija koja vraća trenutno prijavljenog korisnika
+  
+    if (user && !user.hasChangedPassword) {
+      this.isFirstLogin = true; // Postavite isFirstLogin na true ako korisnik nije promenio lozinku nakon registracije
+    } else {
+      this.isFirstLogin = false; // Ako korisnik jeste promenio lozinku ili ako podatak ne postoji, postavite isFirstLogin na false
+    }
+  }
+  
+  getFirstLoginStatus(): boolean {
+    return this.isFirstLogin;
   }
 
 }

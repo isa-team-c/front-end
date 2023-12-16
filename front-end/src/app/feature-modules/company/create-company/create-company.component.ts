@@ -31,6 +31,7 @@ export class CreateCompanyComponent implements OnInit {
     console.log('Form value:', this.creationForm.value);
     console.log('Form validity:', this.creationForm.valid);
     const company: Company = {
+      id:0,
       name: this.creationForm.value.name || "",
       address: this.creationForm.value.address || "",
       description: this.creationForm.value.description || "",

@@ -32,6 +32,7 @@
     </div>
     <div *ngIf="!isEditing">
       <button (click)="editCompany()" class="edit-button">Edit</button>
+      <button (click)="navigateToEquipmentOverview(selectedCompany)" class="see-equipments-button">See Equipments</button>
     </div>
   </form>
 </div>

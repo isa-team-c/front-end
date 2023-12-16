@@ -1,0 +1,15 @@
+<div class="container">
+    <form [formGroup]="creationForm" (ngSubmit)="onSubmit()" class="my-custom-form">
+      <div>
+        <label for="startDate">Start Date:</label>
+        <input type="datetime-local" formControlName="startDate" id="startDate">
+      </div>
+      <div>
+        <label for="duration">Duration:</label>
+        <input type="number" formControlName="duration" id="duration">
+      </div>
+      
+      <button type="submit" [disabled]="creationForm.invalid">Submit</button>
+    </form>
+  </div>
+  

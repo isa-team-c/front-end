@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { UserService } from '../../user/user.service';
 import { Profile } from '../../user/model/profile.model';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-company-update',
@@ -25,7 +26,7 @@ export class CompanyUpdateComponent implements OnInit{
   });
 
   originalCompany: Company | undefined;
-  constructor(private companyService: CompanyService, private authService: AuthService,private userService: UserService) { }
+  constructor(private companyService: CompanyService, private authService: AuthService,private userService: UserService, private router: Router) { }
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       if (user.id) {
@@ -104,4 +105,16 @@ export class CompanyUpdateComponent implements OnInit{
       console.error('Original company data is undefined.');
     }
   }
+
+  navigateToEquipmentOverview(company: Company): void {
+    
+    const companyId = company.id;
+    if (companyId) {
+      this.router.navigate(['/equipment-overview-for-company', companyId]);
+    } else {
+      console.error('Company ID is undefined.');
+    }
+  }
+  
+
 }

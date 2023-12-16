@@ -1,0 +1,48 @@
+/* CSS za formu za kreiranje opreme (CreateEquipmentComponent) */
+
+.container {
+    display: flex;
+    justify-content: center; /* Centriranje horizontalno */
+    align-items: center; /* Centriranje vertikalno */
+    height: 100vh; /* Visina celog ekrana */
+    margin-top: 50px; /* Margina od gornje ivice */
+  }
+  
+  .my-custom-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+  }
+  
+  .my-custom-form div {
+    margin-bottom: 10px;
+  }
+  
+  .my-custom-form label {
+    font-weight: bold;
+  }
+  
+  .my-custom-form input[type="number"],
+  .my-custom-form input[type="text"],
+  .my-custom-form button {
+    width: calc(100% - 12px); /* Oduzima margine i border širinu */
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Obezbeđuje da se širina ne povećava zbog bordera i paddinga */
+  }
+  
+  .my-custom-form button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .my-custom-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

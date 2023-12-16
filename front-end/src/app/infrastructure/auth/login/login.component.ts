@@ -23,19 +23,28 @@ export class LoginComponent  implements OnInit{
   }
  
   onSubmit() {
- 
     this.submitted = true;
-    console.log(this.userService.currentUser);
-    this.authService.login(this.form.value)
-      .subscribe(data => {
-        console.log(data);          
-          this.router.navigate(['/home']);         
-        },
-        error => {
-          console.log(error);
-          this.submitted = false;
-        });
+
+    this.authService.login(this.form.value).subscribe(
+      data => {
+        console.log(data);
+        // Provera prvog logovanja nakon uspešne prijave
+        this.authService.checkFirstLogin();
+        const isFirstLogin = this.authService.getFirstLoginStatus();
+
+        if (isFirstLogin) {
+          this.router.navigate(['/change-password-first-time']); // Ako je prvi put logovan, preusmeri na formu za promenu lozinke
+        } else {
+          this.router.navigate(['/home']); // Ako nije prvi put logovan, preusmeri na home stranicu ili drugu
+        }
+      },
+      error => {
+        console.log(error);
+        this.submitted = false;
+      }
+    );
   }
+
 
 
   

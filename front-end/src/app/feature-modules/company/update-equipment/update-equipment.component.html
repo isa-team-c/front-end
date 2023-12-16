@@ -1,0 +1,38 @@
+<div *ngIf="selectedEquipment" class="equipment-details">
+    <form [formGroup]="updateForm" id="equipmentForm" (ngSubmit)="updateEquipment()">
+      <h1>Equipment Details</h1>
+    
+      <div class="form-group data-field">
+        <label for="name" class="label-inline">Name:</label>
+        <span *ngIf="!isEditing" id="name">{{ originalEquipment!.name }}</span>
+        <input *ngIf="isEditing" id="name" formControlName="name" class="form-control" />
+      </div>
+  
+      <div class="form-group data-field">
+        <label for="description" class="label-inline">Description:</label>
+        <span *ngIf="!isEditing" id="description">{{ originalEquipment!.description }}</span>
+        <textarea *ngIf="isEditing" id="description" formControlName="description" class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group data-field">
+        <label for="type" class="label-inline">Type:</label>
+        <span *ngIf="!isEditing" id="type">{{ originalEquipment!.type }}</span>
+        <input *ngIf="isEditing" id="type" formControlName="type" class="form-control" />
+      </div>
+  
+      <div class="form-group data-field">
+        <label for="quantity" class="label-inline">Quantity:</label>
+        <span *ngIf="!isEditing" id="quantity">{{ originalEquipment!.quantity }}</span>
+        <input *ngIf="isEditing" id="quantity" formControlName="quantity" class="form-control" />
+      </div>
+  
+      <div *ngIf="isEditing">
+        <button class="save-button" (click)="updateEquipment()">Save</button>
+        <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
+      </div>
+      <div *ngIf="!isEditing">
+        <button (click)="editEquipment()" class="edit-button">Edit</button>
+      </div>
+    </form>
+</div>
+  

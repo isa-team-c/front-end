@@ -1,0 +1,44 @@
+<div>
+    <div class="company-title-section" *ngIf="company">
+        <h1 class="company-title">Company name: {{company.name}}</h1>
+        <h2>Company address: {{company.address}}</h2>
+        <h2>Company average-rating: {{company.averageRating}}</h2>
+    </div>
+    <div>
+        </div>
+        <button class="add-button" (click)="navigateToCreateEquipmentPage()">
+            Add Equipment
+        </button>
+        <div>
+        <table class="equipment-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipment of companyEquipment">
+                <td>{{ equipment.name }}</td>
+                <td>{{ equipment.description }}</td>
+                <td>{{ equipment.type }}</td>
+                <td>{{ equipment.quantity }}</td>
+                <td>
+                    <button class="edit-button" (click)="navigateToUpdateEquipment(equipment)">
+                        Edit
+                    </button>
+                </td>
+                <td>
+                    <button class="delete-button" (click)="deleteEquipment(equipment.id)">
+                        Delete
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
