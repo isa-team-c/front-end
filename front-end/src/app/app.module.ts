@@ -21,6 +21,7 @@ import { TokenInterceptor } from './infrastructure/auth/interceptor/TokenInterce
 import { AdministratorModule } from './feature-modules/administrator/administrator.module';
 import { CompanyUpdateComponent } from './feature-modules/company/company-update/company-update.component';
 import { ChangePasswordComponent } from './feature-modules/administrator/change-password/change-password.component';
+import { ComplaintModule } from './feature-modules/complaint/complaint.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ChangePasswordComponent } from './feature-modules/administrator/change-
     AppRoutingModule,
     HttpClientModule,
     CompanyAdministratorModule,
-    AdministratorModule
+    AdministratorModule,
+    ComplaintModule
   ],
   providers: [ 
     {

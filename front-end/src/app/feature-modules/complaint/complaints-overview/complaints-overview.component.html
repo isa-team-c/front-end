@@ -1,0 +1,21 @@
+<div id="equipment-overview">
+    <p>Total Complaints: {{ complaints.length }}</p>
+    <table class="equipment-table">
+        <thead>
+            <tr>
+                <th>User:</th>
+                <th>Company:</th>
+                <th>Complaint Content:</th>
+                <th>Reply:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let complaint of complaints">
+                <td>{{ complaint.userDto?.name || 'No User Name' }}</td>
+                <td>{{ complaint.companyDto?.name || 'No Company Name' }}</td>
+                <td>{{ complaint.complaintContent }}</td>
+                <td><button>Reply to the complaint</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

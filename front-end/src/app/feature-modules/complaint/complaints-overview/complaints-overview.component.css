@@ -1,0 +1,24 @@
+#equipment-overview {
+    max-width: 1000px;
+    margin: 150px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .equipment-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  .equipment-table th, .company-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .equipment-table th {
+    background-color: #f2f2f2;
+  }
+  
