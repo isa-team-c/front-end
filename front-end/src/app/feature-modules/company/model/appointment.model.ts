@@ -2,8 +2,9 @@ import { CompanyAdministrator } from "src/app/infrastructure/auth/model/company-
 
 export interface Appointment {
     id: number;
-    companyAdministrator: CompanyAdministrator;
+    companyAdministrator?: CompanyAdministrator| null;
     startDate: Date;
     duration: number;
     isFree: boolean;
+    isSelected: boolean;
   }
