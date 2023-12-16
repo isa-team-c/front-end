@@ -43,6 +43,6 @@ export class CompanyService {
       appointmentId: appointmentId,
       userId: userId
     };
-    return this.http.post<Reservation>(`http://localhost:8080/reservation/${equipmentId}/${appointmentId}/${userId}`,body);
+    return this.http.post<Reservation>(`http://localhost:8080/api/reservation/reserveEquipment/${equipmentId}/${appointmentId}/${userId}`,body);
   }
 }

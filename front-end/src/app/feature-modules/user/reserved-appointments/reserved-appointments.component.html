@@ -1,0 +1,16 @@
+<div>
+    <table class="appointments-table">
+        <thead>
+          <tr>
+            <th>Start Date</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of userAppointments">
+            <td>{{ appointment.startDate }}</td>
+            <td>{{ appointment.duration }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
