@@ -37,12 +37,15 @@ export class CompanyService {
     return this.http.get<any[]>(`http://localhost:8080/company/${companyId}/appointments`);
   }
 
-  reserveEquipment(equipmentId: number, appointmentId: number, userId: number): Observable<Reservation> {
+  reserveEquipment(equipmentIds: number[], appointmentId: number, userId: number): Observable<Reservation> {
     const body = {
-      equipmentId: equipmentId,
+      equipmentIds: equipmentIds,
       appointmentId: appointmentId,
       userId: userId
     };
-    return this.http.post<Reservation>(`http://localhost:8080/api/reservation/reserveEquipment/${equipmentId}/${appointmentId}/${userId}`,body);
+  
+    return this.http.post<Reservation>(`http://localhost:8080/api/reservation/reserveEquipment/${equipmentIds}/${appointmentId}/${userId}`, {});
+
   }
+  
 }

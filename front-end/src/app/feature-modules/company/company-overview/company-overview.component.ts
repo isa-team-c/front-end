@@ -16,7 +16,7 @@ export class CompanyOverviewComponent {
   companyAppointments: Appointment[] = [];
   company!: Company;
   companyId!: number;
-  selectedEquipment: Equipment | null = null;
+  selectedEquipmentIds: number[] = [];
   showAppointments: boolean = false;
   isSelected?: boolean;
   selectedAppointment: Appointment | null = null;
@@ -67,37 +67,22 @@ export class CompanyOverviewComponent {
   }
 
 
-  // ...
-
-// ...
-
-chooseEquipment(equipment: Equipment) {
-  // Ako je već izabrana ista oprema poništi izbor
-  if (this.selectedEquipment === equipment) {
-    equipment.isSelected = false;
-    this.selectedEquipment = null;
-    this.showAppointments = false;
-  } else {
-    // Ako je već izabrana druga oprema ne dozvoli izbor
-    if (this.selectedEquipment) {
-      return;
+  chooseEquipment(equipment: Equipment) {
+    if (this.selectedEquipmentIds.includes(equipment.id)) {
+      // Ako je oprema već izabrana, poništi izbor
+      equipment.isSelected = false;
+      this.selectedEquipmentIds = this.selectedEquipmentIds.filter(
+        (id) => id !== equipment.id
+      );
+    } else {
+      // Dodaj ID opreme u izabrane
+      equipment.isSelected = true;
+      this.selectedEquipmentIds.push(equipment.id);
     }
-
-    equipment.isSelected = true;
-    this.selectedEquipment = equipment;
-    this.showAppointments = true;
-    console.log('selected',this.selectedEquipment);
+  
+    this.showAppointments = this.selectedEquipmentIds.length > 0;
   }
 
-  // Onemogući ostale opreme
-  this.companyEquipment.forEach((e) => {
-    if (e !== equipment) {
-      e.isSelected = false;
-    }
-  });
-}
-
-// ...
 
 chooseAppointment(appointment: Appointment) {
   // Ako je već izabran isti termin, poništi izbor
@@ -123,22 +108,28 @@ chooseAppointment(appointment: Appointment) {
   });
 }
 
-  reserveEquipment() {
-    if (this.selectedEquipment) {
-        // Ovde dodajte logiku za rezervaciju opreme
-        // Na primer, pozovite odgovarajuću metodu servisa
-        this.service.reserveEquipment(this.selectedEquipment.id, this.selectedAppointment!.id, this.userId!).subscribe(
-            (response) => {
-                console.log('Equipment reserved successfully:', response);
-            },
-            (error) => {
-                console.error('Error reserving equipment:', error);
-            }
-        );
-    } else {
-        console.warn('No equipment selected for reservation.');
-    }
+reserveEquipment() {
+  if (this.selectedEquipmentIds.length > 0 && this.selectedAppointment) {
+    // Ovde dodajte logiku za rezervaciju opreme
+    // Pozovite odgovarajuću metodu servisa i prosledite listu ID-ova
+    this.service
+      .reserveEquipment(
+        this.selectedEquipmentIds,
+        this.selectedAppointment!.id,
+        this.userId!
+      )
+      .subscribe(
+        (response) => {
+          console.log('Equipment reserved successfully:', response);
+        },
+        (error) => {
+          console.error('Error reserving equipment:', error);
+        }
+      );
+  } else {
+    console.warn('No equipment selected for reservation.');
   }
+}
 
   
   
