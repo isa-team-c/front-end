@@ -21,6 +21,8 @@ export class CompanyOverviewComponent {
   isSelected?: boolean;
   selectedAppointment: Appointment | null = null;
   userId: number | undefined;
+  selectedEquipmentIds: number[] = [];
+  
 
   constructor(private route: ActivatedRoute, private service: CompanyService, private authService: AuthService) {}
 
@@ -72,30 +74,20 @@ export class CompanyOverviewComponent {
 // ...
 
 chooseEquipment(equipment: Equipment) {
-  // Ako je već izabrana ista oprema poništi izbor
-  if (this.selectedEquipment === equipment) {
+  if (this.selectedEquipmentIds.includes(equipment.id)) {
+    // Ako je oprema već izabrana, poništi izbor
     equipment.isSelected = false;
-    this.selectedEquipment = null;
-    this.showAppointments = false;
+    this.selectedEquipmentIds = this.selectedEquipmentIds.filter(
+      (id) => id !== equipment.id
+    );
   } else {
-    // Ako je već izabrana druga oprema ne dozvoli izbor
-    if (this.selectedEquipment) {
-      return;
-    }
-
+    // Dodaj ID opreme u izabrane
     equipment.isSelected = true;
-    this.selectedEquipment = equipment;
-    this.showAppointments = true;
-    console.log('selected',this.selectedEquipment);
+    this.selectedEquipmentIds.push(equipment.id);
   }
 
-  // Onemogući ostale opreme
-  this.companyEquipment.forEach((e) => {
-    if (e !== equipment) {
-      e.isSelected = false;
-    }
-  });
-}
+  this.showAppointments = this.selectedEquipmentIds.length > 0;
+  }
 
 // ...
 
