@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Profile } from './model/profile.model';
 import { CompanyReview } from './model/company-review.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Administrator } from 'src/app/infrastructure/auth/model/administrator.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class UserService {
 
   getUserProfile(id: number): Observable<Profile> {
     return this.http.get<Profile>('http://localhost:8080/api/regular/' + id);
+  }
+
+  getAdministrator(id: number): Observable<Administrator> {
+    return this.http.get<Administrator>('http://localhost:8080/api/administrator/' + id);
   }
 
   updateUserProfile(profile: Profile): Observable<Profile> {

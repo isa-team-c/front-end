@@ -20,6 +20,7 @@ import { UserService } from './feature-modules/user/user.service';
 import { TokenInterceptor } from './infrastructure/auth/interceptor/TokenInterceptor';
 import { AdministratorModule } from './feature-modules/administrator/administrator.module';
 import { CompanyUpdateComponent } from './feature-modules/company/company-update/company-update.component';
+import { ChangePasswordComponent } from './feature-modules/administrator/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { CompanyUpdateComponent } from './feature-modules/company/company-update
     AppRoutingModule,
     HttpClientModule,
     CompanyAdministratorModule,
-    AdministratorModule,
+    AdministratorModule
   ],
   providers: [ 
     {

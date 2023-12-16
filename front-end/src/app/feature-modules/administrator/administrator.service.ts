@@ -22,4 +22,15 @@ export class AdministratorService {
       })
     );
   }
+
+  update(administrator: Administrator): Observable<any> {
+    console.log("admin kog dobijam: ", administrator);
+    return this.http.put('http://localhost:8080/api/administrator/update', administrator)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        return throwError("Failed to update administrator");
+      })
+    );
+  }
 }

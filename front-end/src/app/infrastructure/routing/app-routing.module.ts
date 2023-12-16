@@ -12,6 +12,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { CreateAdministratorComponent } from 'src/app/feature-modules/administrator/create-administrator/create-administrator.component';
 import { CompanyUpdateComponent } from 'src/app/feature-modules/company/company-update/company-update.component';
 import { CompanyAdministratorUpdateComponent } from 'src/app/feature-modules/company-administrator/company-administrator-update/company-administrator-update.component';
+import { ChangePasswordComponent } from 'src/app/feature-modules/administrator/change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'create-administrator', component: CreateAdministratorComponent},
   { path: 'company-update', component: CompanyUpdateComponent},
-  { path: 'company-administrator-update', component: CompanyAdministratorUpdateComponent}
+  { path: 'company-administrator-update', component: CompanyAdministratorUpdateComponent},
+  { path: 'change-password', component: ChangePasswordComponent},
 ];
 
 @NgModule({
