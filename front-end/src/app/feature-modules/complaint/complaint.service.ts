@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +12,11 @@ export class ComplaintService {
 
   getAllComplaints(): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/complaint/all`);
+  }
+  
+  sendResponse(user: User, text: string) {
+    const requestBody = user; // Assuming user is a complete UserDto object
+    const queryParams = { responseContent: text }; // Use text as a query parameter
+    return this.http.post('http://localhost:8080/user/auth/sendResponse/', requestBody, { params: queryParams });
   }
 }

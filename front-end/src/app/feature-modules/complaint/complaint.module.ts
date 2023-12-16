@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComplaintsOverviewComponent } from './complaints-overview/complaints-overview.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +10,9 @@ import { ComplaintsOverviewComponent } from './complaints-overview/complaints-ov
     ComplaintsOverviewComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ComplaintModule { }
