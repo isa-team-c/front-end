@@ -68,5 +68,14 @@ export class CompanyService {
         })
       );
   }
+
+  addEquipmentToCompany(companyId: number, equipment: Equipment): Observable<Company> {
+    return this.http.post<Company>(`http://localhost:8080/company/${companyId}/add-equipment`, equipment);
+  }
+
+  addEquipmentForCompany(companyId: number, equipment: Equipment): Observable<Company> {
+    return this.http.post<Company>(`http://localhost:8080/api/equipment/${companyId}/addToCompany`, equipment);
+  }
+  
   
 }

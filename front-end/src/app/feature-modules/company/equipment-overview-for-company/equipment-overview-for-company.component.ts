@@ -53,7 +53,7 @@ export class EquipmentOverviewForCompanyComponent {
   }
   
   navigateToCreateEquipmentPage() {
-    this.router.navigate(['/create-equipment']);
+    this.router.navigate(['/create-equipment', this.companyId]);
 }
 
 navigateToUpdateEquipment(equipment: Equipment): void {
@@ -71,11 +71,17 @@ deleteEquipment(equipmentId: number) {
       this.loadEquipment(); // Osvežavanje tabele nakon brisanja opreme
     },
     (error) => {
-      console.error(error);
-      // Moguće je dodati dodatnu logiku za rukovanje greškom prilikom brisanja opreme
+      if (error.status === 403) {
+        console.log('Equipment cannot be deleted. It is currently reserved or not yet picked up by the user.');
+        // Dodatna logika ili akcije koje treba preduzeti zbog onemogućenog brisanja opreme
+      } else {
+        console.error('An error occurred while deleting the equipment:', error);
+        // Dodatna logika za rukovanje drugim greškama prilikom brisanja opreme
+      }
     }
   );
 }
+
 
 }
 

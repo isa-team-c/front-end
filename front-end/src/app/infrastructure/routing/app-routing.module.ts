@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'company-administrator-update', component: CompanyAdministratorUpdateComponent},
   { path: 'appointment-create', component: AppointmentCreateComponent},
   { path: 'equipment-overview-for-company/:id', component: EquipmentOverviewForCompanyComponent},
-  { path: 'create-equipment', component: CreateEquipmentComponent},
+  { path: 'create-equipment/:companyId', component: CreateEquipmentComponent},
   { path: 'update-equipment/:id', component: UpdateEquipmentComponent},
   { path: 'change-password-company-admin', component: ChangePasswordCompanyAdminComponent},
   { path: 'change-password-first-time', component: ChangePasswordFirstTimeComponent},

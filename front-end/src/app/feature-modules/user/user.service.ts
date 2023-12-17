@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Profile } from './model/profile.model';
 import { CompanyReview } from './model/company-review.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { User2 } from 'src/app/infrastructure/auth/model/user2.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,10 @@ export class UserService {
   getAllEquipment(): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/api/equipment/all`);
   }
+
+  getUserDetails(email: string): Observable<User2> {
+    return this.http.get<User2>(`http://localhost:8080/user/getByEmail/${email}`);
+  }
+
   
 }

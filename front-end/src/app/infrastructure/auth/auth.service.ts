@@ -74,6 +74,9 @@ export class AuthService {
       'username': user.email,
       'password': user.password
     };
+
+  
+    
     
     return this.apiService.post(`http://localhost:8080/auth/login`, JSON.stringify(body), loginHeaders)
       .pipe(map((res) => {
@@ -133,18 +136,5 @@ export class AuthService {
     return this.access_token;
   }
 
-  checkFirstLogin() {
-    const user = this.userService.currentUser; // Pretpostavka da postoji funkcija koja vraća trenutno prijavljenog korisnika
   
-    if (user && !user.hasChangedPassword) {
-      this.isFirstLogin = true; // Postavite isFirstLogin na true ako korisnik nije promenio lozinku nakon registracije
-    } else {
-      this.isFirstLogin = false; // Ako korisnik jeste promenio lozinku ili ako podatak ne postoji, postavite isFirstLogin na false
-    }
-  }
-  
-  getFirstLoginStatus(): boolean {
-    return this.isFirstLogin;
-  }
-
 }

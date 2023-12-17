@@ -21,7 +21,7 @@ export class ChangePasswordCompanyAdminComponent {
   onSubmit() {
     const user: User2 = {
       city: this.companyAdministrator.user.city,
-      companyInformation: "/",
+      companyInformation:  this.companyAdministrator.user.companyInformation,
       country: this.companyAdministrator.user.country,
       email: this.companyAdministrator.user.email,
       id: this.companyAdministrator.user.id,

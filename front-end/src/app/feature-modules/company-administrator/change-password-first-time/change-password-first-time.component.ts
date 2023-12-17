@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { CompanyAdministratorService } from '../company-administrator.service';
 import { User2 } from 'src/app/infrastructure/auth/model/user2.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password-first-time',
@@ -15,14 +16,14 @@ export class ChangePasswordFirstTimeComponent {
   submitted = false;
   userId: number | undefined;
   companyAdministrator!: CompanyAdministrator;
-  isFirstLogin = false;
+ 
 
-  constructor(private userService: UserService, private authService: AuthService, private companyAdministratorService: CompanyAdministratorService) {}
+  constructor(private userService: UserService, private authService: AuthService, private companyAdministratorService: CompanyAdministratorService, private router: Router) {}
 
   onSubmit() {
     const user: User2 = {
       city: this.companyAdministrator.user.city,
-      companyInformation: '/',
+      companyInformation:  this.companyAdministrator.user.companyInformation,
       country: this.companyAdministrator.user.country,
       email: this.companyAdministrator.user.email,
       id: this.companyAdministrator.user.id,
@@ -43,7 +44,20 @@ export class ChangePasswordFirstTimeComponent {
     this.companyAdministratorService.updateCompanyAdministratorForPassword(companyAdministrator).subscribe({
       next: () => {
         alert('Password updated successfully!');
-        this.isFirstLogin = false; // Set isFirstLogin to false after password update
+        
+        // Nakon uspešne promene lozinke, ažurirajte loggedInBefore na true
+        this.companyAdministrator.loggedInBefore = true;
+        this.router.navigate(['/home']);
+
+        // Ažurirajte CompanyAdministrator na serveru sa izmenjenim loggedInBefore
+        this.companyAdministratorService.updateCompanyAdministrator(this.companyAdministrator).subscribe({
+          next: () => {
+            console.log('loggedInBefore updated to true');
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        });
       },
     });
   }
@@ -61,12 +75,14 @@ export class ChangePasswordFirstTimeComponent {
     this.companyAdministratorService.getCompanyAdministratorByUserId(userId).subscribe((companyAdministratorData: CompanyAdministrator) => {
       console.log('Company Administrator data:', companyAdministratorData);
       this.companyAdministrator = companyAdministratorData;
-      
-      if (!this.companyAdministrator.loggedInBefore) {
-        this.isFirstLogin = true;
+  
+      // Ovde možete proveriti da li je this.companyAdministrator.user definisan
+      if (this.companyAdministrator && this.companyAdministrator.user) {
+        console.log('Successfully retrieved company administrator:', this.companyAdministrator);
+      } else {
+        console.error('Company administrator or user object is undefined or null.');
+        // Dodajte odgovarajući tretman u slučaju da su objekti neinicijalizovani
       }
-
-      console.log('Successfully retrieved company administrator:', this.companyAdministrator);
     });
   }
 
