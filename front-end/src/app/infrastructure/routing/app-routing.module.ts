@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'company-update', component: CompanyUpdateComponent},
   { path: 'company-administrator-update', component: CompanyAdministratorUpdateComponent},
   { path: 'change-password', component: ChangePasswordComponent},
-  { path: 'complaints-overview', component: ComplaintsOverviewComponent}
+  { path: 'complaints-overview', component: ComplaintsOverviewComponent},
   { path: 'company/:id', component: CompanyOverviewComponent},
   { path: 'reserved-appointments', component: ReservedAppointmentsComponent},
 ];

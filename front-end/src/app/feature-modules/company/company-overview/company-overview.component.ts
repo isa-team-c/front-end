@@ -48,7 +48,7 @@ export class CompanyOverviewComponent {
       const companyId = params.get('id');
       if (companyId) {
           this.companyId = +companyId; 
-          this.service.getCompany(this.companyId).subscribe((company) => {
+          this.service.getOneCompany(this.companyId).subscribe((company) => {
               this.company = company;
           });
         }
