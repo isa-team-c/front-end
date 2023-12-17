@@ -22,8 +22,7 @@ import { CreateEquipmentComponent } from 'src/app/feature-modules/company/create
 import { UpdateEquipmentComponent } from 'src/app/feature-modules/company/update-equipment/update-equipment.component';
 import { ChangePasswordCompanyAdminComponent } from 'src/app/feature-modules/company-administrator/change-password-company-admin/change-password-company-admin.component';
 import { ChangePasswordFirstTimeComponent } from 'src/app/feature-modules/company-administrator/change-password-first-time/change-password-first-time.component';
-
-
+import { WorkCalendarComponent } from 'src/app/feature-modules/company-administrator/work-calendar/work-calendar.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -49,8 +48,7 @@ const routes: Routes = [
   { path: 'update-equipment/:id', component: UpdateEquipmentComponent},
   { path: 'change-password-company-admin', component: ChangePasswordCompanyAdminComponent},
   { path: 'change-password-first-time', component: ChangePasswordFirstTimeComponent},
- 
- 
+  { path: 'work-calendar', component: WorkCalendarComponent},
 ];
 
 @NgModule({

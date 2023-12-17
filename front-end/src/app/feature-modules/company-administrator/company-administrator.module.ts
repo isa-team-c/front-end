@@ -7,6 +7,10 @@ import { AppointmentCreateComponent } from './appointment-create/appointment-cre
 import { ChangePasswordCompanyAdminComponent } from './change-password-company-admin/change-password-company-admin.component';
 import { ChangePasswordFirstTimeComponent } from './change-password-first-time/change-password-first-time.component';
 
+import { WorkCalendarComponent } from './work-calendar/work-calendar.component';
+
+//kalendar
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -17,13 +21,14 @@ import { ChangePasswordFirstTimeComponent } from './change-password-first-time/c
     AppointmentCreateComponent,
     ChangePasswordCompanyAdminComponent,
     ChangePasswordFirstTimeComponent,
-  
+    WorkCalendarComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-  ], exports: [
-    
+  ],
+  exports: [
+    FullCalendarModule,
   ]
 })
 export class CompanyAdministratorModule { }
