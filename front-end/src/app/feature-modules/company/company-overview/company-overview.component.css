@@ -8,10 +8,9 @@
 
 .company-title {
     font-family: sans-serif;
-    font-weight: 500;
     color: rgb(42, 6, 119);
     margin-top: 150px;
-    font-weight: bold;
+    font-size: xx-large;
 }
 
 .company-address {
@@ -64,20 +63,8 @@
     background-color: #f2f2f2;
   }
 
-  .reserve {
-    margin-top: 70px;
-    width: 80px;
-    height: 40px;   
-    border-radius: 18px;
-    margin-left: 700px;
-    margin-bottom: 20px;
-    background-color: #4CAF50;
-    color: white; 
-  }
 
-  .reserve:hover {
-    background-color: #45a049; 
-}
+
 
 .reserve {
   margin-top: 70px;
@@ -94,5 +81,108 @@
 .reserve:hover {
   background-color: white; 
   color: #2f8cc3; 
-  border: 2px solid #2f8cc3;
+  border: 2px solid rgb(37, 7, 103);
+}
+
+.new-appointment-title-section {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.new-appointment-title {
+  color: rgb(56, 28, 117);
+  margin-bottom: 30px;
+  margin-top: 10px;
+  font-size: large;
+}
+
+.message-form-wrapper .close-button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  cursor: pointer;
+  border: none !important;
+  margin: 2px; /* Added margin for better spacing */
+  cursor: pointer; /* Added cursor style */
+}
+
+.message-form-wrapper .close-button mat-icon {
+  font-size: 22px !important;
+  color: rgb(83, 25, 210) !important;
+}
+
+.new-appointment-button {
+  margin-top: 90px;
+  margin-left: 220px;
+  margin-bottom: 20px;
+  background-color: #2196F3; 
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+.message-form-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20vw; /* Adjusted width */
+  max-width: 400px; /* Set a maximum width if needed */
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+
+.message-form-wrapper .save-button {
+  font-size: medium;
+  font-family: 'Open Sans', sans-serif; 
+  background:  #2f8cc3; 
+  color: white; 
+  display: block;
+  margin: 0 auto;
+  padding: 8px 16px; 
+  border: none; 
+  cursor: pointer;
+  border-radius: 5px;
+  flex: 1; /* Each button takes equal width */
+  margin: 0 5px; /* Add margin around buttons */
+  padding: 5px;
+}
+
+.message-form-wrapper .save-button:hover {
+background: white;
+  color: black;
+  border: 1px solid #2f8cc3;
+}
+
+.schedule-button {
+  margin-top: 70px;
+  width: 80px;
+  height: 40px;   
+  border-radius: 5px;
+  border: none;
+  margin-left: 700px;
+  margin-bottom: 20px;
+  background-color: rgb(42, 6, 119);
+  color: white; 
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.schedule-button:hover {
+  
+  background: white;
+  color: black;
+  border: 1px solid rgb(42, 6, 119);
 }
