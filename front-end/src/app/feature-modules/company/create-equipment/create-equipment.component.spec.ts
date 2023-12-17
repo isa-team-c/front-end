@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CreateEquipmentComponent } from './create-equipment.component';
+
+describe('CreateEquipmentComponent', () => {
+  let component: CreateEquipmentComponent;
+  let fixture: ComponentFixture<CreateEquipmentComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [CreateEquipmentComponent]
+    });
+    fixture = TestBed.createComponent(CreateEquipmentComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -26,12 +26,17 @@
       <input *ngIf="isEditing" id="averageRating" formControlName="averageRating" class="form-control" />
     </div>
 
+    
+    
+    
+
     <div *ngIf="isEditing">
       <button class="save-button" (click)="updateCompany()">Save</button>
       <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
     </div>
     <div *ngIf="!isEditing">
       <button (click)="editCompany()" class="edit-button">Edit</button>
+      <button (click)="navigateToEquipmentOverview(selectedCompany)" class="see-equipments-button">See Equipments</button>
     </div>
   </form>
 </div>

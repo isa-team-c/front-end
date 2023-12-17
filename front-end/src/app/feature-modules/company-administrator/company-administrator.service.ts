@@ -4,6 +4,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Company } from 'src/app/infrastructure/auth/model/company.model';
 import { Router } from '@angular/router';
 import { CompanyAdministrator } from 'src/app/infrastructure/auth/model/company-administrator.model';
+import { Appointment } from 'src/app/infrastructure/auth/model/appointment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,10 @@ export class CompanyAdministratorService {
       return this.http.post<Appointment>(`http://localhost:8080/api/appointments/create/${adminId}`,appointment);
     }
     */
+    createAppointment(appointment : Appointment, adminId: number): Observable<Appointment> {
+      return this.http.post<Appointment>(`http://localhost:8080/api/appointments/create/${adminId}`,appointment);
+    }
+
    
     getCompanyAdministratorByUserId(userId: number): Observable<CompanyAdministrator> {
       return this.http.get<CompanyAdministrator>(`http://localhost:8080/api/companyAdministrator/user/${userId}`);
@@ -53,4 +58,11 @@ export class CompanyAdministratorService {
         })
       );
     }
+
+    saveGeneratedAppointment(appointmentDto: Appointment): Observable<Appointment> {
+      return this.http.post<Appointment>(`http://localhost:8080/api/appointments/generated`, appointmentDto)
+        
+    }
 }
+
+

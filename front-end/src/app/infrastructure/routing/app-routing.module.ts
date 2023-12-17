@@ -16,6 +16,14 @@ import { ChangePasswordComponent } from 'src/app/feature-modules/administrator/c
 import { ComplaintsOverviewComponent } from 'src/app/feature-modules/complaint/complaints-overview/complaints-overview.component';
 import { CompanyOverviewComponent } from 'src/app/feature-modules/company/company-overview/company-overview.component';
 import { ReservedAppointmentsComponent } from 'src/app/feature-modules/user/reserved-appointments/reserved-appointments.component';
+import { AppointmentCreateComponent } from 'src/app/feature-modules/company-administrator/appointment-create/appointment-create.component';
+import { EquipmentOverviewForCompanyComponent } from 'src/app/feature-modules/company/equipment-overview-for-company/equipment-overview-for-company.component';
+import { CreateEquipmentComponent } from 'src/app/feature-modules/company/create-equipment/create-equipment.component';
+import { UpdateEquipmentComponent } from 'src/app/feature-modules/company/update-equipment/update-equipment.component';
+import { ChangePasswordCompanyAdminComponent } from 'src/app/feature-modules/company-administrator/change-password-company-admin/change-password-company-admin.component';
+import { ChangePasswordFirstTimeComponent } from 'src/app/feature-modules/company-administrator/change-password-first-time/change-password-first-time.component';
+
+
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -35,6 +43,14 @@ const routes: Routes = [
   { path: 'complaints-overview', component: ComplaintsOverviewComponent},
   { path: 'company/:id', component: CompanyOverviewComponent},
   { path: 'reserved-appointments', component: ReservedAppointmentsComponent},
+  { path: 'appointment-create', component: AppointmentCreateComponent},
+  { path: 'equipment-overview-for-company/:id', component: EquipmentOverviewForCompanyComponent},
+  { path: 'create-equipment/:companyId', component: CreateEquipmentComponent},
+  { path: 'update-equipment/:id', component: UpdateEquipmentComponent},
+  { path: 'change-password-company-admin', component: ChangePasswordCompanyAdminComponent},
+  { path: 'change-password-first-time', component: ChangePasswordFirstTimeComponent},
+ 
+ 
 ];
 
 @NgModule({

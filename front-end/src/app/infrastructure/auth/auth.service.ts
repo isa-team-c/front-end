@@ -17,6 +17,7 @@ export class AuthService {
   profession:"" , confirmationPassword: "", companyInformation:"", isVerified:true , role: { id: 0, name: '' }});
   //user$ = new BehaviorSubject<User>({email: "", id: 0 });
   private access_token: string | null = null; 
+  isFirstLogin: boolean = false;
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -73,6 +74,9 @@ export class AuthService {
       'username': user.email,
       'password': user.password
     };
+
+  
+    
     
     return this.apiService.post(`http://localhost:8080/auth/login`, JSON.stringify(body), loginHeaders)
       .pipe(map((res) => {
@@ -132,4 +136,5 @@ export class AuthService {
     return this.access_token;
   }
 
+  
 }

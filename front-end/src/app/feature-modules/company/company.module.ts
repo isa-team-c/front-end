@@ -11,12 +11,22 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { CompanyOverviewComponent } from './company-overview/company-overview.component';
+import { EquipmentOverviewForCompanyComponent } from './equipment-overview-for-company/equipment-overview-for-company.component';
+import { CreateEquipmentComponent } from './create-equipment/create-equipment.component';
+import { UpdateEquipmentComponent } from './update-equipment/update-equipment.component';
+
+
 
 @NgModule({
   declarations: [
     CreateCompanyComponent,
     CompanyUpdateComponent,
-    CompanyOverviewComponent
+    CompanyOverviewComponent,
+    EquipmentOverviewForCompanyComponent,
+    CreateEquipmentComponent,
+    UpdateEquipmentComponent,
+    
+ 
   ],
   imports: [
     CommonModule,

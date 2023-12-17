@@ -4,4 +4,5 @@ export interface Company {
   address: string;
   description: string;
   averageRating: number;
+
 }

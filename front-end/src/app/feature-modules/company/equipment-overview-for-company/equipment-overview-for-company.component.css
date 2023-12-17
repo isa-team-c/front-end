@@ -1,0 +1,81 @@
+.company-title-section {
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.company-title {
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+    color: rgb(42, 6, 119);
+    margin-bottom: 30px;
+    margin-top: 150px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.equipment-table {
+    width: 70%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    margin-left: 220px;
+  }
+  
+  .equipment-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .equipment-table th {
+    background-color: #f2f2f2;
+  }
+
+  .equipment-table button.edit-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #b080d4; /* Edit button background color */
+    color: white; /* Edit button text color */
+  }
+  
+  .equipment-table button.edit-button:hover {
+    background-color: #b080d4; /* Darker color on hover for the Edit button */
+  }
+  .equipment-table button.delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #b080d4; /* Delete button background color */
+    color: white; /* Delete button text color */
+  }
+  
+  .equipment-table button.delete-button:hover {
+    background-color: #b080d4; /* Darker color on hover for the Delete button */
+  }
+    
+
+  .add-button {
+    float: right; /* Poravnanje dugmeta u gornji desni ugao */
+    margin-bottom: 20px; /* Margina ispod dugmeta */
+    padding: 8px 16px; /* Prostor oko teksta u dugmetu */
+    font-size: 14px;
+    background-color: #b080d4; /* Boja pozadine dugmeta */
+    color: #fff; /* Boja teksta */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: -30px;
+    margin-right: 250px;
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3; /* Boja pozadine dugmeta prilikom prelaska mišem */
+  }
