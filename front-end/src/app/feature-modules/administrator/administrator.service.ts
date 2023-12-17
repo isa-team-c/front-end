@@ -33,4 +33,8 @@ export class AdministratorService {
       })
     );
   }
+
+  getAdministratorByUserId(userId: number): Observable<Administrator> {
+    return this.http.get<Administrator>(`http://localhost:8080/api/administrator/byUserId/${userId}`);
+  }
 }

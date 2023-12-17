@@ -4,4 +4,5 @@ import { Company } from './company.model';
 export interface CompanyAdministrator {
   id: number;
   user: User2;
+  loggedInBefore: boolean;
 }

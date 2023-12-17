@@ -81,7 +81,8 @@ export class CreateCompanyAdministratorComponent implements OnInit {
 
       const companyAdministrator: CompanyAdministrator = {
         id: 0,
-        user: user
+        user: user,
+        loggedInBefore: false
       };
 
     
