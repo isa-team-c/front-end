@@ -14,6 +14,7 @@ import { CompanyUpdateComponent } from 'src/app/feature-modules/company/company-
 import { CompanyAdministratorUpdateComponent } from 'src/app/feature-modules/company-administrator/company-administrator-update/company-administrator-update.component';
 import { ChangePasswordComponent } from 'src/app/feature-modules/administrator/change-password/change-password.component';
 import { ComplaintsOverviewComponent } from 'src/app/feature-modules/complaint/complaints-overview/complaints-overview.component';
+import { WorkCalendarComponent } from 'src/app/feature-modules/company-administrator/work-calendar/work-calendar.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'company-update', component: CompanyUpdateComponent},
   { path: 'company-administrator-update', component: CompanyAdministratorUpdateComponent},
   { path: 'change-password', component: ChangePasswordComponent},
-  { path: 'complaints-overview', component: ComplaintsOverviewComponent}
+  { path: 'complaints-overview', component: ComplaintsOverviewComponent},
+  { path: 'work-calendar', component: WorkCalendarComponent},
 ];
 
 @NgModule({
