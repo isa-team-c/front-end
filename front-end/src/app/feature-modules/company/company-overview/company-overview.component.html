@@ -1,8 +1,8 @@
 <div>
     <div class="company-title-section" *ngIf="company">
         <h1 class="company-title">Company name: {{company.name}}</h1>
-        <h2>Company address: {{company.address}}</h2>
-        <h2>Company average-rating: {{company.averageRating}}</h2>
+        <h3 class="company-address">Company address: {{company.address}}</h3>
+        <h4 class="company-rating">Company average rating: {{company.averageRating}}</h4>
     </div>
     <div>
         <table class="equipment-table">
@@ -11,7 +11,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Type</th>
-                <th>Quantity</th>
+                <!--<th>Quantity</th>-->
                 <th>Action</th>
               </tr>
             </thead>
@@ -20,7 +20,7 @@
                 <td>{{ equipment.name }}</td>
                 <td>{{ equipment.description }}</td>
                 <td>{{ equipment.type }}</td>
-                <td>{{ equipment.quantity }}</td>
+               <!-- <td>{{ equipment.quantity }}</td>-->
                 <td>
                     <button (click)="chooseEquipment(equipment)">
                         {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
@@ -42,9 +42,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let appointment of companyAppointments">
-                <td>{{ appointment.startDate }}</td>
+                <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
                 <td>{{ appointment.duration }}</td>
-                <td>{{ appointment.isFree }}</td>
+                <td>{{ appointment.isFree ? 'Free' : 'Reserved' }}</td>
                 <td>
                     <button (click)="chooseAppointment(appointment)">
                         {{ appointment.isSelected ? 'Unchoose' : 'Choose' }}</button>
@@ -53,7 +53,7 @@
             </tbody>
           </table>
     </div>
-    <div>
+    <div *ngIf="!isAdmin">
         <button class="reserve" (click)="reserveEquipment()">Reserve</button>
     </div>
 </div>

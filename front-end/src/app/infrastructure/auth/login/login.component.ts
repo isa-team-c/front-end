@@ -34,6 +34,7 @@ export class LoginComponent  implements OnInit{
         error => {
           console.log(error);
           this.submitted = false;
+          alert('Login failed. Please check your credentials.');
         });
   }
 
