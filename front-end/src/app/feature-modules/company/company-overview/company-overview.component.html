@@ -1,6 +1,6 @@
 <div>
     <div class="company-title-section" *ngIf="company">
-        <h1 class="company-title">Company name: {{company.name}}</h1>
+        <h1 class="company-title">{{company.name}}</h1>
         <h2>Company address: {{company.address}}</h2>
         <h2>Company average-rating: {{company.averageRating}}</h2>
     </div>
@@ -22,7 +22,7 @@
                 <td>{{ equipment.type }}</td>
                 <td>{{ equipment.quantity }}</td>
                 <td>
-                    <button (click)="chooseEquipment(equipment)">
+                    <button mat-stroked-button color="primary" (click)="chooseEquipment(equipment)">
                         {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
                       </button>
                 </td>
@@ -36,7 +36,7 @@
               <tr>
                 <th>Start Date</th>
                 <th>Duration</th>
-                <th>Status</th>
+                <th>Is Available</th>
                 <th></th>
               </tr>
             </thead>
@@ -46,14 +46,70 @@
                 <td>{{ appointment.duration }}</td>
                 <td>{{ appointment.isFree }}</td>
                 <td>
-                    <button (click)="chooseAppointment(appointment)">
+                    <button mat-stroked-button color="primary"  (click)="chooseAppointment(appointment)">
                         {{ appointment.isSelected ? 'Unchoose' : 'Choose' }}</button>
                 </td>
               </tr>
             </tbody>
           </table>
     </div>
+    <div  *ngIf="showAppointments">
+      <button class="new-appointment-button"  (click)="newAppointment()">New Appointment</button>
+  </div>
     <div>
         <button class="reserve" (click)="reserveEquipment()">Reserve</button>
     </div>
 </div>
+
+<div *ngIf="shouldRenderNewAppointment" class="message-form-wrapper">
+  <button mat-icon-button class="close-button" (click)="onCloseClicked()">
+      <mat-icon>close</mat-icon>
+  </button>
+  <div class="new-appointment-title-section">
+      <h1 class="new-appointment-title">Extraoridinary appointment</h1>
+    </div>
+    
+  <form [formGroup]="appointmentForm">
+      <!-- Datepicker for date selection -->
+      <mat-form-field>
+          <input matInput [matDatepicker]="appointmentPicker" formControlName="appointmentDate" placeholder="Select a Date">
+          <mat-datepicker-toggle matSuffix [for]="appointmentPicker"></mat-datepicker-toggle>
+          <mat-datepicker #appointmentPicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Time input for time selection -->
+      <mat-form-field>
+          <input matInput type="time" formControlName="appointmentTime" placeholder="Select a Time">
+      </mat-form-field>
+      <div >
+          <button class="save-button" (click)="onSaveAppointmentDateTime()">Done</button>
+      </div>
+  </form>
+</div>
+<div *ngIf="shouldRenderGeneratedAppointments">
+  <table class="appointments-table">
+    <thead>
+      <tr>
+        <th>Start Date</th>
+        <th>Duration</th>
+        <th>Is Available</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of generatedAppointments">
+        <td>{{ appointment.startDate }}</td>
+        <td>{{ appointment.duration }}</td>
+        <td>{{ appointment.isFree }}</td>
+        <td>
+          <button class="schedule-button" (click)="bookAppointment(appointment)" >
+              Schedule
+          </button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    
+  

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from 'src/app/infrastructure/auth/model/company.model';
 import { CompanyService } from '../company.service';
 import { Equipment } from '../../user/model/equipment.model';
 import { Appointment } from '../model/appointment.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-company-overview',
@@ -14,6 +15,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 export class CompanyOverviewComponent {
   companyEquipment: Equipment[] = [];
   companyAppointments: Appointment[] = [];
+  generatedAppointments: Appointment[] = [];
   company!: Company;
   companyId!: number;
   selectedEquipmentIds: number[] = [];
@@ -21,9 +23,17 @@ export class CompanyOverviewComponent {
   isSelected?: boolean;
   selectedAppointment: Appointment | null = null;
   userId: number | undefined;
-  
+  shouldRenderNewAppointment: boolean = false;
+  selectedDateTime!: Date;
+  shouldRenderGeneratedAppointments: boolean = false;
+  selectedGeneratedAppointment: Appointment | null = null;
 
-  constructor(private route: ActivatedRoute, private service: CompanyService, private authService: AuthService) {}
+  constructor(private route: ActivatedRoute, private service: CompanyService, private authService: AuthService, private router: Router) {}
+
+  appointmentForm = new FormGroup({
+    appointmentDate: new FormControl('', [Validators.required]),
+    appointmentTime: new FormControl('', [Validators.required]),
+  });
 
   ngOnInit(): void{
     this.authService.user$.subscribe(user => {
@@ -136,6 +146,93 @@ reserveEquipment() {
   }
 }
 
-  
-  
+newAppointment(){
+  this.shouldRenderNewAppointment = !this.shouldRenderNewAppointment;
+}
+
+onCloseClicked(): void {
+  this.shouldRenderNewAppointment = !this.shouldRenderNewAppointment;
+}
+
+onSaveAppointmentDateTime(): void {
+  if (this.appointmentForm.valid && this.company) {
+    const selectedDate = this.appointmentForm.value.appointmentDate;
+    const selectedTime = this.appointmentForm.value.appointmentTime;
+
+    // Check if selectedDate and selectedTime are not null or undefined
+    if (selectedDate && selectedTime) {
+      const dateFormat = new Date(selectedDate);
+      const [hours, minutes] = selectedTime.split(':');
+
+      // Set the hours and minutes to the date
+      dateFormat.setHours(Number(hours));
+      dateFormat.setMinutes(Number(minutes));
+
+      // Check if the date is valid
+      if (isNaN(dateFormat.getTime())) {
+        console.error('Invalid date or time input.');
+        return; // Exit the function early
+      }
+
+      const currentTime = new Date();
+      const timeDifference = dateFormat.getTime() - currentTime.getTime();
+
+      console.log(timeDifference);
+      if (timeDifference < 0) {
+        console.error('Invalid date or time input.');
+        return; // Exit the function early
+      }
+
+      if (this.company && this.company.id) {
+        // Update the selectedTourProblem's deadlineTimeStamp
+        this.selectedDateTime = dateFormat;
+
+        // You can proceed to use the updated selectedTourProblem as needed
+        this.service.generateAppointments(this.selectedDateTime, 30, this.company.id).subscribe({
+          next: (generatedAppointments) => {
+            this.generatedAppointments = generatedAppointments;
+          },
+          error: (error) => {
+            console.error('Error fetching generated appointments:', error);
+          }
+        });
+        this.shouldRenderNewAppointment = false;
+        this.shouldRenderGeneratedAppointments = true;
+      } else {
+        console.error('Invalid company or company ID.');
+      }
+    } else {
+      console.error('Selected date or time is null or undefined.');
+    }
+  }
+}
+
+async bookAppointment(appointment: Appointment) {
+  appointment.isSelected = true;
+  this.selectedGeneratedAppointment = appointment;
+
+  this.generatedAppointments.forEach((a) => {
+    if (a !== appointment) {
+      a.isSelected = false;
+    }
+  });
+
+  if (this.selectedEquipmentIds.length > 0 && this.selectedGeneratedAppointment) {
+    try {
+      await this.service.createAndReserveAppointment(
+        this.selectedGeneratedAppointment,
+        this.selectedEquipmentIds,
+        this.userId!
+      );
+
+      console.log('Equipment reservation successfully created.');
+      this.router.navigate(['/reserved-appointments']);
+    } catch (error) {
+      console.error('Error reserving equipment:', error);
+    }
+  } else {
+    console.warn('No equipment selected for reservation.');
+  }
+}
+
 }
