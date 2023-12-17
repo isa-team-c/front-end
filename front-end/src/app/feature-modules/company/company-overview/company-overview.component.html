@@ -1,8 +1,8 @@
 <div>
     <div class="company-title-section" *ngIf="company">
         <h1 class="company-title">{{company.name}}</h1>
-        <h3 class="company-address">Company address: {{company.address}}</h3>
-        <h4 class="company-rating">Company average rating: {{company.averageRating}}</h4>
+        <h3 class="company-address">{{company.address}}</h3>
+        <h4 class="company-rating">average rating: {{company.averageRating}}</h4>
     </div>
     <div>
         <table class="equipment-table">
@@ -98,7 +98,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let appointment of generatedAppointments">
-        <td>{{ appointment.startDate }}</td>
+        <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ appointment.duration }}</td>
         <td>{{ appointment.isFree }}</td>
         <td>

@@ -35,4 +35,24 @@ export class ReservedAppointmentsComponent {
       }
     );
   }
+
+  formatDate(date: Date | number[] | string): string {
+    let dateObj: Date;
+  
+    if (date instanceof Date) {
+      dateObj = date;
+    } else if (Array.isArray(date)) {
+      dateObj = new Date(date[0], date[1] - 1, date[2], date[3], date[4]);
+    } else {
+      dateObj = new Date(date);
+    }
+    
+    // Proverite da li je dateObj validan Date objekat
+    if (isNaN(dateObj.getTime())) {
+      console.error('Invalid date:', date);
+      return ''; 
+    }
+  
+    return dateObj.toISOString();
+  }
 }

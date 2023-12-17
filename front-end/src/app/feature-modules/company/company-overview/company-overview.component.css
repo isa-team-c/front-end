@@ -18,7 +18,6 @@
   font-weight: 500;
   color: rgb(42, 6, 119);
   margin-bottom: 5px;
-  font-weight: bold;
 }
 
 .company-rating {
@@ -26,7 +25,6 @@
   font-weight: 500;
   color: rgb(42, 6, 119);
   margin-bottom: 15px;
-  font-weight: bold;
 }
 
 .equipment-table {
@@ -68,20 +66,21 @@
 
 .reserve {
   margin-top: 70px;
-  background-color: #2f8cc3;
-  border: 2px solid white;
-  border-radius: 25px; 
-  color: white; 
-  cursor: pointer;
   margin-left: 700px;
   margin-bottom: 20px;
   width: 80px;
+  height: 40px;   
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(42, 6, 119);
+  color: white; 
+  cursor: pointer;
 }
 
 .reserve:hover {
-  background-color: white; 
-  color: #2f8cc3; 
-  border: 2px solid rgb(37, 7, 103);
+  background: white;
+  color: black;
+  border: 1px solid rgb(42, 6, 119);
 }
 
 .new-appointment-title-section {

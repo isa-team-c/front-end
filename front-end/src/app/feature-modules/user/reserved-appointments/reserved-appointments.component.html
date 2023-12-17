@@ -8,7 +8,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let appointment of userAppointments">
-            <td>{{ appointment.startDate }}</td>
+            <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
             <td>{{ appointment.duration }}</td>
           </tr>
         </tbody>
