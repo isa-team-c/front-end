@@ -62,4 +62,8 @@ export class UserService {
   getUserDetails(email: string): Observable<User2> {
     return this.http.get<User2>(`http://localhost:8080/user/getByEmail/${email}`);
   }
+  
+  getAllAppointmentsByUserId(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/api/reservation/appointmentsByUserId/${userId}`);
+  }
 }

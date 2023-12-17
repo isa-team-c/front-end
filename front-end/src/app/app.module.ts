@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { AuthService } from './infrastructure/auth/auth.service';
 import { AuthModule } from './infrastructure/auth/auth.module';
-import { CompaniesOverviewComponent } from './feature-modules/company/companies-overview/companies-overview.component';
 import { CompanyModule } from './feature-modules/company/company.module';
 import { CompanyAdministratorModule } from './feature-modules/company-administrator/company-administrator.module';
 import { MatButtonModule } from '@angular/material/button';

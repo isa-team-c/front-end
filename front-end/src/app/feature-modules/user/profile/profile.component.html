@@ -41,7 +41,7 @@
   </div>
   <div>
     <label for="role">User category</label>
-    <span id="role">{{ regularUser?.user?.role }}</span>
+    <span id="role">{{ regularUser?.role }}</span>
   </div>
 <div>
   <label for="penalties">Penalties</label>
@@ -54,4 +54,8 @@
   <div *ngIf="!isEditing">
     <button (click)="editProfile()">Edit</button>
   </div>
+  <div>
+    <button (click)="viewReservedAppointments()">Reserved appointments</button>
+  </div>
 </div>
+

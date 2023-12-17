@@ -14,6 +14,8 @@ import { CompanyUpdateComponent } from 'src/app/feature-modules/company/company-
 import { CompanyAdministratorUpdateComponent } from 'src/app/feature-modules/company-administrator/company-administrator-update/company-administrator-update.component';
 import { ChangePasswordComponent } from 'src/app/feature-modules/administrator/change-password/change-password.component';
 import { ComplaintsOverviewComponent } from 'src/app/feature-modules/complaint/complaints-overview/complaints-overview.component';
+import { CompanyOverviewComponent } from 'src/app/feature-modules/company/company-overview/company-overview.component';
+import { ReservedAppointmentsComponent } from 'src/app/feature-modules/user/reserved-appointments/reserved-appointments.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -31,6 +33,8 @@ const routes: Routes = [
   { path: 'company-administrator-update', component: CompanyAdministratorUpdateComponent},
   { path: 'change-password', component: ChangePasswordComponent},
   { path: 'complaints-overview', component: ComplaintsOverviewComponent}
+  { path: 'company/:id', component: CompanyOverviewComponent},
+  { path: 'reserved-appointments', component: ReservedAppointmentsComponent},
 ];
 
 @NgModule({

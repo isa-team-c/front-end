@@ -1,0 +1,115 @@
+<div>
+    <div class="company-title-section" *ngIf="company">
+        <h1 class="company-title">{{company.name}}</h1>
+        <h3 class="company-address">{{company.address}}</h3>
+        <h4 class="company-rating">average rating: {{company.averageRating}}</h4>
+    </div>
+    <div>
+        <table class="equipment-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <!--<th>Quantity</th>-->
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipment of companyEquipment">
+                <td>{{ equipment.name }}</td>
+                <td>{{ equipment.description }}</td>
+                <td>{{ equipment.type }}</td>
+               <!-- <td>{{ equipment.quantity }}</td>-->
+                <td>
+                    <button mat-stroked-button color="primary" (click)="chooseEquipment(equipment)">
+                        {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
+                      </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div *ngIf="showAppointments">
+        <table class="appointments-table">
+            <thead>
+              <tr>
+                <th>Start Date</th>
+                <th>Duration</th>
+                <th>Is Available</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of companyAppointments">
+                <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ appointment.duration }}</td>
+                <td>{{ appointment.isFree ? 'Free' : 'Reserved' }}</td>
+                <td>
+                    <button mat-stroked-button color="primary"  (click)="chooseAppointment(appointment)">
+                        {{ appointment.isSelected ? 'Unchoose' : 'Choose' }}</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div  *ngIf="showAppointments && !isAdmin">
+      <button class="new-appointment-button"  (click)="newAppointment()">New Appointment</button>
+  </div>
+    <div *ngIf="!isAdmin">
+        <button class="reserve" (click)="reserveEquipment()">Reserve</button>
+    </div>
+</div>
+
+<div *ngIf="shouldRenderNewAppointment" class="message-form-wrapper">
+  <button mat-icon-button class="close-button" (click)="onCloseClicked()">
+      <mat-icon>close</mat-icon>
+  </button>
+  <div class="new-appointment-title-section">
+      <h1 class="new-appointment-title">Extraoridinary appointment</h1>
+    </div>
+    
+  <form [formGroup]="appointmentForm">
+      <!-- Datepicker for date selection -->
+      <mat-form-field>
+          <input matInput [matDatepicker]="appointmentPicker" formControlName="appointmentDate" placeholder="Select a Date">
+          <mat-datepicker-toggle matSuffix [for]="appointmentPicker"></mat-datepicker-toggle>
+          <mat-datepicker #appointmentPicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Time input for time selection -->
+      <mat-form-field>
+          <input matInput type="time" formControlName="appointmentTime" placeholder="Select a Time">
+      </mat-form-field>
+      <div >
+          <button class="save-button" (click)="onSaveAppointmentDateTime()">Done</button>
+      </div>
+  </form>
+</div>
+<div *ngIf="shouldRenderGeneratedAppointments">
+  <table class="appointments-table">
+    <thead>
+      <tr>
+        <th>Start Date</th>
+        <th>Duration</th>
+        <th>Is Available</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of generatedAppointments">
+        <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ appointment.duration }}</td>
+        <td>{{ appointment.isFree }}</td>
+        <td>
+          <button class="schedule-button" (click)="bookAppointment(appointment)" >
+              Schedule
+          </button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    
+  
