@@ -3,6 +3,7 @@ import { Profile } from '../model/profile.model';
 import { UserService } from '../user.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit{
   originalUser: any;
   userId: number | undefined;
 
-  constructor(private userService: UserService, private authService: AuthService) {}
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
 
   ngOnInit() {    
@@ -65,6 +66,10 @@ cancelEdit() {
     this.originalUser = JSON.parse(JSON.stringify(this.regularUser));
     this.isEditing = false;
   
+}
+
+viewReservedAppointments() {
+  this.router.navigate(['/reserved-appointments']);
 }
 
 }

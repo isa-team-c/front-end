@@ -21,6 +21,7 @@ export class CompanyOverviewComponent {
   isSelected?: boolean;
   selectedAppointment: Appointment | null = null;
   userId: number | undefined;
+  isAdmin!: boolean;
 
   constructor(private route: ActivatedRoute, private service: CompanyService, private authService: AuthService) {}
 
@@ -28,6 +29,7 @@ export class CompanyOverviewComponent {
     this.authService.user$.subscribe(user => {
       if (user.id) {
        this.userId = user.id;
+       this.isAdmin = user.role.name === 'COMPANY_ADMIN';
       }
     })
     this.route.paramMap.subscribe((params) => {
@@ -110,8 +112,10 @@ chooseAppointment(appointment: Appointment) {
 
 reserveEquipment() {
   if (this.selectedEquipmentIds.length > 0 && this.selectedAppointment) {
-    // Ovde dodajte logiku za rezervaciju opreme
-    // Pozovite odgovarajuću metodu servisa i prosledite listu ID-ova
+    if (!this.selectedAppointment.isFree) {
+      alert('The selected appointment is not free. Please choose another appointment.');
+      return;
+    }
     this.service
       .reserveEquipment(
         this.selectedEquipmentIds,
@@ -120,17 +124,38 @@ reserveEquipment() {
       )
       .subscribe(
         (response) => {
-          console.log('Equipment reserved successfully:', response);
+          alert('Equipment reserved successfully');
         },
         (error) => {
-          console.error('Error reserving equipment:', error);
+          alert('Error reserving equipment: ' + error.message);
         }
       );
   } else {
-    console.warn('No equipment selected for reservation.');
+    alert('No equipment selected for reservation.');
   }
 }
 
+formatDate(date: Date | number[] | string): string {
+  let dateObj: Date;
+
+  if (date instanceof Date) {
+    dateObj = date;
+  } else if (Array.isArray(date)) {
+    dateObj = new Date(date[0], date[1] - 1, date[2], date[3], date[4]);
+  } else {
+    dateObj = new Date(date);
+  }
   
+  // Proverite da li je dateObj validan Date objekat
+  if (isNaN(dateObj.getTime())) {
+    console.error('Invalid date:', date);
+    return ''; 
+  }
+
+  return dateObj.toISOString();
+}
+
+
+ 
   
 }
