@@ -4,6 +4,5 @@ export interface Company {
   address: string;
   description: string;
   averageRating: number;
-  workStartTime: string; 
-  workEndTime: string;
+
 }

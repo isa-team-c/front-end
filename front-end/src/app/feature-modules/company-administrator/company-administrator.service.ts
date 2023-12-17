@@ -53,6 +53,11 @@ export class CompanyAdministratorService {
         })
       );
     }
+
+    saveGeneratedAppointment(appointmentDto: Appointment): Observable<Appointment> {
+      return this.http.post<Appointment>(`http://localhost:8080/api/appointments/generated`, appointmentDto)
+        
+    }
 }
 
 

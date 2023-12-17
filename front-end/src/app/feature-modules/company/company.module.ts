@@ -8,6 +8,7 @@ import { CreateEquipmentComponent } from './create-equipment/create-equipment.co
 import { UpdateEquipmentComponent } from './update-equipment/update-equipment.component';
 
 
+
 @NgModule({
   declarations: [
     CreateCompanyComponent,
@@ -15,6 +16,7 @@ import { UpdateEquipmentComponent } from './update-equipment/update-equipment.co
     EquipmentOverviewForCompanyComponent,
     CreateEquipmentComponent,
     UpdateEquipmentComponent,
+    
  
   ],
   imports: [

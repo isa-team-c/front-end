@@ -26,17 +26,7 @@
       <input *ngIf="isEditing" id="averageRating" formControlName="averageRating" class="form-control" />
     </div>
 
-    <div class="form-group data-field">
-      <label for="workStartTime" class="label-inline">Work Start Time:</label>
-      <span *ngIf="!isEditing" id="workStartTime">{{ convertToLocalTime(originalCompany!.workStartTime) }}</span>
-      <input *ngIf="isEditing" id="workStartTime" formControlName="workStartTime" class="form-control" />
-    </div>
     
-    <div class="form-group data-field">
-      <label for="workEndTime" class="label-inline">Work End Time:</label>
-      <span *ngIf="!isEditing" id="workEndTime">{{ convertToLocalTime(originalCompany!.workEndTime) }}</span>
-      <input *ngIf="isEditing" id="workEndTime" formControlName="workEndTime" class="form-control" />
-    </div>
     
     
 

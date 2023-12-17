@@ -26,24 +26,24 @@ export class CreateCompanyComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    workStartTime: new FormControl('', [Validators.required]),
-    workEndTime: new FormControl('', [Validators.required]),
+    //workStartTime: new FormControl('', [Validators.required]),
+    //workEndTime: new FormControl('', [Validators.required]),
   });
 
   onSubmit(): void {
     this.submitted = true;
     console.log('Form value:', this.creationForm.value);
     console.log('Form validity:', this.creationForm.valid);
-    const startTime = this.creationForm.value.workStartTime!.split(':').map(Number);
-    const endTime = this.creationForm.value.workEndTime!.split(':').map(Number);
+    //const startTime = this.creationForm.value.workStartTime!.split(':').map(Number);
+    //const endTime = this.creationForm.value.workEndTime!.split(':').map(Number);
     const company: Company = {
       id:0,
       name: this.creationForm.value.name || "",
       address: this.creationForm.value.address || "",
       description: this.creationForm.value.description || "",
       averageRating: 0,
-      workStartTime: this.formatTime(startTime, 0),
-    workEndTime: this.formatTime(endTime, 0),
+      //workStartTime: this.formatTime(startTime, 0),
+    //workEndTime: this.formatTime(endTime, 0),
     };
     
 
@@ -56,7 +56,7 @@ export class CreateCompanyComponent implements OnInit {
     }
   }
 
-  formatTime(time: any, seconds: number): string {
+  /*formatTime(time: any, seconds: number): string {
     if (!Array.isArray(time) || time.length !== 2) {
       console.error('Received time is not in the expected format:', time);
       return ''; // ili obradite grešku na odgovarajući način
@@ -72,6 +72,6 @@ export class CreateCompanyComponent implements OnInit {
   
   padTimeUnit(unit: number): string {
     return unit < 10 ? `0${unit}` : `${unit}`;
-  }
+  }*/
   
 }

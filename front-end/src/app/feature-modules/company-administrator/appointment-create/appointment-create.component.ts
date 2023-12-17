@@ -59,7 +59,7 @@ export class AppointmentCreateComponent {
         isFree: true
       };
 
-      this.service.createAppointment(newAppointment, this.administratorId)
+      this.service.saveGeneratedAppointment(newAppointment)
         .subscribe(
           () => {
             alert('Appointment created successfully!');
