@@ -6,7 +6,7 @@ import { LoginComponent } from './infrastructure/auth/login/login.component';
 import { RegistrationComponent } from './infrastructure/auth/registration/registration.component';
 import { UserModule } from './feature-modules/user/user.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { AuthService } from './infrastructure/auth/auth.service';
@@ -21,6 +21,7 @@ import { AdministratorModule } from './feature-modules/administrator/administrat
 import { CompanyUpdateComponent } from './feature-modules/company/company-update/company-update.component';
 import { ChangePasswordComponent } from './feature-modules/administrator/change-password/change-password.component';
 import { ComplaintModule } from './feature-modules/complaint/complaint.module';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -39,11 +40,10 @@ import { ComplaintModule } from './feature-modules/complaint/complaint.module';
     CompanyAdministratorModule,
     MatButtonModule,
     MatMenuModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CompanyAdministratorModule,
     AdministratorModule,
-    ComplaintModule
+    ComplaintModule,
+    FullCalendarModule,
+    ReactiveFormsModule
   ],
   providers: [ 
     {

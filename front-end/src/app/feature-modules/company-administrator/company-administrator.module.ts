@@ -10,7 +10,7 @@ import { ChangePasswordFirstTimeComponent } from './change-password-first-time/c
 import { WorkCalendarComponent } from './work-calendar/work-calendar.component';
 
 //kalendar
-import { FullCalendarModule } from '@fullcalendar/angular';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -21,11 +21,12 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AppointmentCreateComponent,
     ChangePasswordCompanyAdminComponent,
     ChangePasswordFirstTimeComponent,
-    WorkCalendarComponent,
+    WorkCalendarComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FullCalendarModule,
   ],
   exports: [
     FullCalendarModule,
