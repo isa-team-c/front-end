@@ -67,6 +67,7 @@ export class CompanyOverviewComponent {
       },
       (error) => {
         console.error('Error loading equipment:', error);
+        
       }
     );
   }
@@ -145,6 +146,7 @@ reserveEquipment() {
         (response) => {
           alert('Equipment reserved successfully');
           this.loadEquipment();
+          this.loadAppointments();
         },
         (error) => {
           alert('Error reserving equipment: ' + error.message);
