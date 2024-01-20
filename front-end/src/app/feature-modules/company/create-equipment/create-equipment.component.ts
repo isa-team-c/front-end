@@ -49,7 +49,8 @@ export class CreateEquipmentComponent implements OnInit{
         name: this.creationForm.value.name || '',
         type: this.creationForm.value.type || '',
         description: this.creationForm.value.description || '',
-        quantity: +this.creationForm.value.quantity! || 0
+        quantity: +this.creationForm.value.quantity! || 0,
+        reservedQuantity:  0
       };
 
       this.service.addEquipmentForCompany(this.company.id,newEquipment).subscribe(

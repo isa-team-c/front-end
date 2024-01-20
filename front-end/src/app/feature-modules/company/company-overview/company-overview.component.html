@@ -11,8 +11,8 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Type</th>
-                <!--<th>Quantity</th>-->
-                <th>Action</th>
+                <th>Quantity</th>
+                <th *ngIf="!isAdmin">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -20,9 +20,17 @@
                 <td>{{ equipment.name }}</td>
                 <td>{{ equipment.description }}</td>
                 <td>{{ equipment.type }}</td>
-               <!-- <td>{{ equipment.quantity }}</td>-->
                 <td>
-                    <button mat-stroked-button color="primary" (click)="chooseEquipment(equipment)">
+                  <ng-container *ngIf="equipment.quantity - equipment.reservedQuantity > 0; else noStock">
+                    {{ equipment.quantity - equipment.reservedQuantity }}
+                  </ng-container>
+                  <ng-template #noStock>
+                    Nema na stanju
+                  </ng-template>
+                </td>
+                
+                <td>
+                    <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && !isAdmin" color="primary" (click)="chooseEquipment(equipment)">
                         {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
                       </button>
                 </td>
@@ -41,15 +49,25 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let appointment of companyAppointments">
-                <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
-                <td>{{ appointment.duration }}</td>
-                <td>{{ appointment.isFree ? 'Free' : 'Reserved' }}</td>
-                <td>
-                    <button mat-stroked-button color="primary"  (click)="chooseAppointment(appointment)">
-                        {{ appointment.isSelected ? 'Unchoose' : 'Choose' }}</button>
-                </td>
-              </tr>
+              <ng-container *ngFor="let appointment of companyAppointments" >
+                <tr *ngIf="appointment.isFree === true && !isAdmin" >
+                  <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td>{{ appointment.duration }}</td>
+                  <td>{{ appointment.isFree ? 'Free' : 'Reserved' }}</td>
+                  <td>
+                    <button mat-stroked-button color="primary" *ngIf="appointment.isFree" (click)="chooseAppointment(appointment)">
+                      {{ appointment.isSelected ? 'Unchoose' : 'Choose' }}
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="isAdmin">
+                  <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td>{{ appointment.duration }}</td>
+                  <td>{{ appointment.isFree ? 'Free' : 'Reserved' }}</td>
+        
+                </tr>
+              </ng-container>
+              
             </tbody>
           </table>
     </div>

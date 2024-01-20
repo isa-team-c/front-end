@@ -41,7 +41,10 @@ export class CompanyOverviewComponent {
     this.authService.user$.subscribe(user => {
       if (user.id) {
        this.userId = user.id;
-       this.isAdmin = user.role.name === 'COMPANY_ADMIN';
+       this.isAdmin = user.role.name === 'ROLE_COMPANY_ADMIN';
+       if(this.isAdmin){
+        this.showAppointments = true;
+       }
       }
     })
     this.route.paramMap.subscribe((params) => {
@@ -141,6 +144,7 @@ reserveEquipment() {
       .subscribe(
         (response) => {
           alert('Equipment reserved successfully');
+          this.loadEquipment();
         },
         (error) => {
           alert('Error reserving equipment: ' + error.message);
