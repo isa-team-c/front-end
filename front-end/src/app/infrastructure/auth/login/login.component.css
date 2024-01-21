@@ -57,3 +57,15 @@
   color: #2f8cc3; 
   margin-bottom: 20px; 
 }
+
+.login-image {
+  width: 100px;
+  height: auto; 
+  margin-left: 75px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #aaa; /* Boja placeholder teksta */
+    font-family: 'Arial', sans-serif; /* Font za placeholder tekst */
+}
