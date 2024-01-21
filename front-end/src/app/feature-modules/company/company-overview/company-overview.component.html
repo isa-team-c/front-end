@@ -12,7 +12,7 @@
                 <th>Description</th>
                 <th>Type</th>
                 <th>Quantity</th>
-                <th *ngIf="!isAdmin">Action</th>
+                <th *ngIf="!isAdmin && isLogged">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@
                 </td>
                 
                 <td>
-                    <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && !isAdmin" color="primary" (click)="chooseEquipment(equipment)">
+                    <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && (!isAdmin && isLogged)" color="primary" (click)="chooseEquipment(equipment)">
                         {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
                       </button>
                 </td>
@@ -49,8 +49,8 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let appointment of companyAppointments" >
-                <tr *ngIf="appointment.isFree === true && !isAdmin" >
+              <ng-container *ngFor="let appointment of companyAppointments">
+                <tr *ngIf="appointment.isFree === true && (!isAdmin && isLogged)" >
                   <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
                   <td>{{ appointment.duration }}</td>
                   <td>{{ appointment.isFree ? 'Free' : 'Reserved' }}</td>
@@ -60,7 +60,7 @@
                     </button>
                   </td>
                 </tr>
-                <tr *ngIf="isAdmin">
+                <tr *ngIf="isAdmin && isLogged" >
                   <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
                   <td>{{ appointment.duration }}</td>
                   <td>{{ appointment.isFree ? 'Free' : 'Reserved' }}</td>
@@ -71,10 +71,10 @@
             </tbody>
           </table>
     </div>
-    <div  *ngIf="showAppointments && !isAdmin">
+    <div  *ngIf="showAppointments && (!isAdmin && isLogged)">
       <button class="new-appointment-button"  (click)="newAppointment()">New Appointment</button>
   </div>
-    <div *ngIf="!isAdmin">
+    <div *ngIf="!isAdmin && isLogged">
         <button class="reserve" (click)="reserveEquipment()">Reserve</button>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { Equipment } from '../../user/model/equipment.model';
 import { Appointment } from '../model/appointment.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Component({
   selector: 'app-company-overview',
@@ -23,8 +24,10 @@ export class CompanyOverviewComponent {
   isSelected?: boolean;
   selectedAppointment: Appointment | null = null;
   userId: number | undefined;
+  user: User | undefined;
   
   isAdmin!: boolean;
+  isLogged!: boolean;
   shouldRenderNewAppointment: boolean = false;
   selectedDateTime!: Date;
   shouldRenderGeneratedAppointments: boolean = false;
@@ -39,9 +42,10 @@ export class CompanyOverviewComponent {
 
   ngOnInit(): void{
     this.authService.user$.subscribe(user => {
-      if (user.id) {
+      if (user.id != 0) {
        this.userId = user.id;
        this.isAdmin = user.role.name === 'ROLE_COMPANY_ADMIN';
+       this.isLogged = true;
        if(this.isAdmin){
         this.showAppointments = true;
        }

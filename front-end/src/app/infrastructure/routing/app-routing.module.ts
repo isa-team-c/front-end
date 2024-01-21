@@ -23,11 +23,12 @@ import { UpdateEquipmentComponent } from 'src/app/feature-modules/company/update
 import { ChangePasswordCompanyAdminComponent } from 'src/app/feature-modules/company-administrator/change-password-company-admin/change-password-company-admin.component';
 import { ChangePasswordFirstTimeComponent } from 'src/app/feature-modules/company-administrator/change-password-first-time/change-password-first-time.component';
 import { WorkCalendarComponent } from 'src/app/feature-modules/company-administrator/work-calendar/work-calendar.component';
+import { HomeComponent } from 'src/app/layout/home/home.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'companies', component: CompanyReviewComponent},
-  { path: 'home', component: AppComponent},
+  { path: 'home', component: HomeComponent},
   { path: 'register', component: RegistrationComponent },
   { path: 'verification/:id' , component: VerificationComponent},
   { path: 'equipment-overview' , component: EquipmentOverviewComponent},

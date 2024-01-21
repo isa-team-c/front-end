@@ -71,7 +71,7 @@ export class LoginComponent  implements OnInit{
             else {
               console.log('User is not a company administrator.');
               this.submitted = false;
-              this.router.navigate(['/home']); // Redirect if the user is not an administrator
+              this.router.navigate(['/companies']); // Redirect if the user is not an administrator
             }
           },
           (error) => {

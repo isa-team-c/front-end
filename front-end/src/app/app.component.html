@@ -1,6 +1,7 @@
+<app-navbar></app-navbar>
 <router-outlet></router-outlet>
 <style>
-
+/*
   .toolbar {
     position: absolute;
     top: 0;
@@ -21,7 +22,7 @@
     font-size: 24px;
     margin-left: 90px;
   }
-
+/
   .profile {
     margin-left: 740px;
   }
@@ -58,8 +59,7 @@
   
   }</style>
 
-<router-outlet></router-outlet>
-<div class="toolbar">
+<!--div class="toolbar">
   <div class="medbooking-text">MedBooking</div>
   <div class="profile">
     <ng-container *ngIf="!isUserLoggedIn(); else loggedInTemplate">
@@ -81,5 +81,4 @@
       <button mat-menu-item (click)="logout()">Log out</button>
     </mat-menu>
   </div> 
-</div>
-<router-outlet></router-outlet>
+</div>-->

@@ -22,10 +22,12 @@ import { CompanyUpdateComponent } from './feature-modules/company/company-update
 import { ChangePasswordComponent } from './feature-modules/administrator/change-password/change-password.component';
 import { ComplaintModule } from './feature-modules/complaint/complaint.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, 
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AdministratorModule,
     ComplaintModule,
     FullCalendarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule,
+    NavbarComponent,
   ],
   providers: [ 
     {
