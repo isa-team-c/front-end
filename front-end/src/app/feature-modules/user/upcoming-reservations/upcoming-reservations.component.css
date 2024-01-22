@@ -1,19 +1,20 @@
-.appointments-table {
+.upcoming-reservations {
     width: 70%;
     margin-top: 20px;
     border-collapse: collapse;
     margin-left: 220px;
   }
   
-  .appointments-table th{
+  .upcoming-reservations th {
     padding: 8px;
     text-align: left;
   }
   
-  .appointments-table th {
+  .upcoming-reservations th {
     background-color: #f2f2f2;
   }
-  .appointments-title-section {
+
+  .upcoming-reservations-title-section {
     color: white;
     text-align: center;
     display: flex;
@@ -21,9 +22,10 @@
     justify-content: center;
 }
 
-.appointments-title {
+.upcoming-reservations-title {
     font-family: sans-serif;
     color: rgb(42, 6, 119);
     margin-top: 80px;
     font-size: xx-large;
 }
+

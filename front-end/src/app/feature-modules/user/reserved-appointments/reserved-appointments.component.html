@@ -1,15 +1,22 @@
 <div>
+  <div class="appointments-title-section">
+    <h1 class="appointments-title">My reservations</h1>
+</div>
     <table class="appointments-table">
         <thead>
           <tr>
+            <th>QR code</th>
             <th>Start Date</th>
             <th>Duration</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let appointment of userAppointments">
-            <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
-            <td>{{ appointment.duration }}</td>
+          <tr *ngFor="let reservation of userAppointments">
+            <td></td>
+            <td>{{ formatDate(reservation.appointment?.startDate || '') | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ reservation.appointment?.duration }}</td>
+            <td>{{ reservation.status }}</td>
           </tr>
         </tbody>
       </table>

@@ -67,4 +67,12 @@ export class UserService {
   getAllAppointmentsByUserId(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/api/reservation/appointmentsByUserId/${userId}`);
   }
+
+  getTakenReservationsByUserId(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/api/reservation/takenReservationsByUserId/${userId}`);
+  }
+
+  getUpcomingReservationsByUserId(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/api/reservation/upcomingReservationsByUserId/${userId}`);
+  }
 }

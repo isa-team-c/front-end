@@ -1,0 +1,29 @@
+<div>
+    <div class="upcoming-reservations-title-section">
+        <h1 class="upcoming-reservations-title">Yours Upcoming Reservations</h1>
+    </div>
+<div>
+<table class="upcoming-reservations">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Price</th>
+        <th>Cancel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ formatDate(reservation.appointment?.startDate || '') | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ reservation.appointment?.duration }}</td>
+        <td>{{ reservation.price }}</td>
+        <td>
+            <button mat-stroked-button color="primary" >
+                Cancel
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

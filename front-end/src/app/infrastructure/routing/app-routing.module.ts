@@ -24,6 +24,8 @@ import { ChangePasswordCompanyAdminComponent } from 'src/app/feature-modules/com
 import { ChangePasswordFirstTimeComponent } from 'src/app/feature-modules/company-administrator/change-password-first-time/change-password-first-time.component';
 import { WorkCalendarComponent } from 'src/app/feature-modules/company-administrator/work-calendar/work-calendar.component';
 import { HomeComponent } from 'src/app/layout/home/home.component';
+import { TakenReservationsComponent } from 'src/app/feature-modules/user/taken-reservations/taken-reservations.component';
+import { UpcomingReservationsComponent } from 'src/app/feature-modules/user/upcoming-reservations/upcoming-reservations.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -50,6 +52,8 @@ const routes: Routes = [
   { path: 'change-password-company-admin', component: ChangePasswordCompanyAdminComponent},
   { path: 'change-password-first-time', component: ChangePasswordFirstTimeComponent},
   { path: 'work-calendar', component: WorkCalendarComponent},
+  { path: 'pickup-history', component: TakenReservationsComponent},
+  { path: 'upcoming-reservations', component: UpcomingReservationsComponent},
 ];
 
 @NgModule({

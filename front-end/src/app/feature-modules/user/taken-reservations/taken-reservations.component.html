@@ -1,0 +1,22 @@
+<div>
+    <div class="taken-reservations-title-section">
+        <h1 class="taken-reservations-title">Yours Pickup History</h1>
+    </div>
+<div>
+<table class="taken-reservations">
+    <thead>
+      <tr>
+        <th  (click)="sortReservationsByColumn('date')">Date</th>
+        <th  (click)="sortReservationsByColumn('duration')">Duration</th>
+        <th  (click)="sortReservationsByColumn('price')">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ formatDate(reservation.appointment?.startDate || '') | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ reservation.appointment?.duration }}</td>
+        <td>{{ reservation.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

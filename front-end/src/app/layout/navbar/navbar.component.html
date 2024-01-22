@@ -9,8 +9,8 @@
                 Reservations
             </button>
             <mat-menu #reservationsMenu="matMenu">
-                <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular">Pickup History</button>
-                <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular">Upcoming</button>
+                <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [routerLink]="['pickup-history']">Pickup History</button>
+                <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [routerLink]="['upcoming-reservations']">Upcoming</button>
                 <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular">QR Codes</button>
             </mat-menu>
         </mat-menu>

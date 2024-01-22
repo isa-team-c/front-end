@@ -1,38 +1,43 @@
 import { Component } from '@angular/core';
-import { Appointment } from '../../company/model/appointment.model';
+import { Reservation } from '../../company/model/reservation.model';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { UserService } from '../user.service';
-import { Reservation } from '../../company/model/reservation.model';
+import { CommonModule } from '@angular/common';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-reserved-appointments',
-  templateUrl: './reserved-appointments.component.html',
-  styleUrls: ['./reserved-appointments.component.css']
+  selector: 'app-upcoming-reservations',
+  standalone: true,
+  imports: [CommonModule, MatButtonModule],
+  templateUrl: './upcoming-reservations.component.html',
+  styleUrl: './upcoming-reservations.component.css'
 })
-export class ReservedAppointmentsComponent {
+export class UpcomingReservationsComponent {
+
   userId: number | undefined;
-  userAppointments: Reservation[] = [];
+  reservations: Reservation[] = [];
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private service: UserService) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       if (user.id) {
-       this.userId = user.id;
+        this.userId = user.id;
       }
-    })
+    });
 
-    this.loadUserAppointments();
+    this.loadReservations();
   }
 
-  loadUserAppointments() {
-    this.service.getAllAppointmentsByUserId(this.userId!).subscribe(
+  loadReservations() {
+    this.service.getUpcomingReservationsByUserId(this.userId!).subscribe(
       (data) => {
-        this.userAppointments = data;
+        // Sort reservations before assigning
+        this.reservations = data;
       },
       (error) => {
-        console.error('Error loading appointments:', error);
+        console.error('Error loading taken reservations:', error);
       }
     );
   }
