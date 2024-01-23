@@ -13,7 +13,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let reservation of userAppointments">
-            <td></td>
+            <td>
+              <img class="qr" [src]="'http://localhost:8080/' + reservation.qrCode" alt="QR Code">
+
+            </td>
             <td>{{ formatDate(reservation.appointment?.startDate || '') | date: 'dd/MM/yyyy HH:mm' }}</td>
             <td>{{ reservation.appointment?.duration }}</td>
             <td>{{ reservation.status }}</td>

@@ -7,6 +7,8 @@ import { Appointment } from '../model/appointment.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Profile } from '../../user/model/profile.model';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-company-overview',
@@ -25,6 +27,7 @@ export class CompanyOverviewComponent {
   selectedAppointment: Appointment | null = null;
   userId: number | undefined;
   user: User | undefined;
+  profile: Profile | undefined;
   
   isAdmin!: boolean;
   isLogged!: boolean;
@@ -33,7 +36,7 @@ export class CompanyOverviewComponent {
   shouldRenderGeneratedAppointments: boolean = false;
   selectedGeneratedAppointment: Appointment | null = null;
 
-  constructor(private route: ActivatedRoute, private service: CompanyService, private authService: AuthService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private userService: UserService, private service: CompanyService, private authService: AuthService, private router: Router) {}
 
   appointmentForm = new FormGroup({
     appointmentDate: new FormControl('', [Validators.required]),
@@ -49,6 +52,11 @@ export class CompanyOverviewComponent {
        if(this.isAdmin){
         this.showAppointments = true;
        }
+       if(user.role.name === 'ROLE_REGULAR_USER'){
+
+        this.getUserProfile(this.userId!);
+      
+      }
       }
     })
     this.route.paramMap.subscribe((params) => {
@@ -136,6 +144,10 @@ chooseAppointment(appointment: Appointment) {
 
 reserveEquipment() {
   if (this.selectedEquipmentIds.length > 0 && this.selectedAppointment) {
+    if (this.profile?.penalties! > 2) {
+      alert('You cannot make a reservation right now because you have more than 2 penalties.');
+      return;
+    }
     if (!this.selectedAppointment.isFree) {
       alert('The selected appointment is not free. Please choose another appointment.');
       return;
@@ -272,6 +284,14 @@ async bookAppointment(appointment: Appointment) {
   } else {
     console.warn('No equipment selected for reservation.');
   }
+}
+
+getUserProfile(userId: number) {
+  this.userService.getUserProfile(userId).subscribe((profileData: Profile) => {
+    console.log('Profile data:', profileData);
+    this.profile = profileData;
+    console.log('Uspesno dobijen profil:', this.profile);
+  });
 }
 
 }

@@ -27,3 +27,8 @@
     margin-top: 80px;
     font-size: xx-large;
 }
+
+.qr {
+  width: 150px;  
+  height: 150px; 
+}
