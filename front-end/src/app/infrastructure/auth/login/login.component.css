@@ -64,8 +64,3 @@
   margin-left: 75px;
 }
 
-input::placeholder,
-textarea::placeholder {
-    color: #aaa; /* Boja placeholder teksta */
-    font-family: 'Arial', sans-serif; /* Font za placeholder tekst */
-}

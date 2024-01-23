@@ -1,15 +1,20 @@
 <div>
+    <h2 class="title">My Appointments</h2>
     <table class="appointments-table">
         <thead>
           <tr>
             <th>Start Date</th>
             <th>Duration</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let appointment of userAppointments">
             <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
             <td>{{ appointment.duration }}</td>
+            <td>
+              <button mat-stroked-button color="primary" (click)="onCancelClicked(appointment)">Cancel</button>
+            </td>
           </tr>
         </tbody>
       </table>
