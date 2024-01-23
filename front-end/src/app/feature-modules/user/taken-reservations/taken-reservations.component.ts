@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './taken-reservations.component.html',
-  styleUrl: './taken-reservations.component.css'
+  styleUrls: ['./taken-reservations.component.css']
 })
 export class TakenReservationsComponent {
   userId: number | undefined;

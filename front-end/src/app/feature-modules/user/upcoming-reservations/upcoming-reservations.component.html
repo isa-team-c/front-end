@@ -18,7 +18,7 @@
         <td>{{ reservation.appointment?.duration }}</td>
         <td>{{ reservation.price }}</td>
         <td>
-            <button mat-stroked-button color="primary" >
+            <button mat-stroked-button color="primary" (click)="onCancelClicked(reservation.appointment)">
                 Cancel
             </button>
         </td>

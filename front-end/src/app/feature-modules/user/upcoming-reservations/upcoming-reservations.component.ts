@@ -5,13 +5,14 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { Appointment } from '../../company/model/appointment.model';
 
 @Component({
   selector: 'app-upcoming-reservations',
   standalone: true,
   imports: [CommonModule, MatButtonModule],
   templateUrl: './upcoming-reservations.component.html',
-  styleUrl: './upcoming-reservations.component.css'
+  styleUrls: ['./upcoming-reservations.component.css']
 })
 export class UpcomingReservationsComponent {
 
@@ -38,6 +39,19 @@ export class UpcomingReservationsComponent {
       },
       (error) => {
         console.error('Error loading taken reservations:', error);
+      }
+    );
+  }
+
+  onCancelClicked(selectedAppointment: Appointment | undefined) {
+    this.service.cancelAppointment(selectedAppointment!.id, this.userId!).subscribe(
+      (response) => {
+        console.log('Appointment canceled:', response);
+        alert('Appointment canceled successfully!');
+        this.loadReservations();
+      },
+      (error) => {
+        console.error('Error cancelling appointment:', error);
       }
     );
   }

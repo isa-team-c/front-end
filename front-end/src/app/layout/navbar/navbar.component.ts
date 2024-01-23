@@ -13,7 +13,7 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
   standalone: true,
   imports: [MatToolbarModule, MatMenuModule, MatButtonModule, RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
 
