@@ -9,6 +9,7 @@
             <th>Start Date</th>
             <th>Duration</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +21,9 @@
             <td>{{ formatDate(reservation.appointment?.startDate || '') | date: 'dd/MM/yyyy HH:mm' }}</td>
             <td>{{ reservation.appointment?.duration }}</td>
             <td>{{ reservation.status }}</td>
+            <td>
+              <button mat-stroked-button color="primary" (click)="onCancelClicked(reservation.appointment)">Cancel</button>
+            </td>
           </tr>
         </tbody>
       </table>

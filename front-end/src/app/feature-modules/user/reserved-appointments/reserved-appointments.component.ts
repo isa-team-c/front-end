@@ -56,4 +56,19 @@ export class ReservedAppointmentsComponent {
 
     return dateObj;
   }
+
+  onCancelClicked(selectedAppointment: Appointment) {
+    this.service.cancelAppointment(selectedAppointment.id, this.userId!).subscribe(
+      (response) => {
+        console.log('Appointment canceled:', response);
+        alert('Appointment canceled successfully!');
+        this.loadUserAppointments();
+      },
+      (error) => {
+        console.error('Error cancelling appointment:', error);
+      }
+    );
+  }
+  
+
 }

@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Profile } from '../../user/model/profile.model';
+import { Role } from 'src/app/infrastructure/auth/model/role.model';
 import { UserService } from '../../user/user.service';
 
 @Component({
@@ -29,14 +30,20 @@ export class CompanyOverviewComponent {
   user: User | undefined;
   profile: Profile | undefined;
   
+  role: Role | undefined;
   isAdmin!: boolean;
   isLogged!: boolean;
   shouldRenderNewAppointment: boolean = false;
   selectedDateTime!: Date;
   shouldRenderGeneratedAppointments: boolean = false;
   selectedGeneratedAppointment: Appointment | null = null;
+  userAppointments: Appointment[] = [];
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private service: CompanyService, private authService: AuthService, private router: Router) {}
+  constructor(private route: ActivatedRoute, 
+              private service: CompanyService,
+              private userService: UserService, 
+              private authService: AuthService, 
+              private router: Router) {}
 
   appointmentForm = new FormGroup({
     appointmentDate: new FormControl('', [Validators.required]),
@@ -47,6 +54,7 @@ export class CompanyOverviewComponent {
     this.authService.user$.subscribe(user => {
       if (user.id != 0) {
        this.userId = user.id;
+       this.role = user.role;
        this.isAdmin = user.role.name === 'ROLE_COMPANY_ADMIN';
        this.isLogged = true;
        if(this.isAdmin){
@@ -70,6 +78,15 @@ export class CompanyOverviewComponent {
     })
     this.loadEquipment();
     this.loadAppointments();
+
+    this.userService.getAllAppointmentsByUserId(this.userId!).subscribe(
+      (appointments) => {
+        this.userAppointments = appointments;
+      },
+      (error) => {
+        console.error('Error fetching user appointments:', error);
+      }
+    );
   }
 
   loadEquipment() {
@@ -152,26 +169,34 @@ reserveEquipment() {
       alert('The selected appointment is not free. Please choose another appointment.');
       return;
     }
-    this.service
-      .reserveEquipment(
+
+    this.service.reserveEquipment(
         this.selectedEquipmentIds,
         this.selectedAppointment!.id,
         this.userId!
       )
       .subscribe(
         (response) => {
-          alert('Equipment reserved successfully');
-          this.loadEquipment();
-          this.loadAppointments();
+            alert('Equipment reserved successfully');
+            this.loadEquipment();
+            this.loadAppointments();
         },
         (error) => {
-          alert('Error reserving equipment: ' + error.message);
+          // Handle reservation error
+          if (error.status === 400) {
+            alert('Failed to reserve equipment. Please try again.'); // or display an error message on the UI
+          } else if (error.status === 500) {
+            alert('Error during equipment reservation. Please contact support.'); // or display an error message on the UI
+          } else {
+            alert('An unexpected error occurred.'); // or display an error message on the UI
+          }
         }
       );
   } else {
     alert('No equipment selected for reservation.');
   }
 }
+
 
 formatDate(date: Date | number[] | string): string {
   let dateObj: Date;

@@ -1,11 +1,17 @@
+.title {
+  margin-top: 170px;
+  text-align: center;
+}
+
 .appointments-table {
     width: 70%;
-    margin-top: 20px;
+    margin-top: 50px;   /*20px*/
     border-collapse: collapse;
     margin-left: 220px;
   }
   
-  .appointments-table th{
+  .appointments-table th, .appointments-table td{
+    border: none;
     padding: 8px;
     text-align: left;
   }

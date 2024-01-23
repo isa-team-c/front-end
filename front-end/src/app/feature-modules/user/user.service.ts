@@ -7,6 +7,7 @@ import { CompanyReview } from './model/company-review.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Administrator } from 'src/app/infrastructure/auth/model/administrator.model';
 import { User2 } from 'src/app/infrastructure/auth/model/user2.model';
+import { Appointment } from '../company/model/appointment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,9 @@ export class UserService {
     return this.http.get<User2>(`http://localhost:8080/user/getByEmail/${email}`);
   }
 
+  getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>(`http://localhost:8080/user/getByEmail/${email}`);
+  }
   
   getAllAppointmentsByUserId(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/api/reservation/appointmentsByUserId/${userId}`);
@@ -75,4 +79,8 @@ export class UserService {
   getUpcomingReservationsByUserId(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/api/reservation/upcomingReservationsByUserId/${userId}`);
   }
+  cancelAppointment(appointmentId: number, userId: number): Observable<string> {
+    return this.http.put(`http://localhost:8080/api/appointments/cancel/${appointmentId}/${userId}`, {}, { responseType: 'text' });
+  }
+  
 }
