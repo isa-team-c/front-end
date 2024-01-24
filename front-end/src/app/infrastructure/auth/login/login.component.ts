@@ -34,16 +34,34 @@ export class LoginComponent  implements OnInit{
  
   onSubmit() {
     this.submitted = true;
+    const userEmail = this.form.get('email')?.value;
+    this.userService.getUserByEmail(userEmail).subscribe(
+      (user: User) => {
+        console.log('Received User:', user);
+
+        if (!user.isVerified) {
+          alert("User is not verified. Check your email.")
+          this.submitted = false;
+          this.router.navigate(['/login']);
+          return;
+        }
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+        this.submitted = false;
+        //this.router.navigate(['/home']); // Redirect if error fetching user details
+      }
+    );
     this.authService.login(this.form.value).subscribe(
       (response: HttpResponse<any>) => {
         console.log('Login success', response);
   
         const userEmail = this.form.get('email')?.value; // Get the user email from the form
-  
+
         this.userService.getUserDetails(userEmail).subscribe(
           (user: User2) => {
             console.log('Received User:', user);
-  
+
             // Check if the user is an administrator
             if (this.isUserCompanyAdministrator(user)) {
               const userId = this.getUserIdFromUserDetails(user); // Get the user ID from UserDetails
@@ -71,20 +89,20 @@ export class LoginComponent  implements OnInit{
             else {
               console.log('User is not a company administrator.');
               this.submitted = false;
-              this.router.navigate(['/home']); // Redirect if the user is not an administrator
+              this.router.navigate(['/companies']); // Redirect if the user is not an administrator
             }
           },
           (error) => {
             console.error('Error fetching user details:', error);
             this.submitted = false;
-            this.router.navigate(['/home']); // Redirect if error fetching user details
+            //this.router.navigate(['/home']); // Redirect if error fetching user details
           }
         );
       },
       (error) => {
         console.error('Login error:', error);
         this.submitted = false;
-        this.router.navigate(['/home']); // Redirect if login error
+        //this.router.navigate(['/home']); // Redirect if login error
       }
     );
   }

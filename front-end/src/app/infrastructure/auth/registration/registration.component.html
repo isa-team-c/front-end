@@ -8,37 +8,38 @@
 <body>
     <div class="registrationComponent"></div>
     <div class="user-form-container">
-        <h2>User Information</h2>
+        <img src="assets/images/registration.png" alt="Login Image" class="login-image">
+        <h3 class="registration-title">REGISTRATION</h3>
         <form [formGroup] = "registrationForm" id="userForm" (ngSubmit)="onSubmit()">
-            <label for="email">Email:</label>
-            <input type="email" id="email" formControlName="email" required>
+            <!--<label for="email">Email:</label>-->
+            <input type="email" id="email" formControlName="email" placeholder="email" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" formControlName="password" required>
+            <!--<label for="password">Password:</label>-->
+            <input type="password" id="password" formControlName="password" placeholder="password" required>
 
-            <label for="confirmationPassword">Confirm Password:</label>
-            <input type="password" id="confirmationPassword" formControlName="confirmationPassword" required [ngStyle]="{'border-color': (submitted && registrationForm.get('confirmationPassword')?.invalid) || (registrationForm.get('confirmationPassword')?.value !== registrationForm.get('password')?.value) ? 'red' : ''}">
+            <!--<label for="confirmationPassword">Confirm Password:</label>-->
+            <input type="password" id="confirmationPassword" formControlName="confirmationPassword" placeholder="confirm password" required [ngStyle]="{'border-color': (submitted && registrationForm.get('confirmationPassword')?.invalid) || (registrationForm.get('confirmationPassword')?.value !== registrationForm.get('password')?.value) ? 'red' : ''}">
 
-            <label for="name">Name:</label>
-            <input type="text" id="name" formControlName="name" required>
+            <!--<label for="name">Name</label>-->
+            <input type="text" id="name" formControlName="name" placeholder="name" required>
 
-            <label for="surname">Surname:</label>
-            <input type="text" id="surname" formControlName="surname" required>
+            <!--<label for="surname">Surname</label>-->
+            <input type="text" id="surname" formControlName="surname" placeholder="surname" required>
 
-            <label for="city">City:</label>
-            <input type="text" id="city" formControlName="city" required>
+            <!--<label for="city">City:</label>-->
+            <input type="text" id="city" formControlName="city" placeholder="city" required>
 
-            <label for="country">Country:</label>
-            <input type="text" id="country" formControlName="country" required>
+            <!--<label for="country">Country</label>-->
+            <input type="text" id="country" formControlName="country" placeholder="country" required>
 
-            <label for="phoneNumber">Phone Number:</label>
-            <input type="tel" id="phoneNumber" formControlName="phoneNumber" required>
+            <!--<label for="phoneNumber">Phone Number</label>-->
+            <input type="tel" id="phoneNumber" formControlName="phoneNumber" placeholder="phone number" required>
 
-            <label for="profession">Profession:</label>
-            <input type="text" id="profession" formControlName="profession" required>
+            <!--<label for="profession">Profession</label>-->
+            <input type="text" id="profession" formControlName="profession" placeholder="profession" required>
 
-            <label for="companyInformation">Company Information:</label>
-            <textarea id="companyInformation" formControlName="companyInformation" required></textarea>
+            <!--<label for="companyInformation">Company Information</label>-->
+            <textarea id="companyInformation" formControlName="companyInformation" placeholder="company information" required></textarea>
 
             <div *ngIf="registrationForm.get('passwordMismatch')?.value" class="alert alert-danger">
                 Password and Confirmation Password do not match.

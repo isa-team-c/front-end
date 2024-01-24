@@ -1,0 +1,48 @@
+<mat-toolbar class="navbar" >
+    <div class="navbar-left">
+        <button class="menuButton" mat-button  [matMenuTriggerFor]="menu">Menu</button>
+        
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item color="primary" [routerLink]="['companies']">Companies</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [routerLink]="['profile']">Profile</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [matMenuTriggerFor]="reservationsMenu">
+                Reservations
+            </button>
+            <mat-menu #reservationsMenu="matMenu">
+                <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [routerLink]="['pickup-history']">Pickup History</button>
+                <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [routerLink]="['upcoming-reservations']">Upcoming</button>
+                <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular">QR Codes</button>
+            </mat-menu>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular">Complaints</button>
+        </mat-menu>
+    </div>
+            <!--
+            <button mat-menu-item color="primary" [routerLink]="['companies']">Home</button>
+            <button mat-menu-item *ngIf="user && user.role === 'ROLE_REGULAR_USER'" color="primary" [routerLink]="['profile']">Profile</button>
+            <button mat-menu-item color="primary" *ngIf="user && user.role === 'ROLE_REGULAR_USER'" [matMenuTriggerFor]="reservationsMenu">
+                Reservations
+              </button>
+              <mat-menu #menu="reservationsMenu">
+                <button mat-menu-item *ngIf="user && user.role === 'ROLE_REGULAR_USER'" color="primary" [routerLink]="['..']">Taking over history</button> 
+                <button mat-menu-item *ngIf="user && user.role === 'ROLE_REGULAR_USER'" color="primary" [routerLink]="['reservations']">Upcoming reservations</button>
+                <button mat-menu-item *ngIf="user && user.role === 'ROLE_REGULAR_USER'" color="primary" [routerLink]="['qr']">My QR codes</button>  
+              </mat-menu>
+            <button mat-menu-item *ngIf="user && user.role === 'ROLE_REGULAR_USER'" color="primary" [routerLink]="['equipment']">Complaints</button>     
+        </mat-menu>
+
+    </div>!-->
+
+<p class="app-name"><b><b>Med</b></b>BOOKING</p>
+
+<div class="navbar-right">
+          <button *ngIf="!isUserLoggedIn()" mat-button routerLink="/login" class="logButton">
+            Login
+          </button>
+          <button *ngIf="!isUserLoggedIn()" mat-button (click)="register()" class="logButton">
+            Sign up
+          </button>
+        <button *ngIf="isUserLoggedIn()" mat-button class="logButton"  (click)="logout()">Log out</button>
+        
+</div>
+
+</mat-toolbar>

@@ -6,6 +6,10 @@ import { Equipment } from '../../user/model/equipment.model';
 import { Appointment } from '../model/appointment.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Profile } from '../../user/model/profile.model';
+import { Role } from 'src/app/infrastructure/auth/model/role.model';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-company-overview',
@@ -23,14 +27,23 @@ export class CompanyOverviewComponent {
   isSelected?: boolean;
   selectedAppointment: Appointment | null = null;
   userId: number | undefined;
+  user: User | undefined;
+  profile: Profile | undefined;
   
+  role: Role | undefined;
   isAdmin!: boolean;
+  isLogged!: boolean;
   shouldRenderNewAppointment: boolean = false;
   selectedDateTime!: Date;
   shouldRenderGeneratedAppointments: boolean = false;
   selectedGeneratedAppointment: Appointment | null = null;
+  userAppointments: Appointment[] = [];
 
-  constructor(private route: ActivatedRoute, private service: CompanyService, private authService: AuthService, private router: Router) {}
+  constructor(private route: ActivatedRoute, 
+              private service: CompanyService,
+              private userService: UserService, 
+              private authService: AuthService, 
+              private router: Router) {}
 
   appointmentForm = new FormGroup({
     appointmentDate: new FormControl('', [Validators.required]),
@@ -39,9 +52,19 @@ export class CompanyOverviewComponent {
 
   ngOnInit(): void{
     this.authService.user$.subscribe(user => {
-      if (user.id) {
+      if (user.id != 0) {
        this.userId = user.id;
-       this.isAdmin = user.role.name === 'COMPANY_ADMIN';
+       this.role = user.role;
+       this.isAdmin = user.role.name === 'ROLE_COMPANY_ADMIN';
+       this.isLogged = true;
+       if(this.isAdmin){
+        this.showAppointments = true;
+       }
+       if(user.role.name === 'ROLE_REGULAR_USER'){
+
+        this.getUserProfile(this.userId!);
+      
+      }
       }
     })
     this.route.paramMap.subscribe((params) => {
@@ -55,6 +78,15 @@ export class CompanyOverviewComponent {
     })
     this.loadEquipment();
     this.loadAppointments();
+
+    this.userService.getAllAppointmentsByUserId(this.userId!).subscribe(
+      (appointments) => {
+        this.userAppointments = appointments;
+      },
+      (error) => {
+        console.error('Error fetching user appointments:', error);
+      }
+    );
   }
 
   loadEquipment() {
@@ -64,6 +96,7 @@ export class CompanyOverviewComponent {
       },
       (error) => {
         console.error('Error loading equipment:', error);
+        
       }
     );
   }
@@ -128,28 +161,42 @@ chooseAppointment(appointment: Appointment) {
 
 reserveEquipment() {
   if (this.selectedEquipmentIds.length > 0 && this.selectedAppointment) {
+    if (this.profile?.penalties! > 2) {
+      alert('You cannot make a reservation right now because you have more than 2 penalties.');
+      return;
+    }
     if (!this.selectedAppointment.isFree) {
       alert('The selected appointment is not free. Please choose another appointment.');
       return;
     }
-    this.service
-      .reserveEquipment(
+
+    this.service.reserveEquipment(
         this.selectedEquipmentIds,
         this.selectedAppointment!.id,
         this.userId!
       )
       .subscribe(
         (response) => {
-          alert('Equipment reserved successfully');
+            alert('Equipment reserved successfully');
+            this.loadEquipment();
+            this.loadAppointments();
         },
         (error) => {
-          alert('Error reserving equipment: ' + error.message);
+          // Handle reservation error
+          if (error.status === 400) {
+            alert('Failed to reserve equipment. Please try again.'); // or display an error message on the UI
+          } else if (error.status === 500) {
+            alert('Error during equipment reservation. Please contact support.'); // or display an error message on the UI
+          } else {
+            alert('An unexpected error occurred.'); // or display an error message on the UI
+          }
         }
       );
   } else {
     alert('No equipment selected for reservation.');
   }
 }
+
 
 formatDate(date: Date | number[] | string): string {
   let dateObj: Date;
@@ -262,6 +309,14 @@ async bookAppointment(appointment: Appointment) {
   } else {
     console.warn('No equipment selected for reservation.');
   }
+}
+
+getUserProfile(userId: number) {
+  this.userService.getUserProfile(userId).subscribe((profileData: Profile) => {
+    console.log('Profile data:', profileData);
+    this.profile = profileData;
+    console.log('Uspesno dobijen profil:', this.profile);
+  });
 }
 
 }

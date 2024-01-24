@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit{
   isEditing: boolean = false;
   originalUser: any;
   userId: number | undefined;
+  isRegular!: boolean;
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
@@ -23,7 +24,7 @@ export class ProfileComponent implements OnInit{
     this.authService.user$.subscribe(user => {
       if (user.id) {
        this.userId = user.id;
-        
+       this.isRegular = user.role.name === 'ROLE_REGULAR_USER';
         this.getUserProfile(this.userId);
       }
     })

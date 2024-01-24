@@ -5,6 +5,8 @@ import { Appointment } from "./appointment.model";
 export class Reservation {
     id?: number;
     status?: ReservationStatus;
+    price?: number;
+    qrCode?: String;
     equipment?: Equipment[];
     appointment?: Appointment;
     user?: User;

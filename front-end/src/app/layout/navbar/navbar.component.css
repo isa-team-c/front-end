@@ -1,0 +1,57 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgb(55, 4, 133), rgb(11, 3, 101));
+    width: 100vw - 20px; /* Make the navbar span the entire width */
+    padding: 1rem; /* Add some padding for spacing */
+    z-index: 500;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    font-weight: 350;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    font-weight: 350;
+  }
+  
+  .navbar .menuButton {
+    margin-right: 1vw; /* Adjust the spacing between the menu button and the Explorer text */
+    font-weight: 350;
+    text-decoration: none; /* Remove underline for anchor tags */
+    color: #fff; /* Set the text color for anchor tags */
+  }
+
+  .app-name {
+    font-size: 1.8vw;
+    margin-top: 1.8vw;
+    color: #fff; /* Set the text color for Explorer text */
+    
+  }
+
+  .navbar .logButton {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 350;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .menuButton {
+    margin-right: 1vw; /* Adjust the spacing between the menu button and the Explorer text */
+    font-weight: 350;
+    text-decoration: none; /* Remove underline for anchor tags */
+    color: #fff; /* Set the text color for anchor tags */
+  }
+
+  #buttons {
+    width: auto;
+    margin-left: auto;
+  }

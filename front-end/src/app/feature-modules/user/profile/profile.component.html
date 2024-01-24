@@ -1,4 +1,4 @@
-<div id="profile" >
+<div id="profile" *ngIf="isRegular" >
 <h1>Profile</h1>
 <div>
   <label for="name">Name</label>
@@ -48,14 +48,14 @@
   <span id="penalties">{{ regularUser?.penalties }}</span>
 </div>
 <div *ngIf="isEditing">
-    <button class="save-button" (click)="saveChanges()">Save</button>
-    <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
+    <button mat-stroked-button color="primary" (click)="saveChanges()">Save</button>
+    <button mat-stroked-button color="primary"  (click)="cancelEdit()">Cancel</button>
   </div>
   <div *ngIf="!isEditing">
-    <button (click)="editProfile()">Edit</button>
+    <button mat-stroked-button color="primary"  (click)="editProfile()">Edit</button>
   </div>
   <div>
-    <button (click)="viewReservedAppointments()">Reserved appointments</button>
+    <button mat-stroked-button color="primary" (click)="viewReservedAppointments()">My Reservations</button>
   </div>
 </div>
 

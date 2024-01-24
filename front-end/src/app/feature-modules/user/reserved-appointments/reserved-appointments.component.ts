@@ -3,6 +3,7 @@ import { Appointment } from '../../company/model/appointment.model';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { UserService } from '../user.service';
+import { Reservation } from '../../company/model/reservation.model';
 
 @Component({
   selector: 'app-reserved-appointments',
@@ -11,7 +12,7 @@ import { UserService } from '../user.service';
 })
 export class ReservedAppointmentsComponent {
   userId: number | undefined;
-  userAppointments: Appointment[] = [];
+  userAppointments: Reservation[] = [];
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private service: UserService) {}
 
@@ -36,9 +37,9 @@ export class ReservedAppointmentsComponent {
     );
   }
 
-  formatDate(date: Date | number[] | string): string {
+  formatDate(date: Date | number[] | string): Date {
     let dateObj: Date;
-  
+
     if (date instanceof Date) {
       dateObj = date;
     } else if (Array.isArray(date)) {
@@ -46,13 +47,15 @@ export class ReservedAppointmentsComponent {
     } else {
       dateObj = new Date(date);
     }
-    
-    // Proverite da li je dateObj validan Date objekat
+
+    // Check if dateObj is a valid Date object
     if (isNaN(dateObj.getTime())) {
       console.error('Invalid date:', date);
-      return ''; 
+      return new Date(); // Return some default value, e.g., the current date
     }
-  
-    return dateObj.toISOString();
+
+    return dateObj;
   }
+  
+
 }
