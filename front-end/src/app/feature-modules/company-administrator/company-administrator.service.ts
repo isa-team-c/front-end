@@ -5,6 +5,7 @@ import { Company } from 'src/app/infrastructure/auth/model/company.model';
 import { Router } from '@angular/router';
 import { CompanyAdministrator } from 'src/app/infrastructure/auth/model/company-administrator.model';
 import { Appointment } from 'src/app/infrastructure/auth/model/appointment.model';
+import { Reservation } from '../company/model/reservation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +74,15 @@ export class CompanyAdministratorService {
       formData.append('file', file);
   
       return this.http.post(`http://localhost:8080/api/qrcode/upload`, formData, { responseType: 'text' });
-  }
+    }
+
+    getAppointment(id: number): Observable<Appointment> {
+      return this.http.get<Appointment>('http://localhost:8080/api/appointments/' + id);
+    }
+
+    getReservation(id: number): Observable<Reservation> {
+      return this.http.get<Reservation>('http://localhost:8080/api/reservation/' + id);
+    }
 }
 
 

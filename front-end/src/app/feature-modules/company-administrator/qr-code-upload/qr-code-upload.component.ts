@@ -8,8 +8,10 @@ import { CompanyAdministratorService } from '../company-administrator.service';
 })
 export class QrCodeUploadComponent {
   qrCodeData: string | undefined;
-  userId: number | undefined;  // Change the type to number
-  extractedDate: Date | undefined;  // Change the type to Date
+  extractedUserId: number | undefined;
+  extractedAppoitmentDate: Date | undefined;
+  extractedAppoitmentDuration: number | undefined;
+  extractedEndDate: Date | undefined;
 
   constructor(private companyAdministratorService: CompanyAdministratorService) {}
 
@@ -18,9 +20,11 @@ export class QrCodeUploadComponent {
 
     this.companyAdministratorService.uploadQRCodeImage(file).subscribe(
       (data: any) => {
-        this.qrCodeData = data; // Save the entire QR code data
-        this.extractUserId(data); // Extract and set the User ID
-        this.extractDate(data); // Extract and set the date
+        this.qrCodeData = data;
+        this.extractUserId(data);
+        this.extractAppoitmentDate(data);
+        this.extractAppoitmentDuration(data);
+        this.calculateEndDate();
       },
       (error: any) => {
         console.error('Error uploading QR code:', error);
@@ -29,17 +33,37 @@ export class QrCodeUploadComponent {
   }
 
   private extractUserId(qrCodeData: string): void {
-    // Extract User ID using string manipulation
     const userIdMatch = qrCodeData.match(/User ID: (\d+)/);
-    this.userId = userIdMatch ? +userIdMatch[1] : undefined;  // Convert to number
-    console.log('User ID:', this.userId);
+    this.extractedUserId = userIdMatch ? +userIdMatch[1] : undefined;
+    console.log('Extracted User ID:', this.extractedUserId);
   }
 
-  private extractDate(qrCodeData: string): void {
-    // Extract date using string manipulation based on the format
-    // Modify the regular expression or extraction logic as needed
+  private extractAppoitmentDate(qrCodeData: string): void {
     const dateMatch = qrCodeData.match(/Date: (\d{4}-\d{2}-\d{2})/);
-    this.extractedDate = dateMatch ? new Date(dateMatch[1]) : undefined;  // Convert to Date
-    console.log('Extracted Date:', this.extractedDate);
+    this.extractedAppoitmentDate = dateMatch ? new Date(dateMatch[1]) : undefined;
+    console.log('Extracted Appointment Date:', this.extractedAppoitmentDate);
+  }
+
+  private extractAppoitmentDuration(qrCodeData: string): void {
+    const durationMatch = qrCodeData.match(/Appointment Duration: (\d+)/);
+    this.extractedAppoitmentDuration = durationMatch ? +durationMatch[1] : undefined;
+    console.log('Extracted Appointment Duration:', this.extractedAppoitmentDuration);
+  }
+
+  private calculateEndDate(): void {
+    if (this.extractedAppoitmentDate && this.extractedAppoitmentDuration) {
+      const endDate = new Date(this.extractedAppoitmentDate);
+      endDate.setDate(endDate.getDate() + this.extractedAppoitmentDuration);
+      this.extractedEndDate = endDate;
+      console.log('Calculated End Date:', this.extractedEndDate);
+    }
+  }
+
+  isCurrentDateBeforeEndDate(): boolean {
+    if (this.extractedEndDate) {
+      const currentDate = new Date();
+      return currentDate > this.extractedAppoitmentDate! && currentDate < this.extractedEndDate;
+    }
+    return false;
   }
 }
