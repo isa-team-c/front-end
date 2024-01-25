@@ -1,0 +1,8 @@
+<div>
+    <input type="file" (change)="onFileSelected($event)" />
+  </div>
+  <div *ngIf="qrCodeData">
+    <h2>Extracted QR Code Data:</h2>
+    <p>{{ qrCodeData }}</p>
+  </div>
+  

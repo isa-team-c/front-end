@@ -63,6 +63,17 @@ export class CompanyAdministratorService {
       return this.http.post<Appointment>(`http://localhost:8080/api/appointments/generated`, appointmentDto)
         
     }
+
+
+
+
+    // qr code
+    uploadQRCodeImage(file: File): Observable<any> {
+      const formData: FormData = new FormData();
+      formData.append('file', file);
+  
+      return this.http.post(`http://localhost:8080/api/qrcode/upload`, formData, { responseType: 'text' });
+  }
 }
 
 
