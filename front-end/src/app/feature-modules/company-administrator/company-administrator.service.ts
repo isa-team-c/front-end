@@ -8,6 +8,7 @@ import { Appointment } from 'src/app/infrastructure/auth/model/appointment.model
 import { Reservation } from '../company/model/reservation.model';
 import { Profile } from '../user/model/profile.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Equipment } from '../user/model/equipment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +94,10 @@ export class CompanyAdministratorService {
     sendReceiveConfirmation(user: User) {
       const requestBody = user;
       return this.http.post('http://localhost:8080/user/auth/sendConfirmation/', requestBody);
+    }
+
+    getEquipmentById(equipmentId: number): Observable<Equipment> {
+      return this.http.get<Equipment>(`http://localhost:8080/api/equipment/${equipmentId}`);
     }
 
 
