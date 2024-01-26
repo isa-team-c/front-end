@@ -7,6 +7,7 @@ import { CompanyAdministrator } from 'src/app/infrastructure/auth/model/company-
 import { Appointment } from 'src/app/infrastructure/auth/model/appointment.model';
 import { Reservation } from '../company/model/reservation.model';
 import { Profile } from '../user/model/profile.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +88,11 @@ export class CompanyAdministratorService {
 
     updateReservationStatus(reservation: Reservation): Observable<Reservation> {
       return this.http.put<Reservation>('http://localhost:8080/api/reservation/updateStatus', reservation);
+    }
+
+    sendReceiveConfirmation(user: User) {
+      const requestBody = user;
+      return this.http.post('http://localhost:8080/user/auth/sendConfirmation/', requestBody);
     }
 
 

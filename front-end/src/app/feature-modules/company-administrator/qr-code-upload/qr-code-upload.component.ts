@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CompanyAdministratorService } from '../company-administrator.service';
 import { Reservation, ReservationStatus } from '../../company/model/reservation.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Component({
   selector: 'app-qr-code-upload',
@@ -15,6 +16,7 @@ export class QrCodeUploadComponent {
   extractedEndDate: Date | undefined;
   extractedReservationId: number | undefined;
   reservation: Reservation | undefined;
+  user: User | undefined;
 
   constructor(private companyAdministratorService: CompanyAdministratorService) {}
 
@@ -63,6 +65,7 @@ export class QrCodeUploadComponent {
       this.companyAdministratorService.getUserById(this.extractedUserId).subscribe(
         (userData: any) => {
           console.log('User Data:', userData);
+          this.user = userData;
         },
         (error: any) => {
           console.error('Error getting user by ID:', error);
@@ -109,6 +112,18 @@ export class QrCodeUploadComponent {
         .subscribe(
           () => {
             console.log('Reservation status updated to TAKEN successfully.');
+            const user: User = this.user!;
+            if (user) {
+              this.companyAdministratorService.sendReceiveConfirmation(user).subscribe(
+                (response) => {
+                  alert('Response has been sent via mail!');
+                },
+                (error) => {
+                  // Handle error if the response fails to send
+                  console.error('Error sending response:', error);
+                }
+              );
+            }
           },
           (error: any) => {
             console.error('Error updating reservation status:', error);
