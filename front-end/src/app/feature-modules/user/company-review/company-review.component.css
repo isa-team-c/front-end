@@ -15,6 +15,13 @@
     border: 2px solid #ccc;
   }
   
+  .arrow-up::after {
+    content: ' ↑';
+  }
+  
+  .arrow-down::after {
+    content: ' ↓';
+  }
  
   
   .rating-slider {

@@ -17,6 +17,9 @@ export class CompanyReviewComponent {
   minRating: number = 1;
   maxRating: number = 5;
   isFilterApplied: boolean = false;
+  sortByColumn: 'name' | 'address' | 'averageRating' = 'name';
+  sortByOrder: 'asc' | 'desc' = 'asc';
+
 
 
   constructor(private userService: UserService, private router: Router) {}
@@ -25,13 +28,49 @@ export class CompanyReviewComponent {
       this.searchCompanies();
     
   }
+
+  sortCompaniesByColumn(column: 'name' | 'address' | 'averageRating') {
+    if (this.sortByColumn === column) {
+      // Ako je trenutna sortirana kolona ista, promenite redosled sortiranja
+      this.sortByOrder = (this.sortByOrder === 'asc') ? 'desc' : 'asc';
+    } else {
+      // Ako je korisnik kliknuo na drugu kolonu, postavite novu sortiranu kolonu i postavite redosled na uzlazan
+      this.sortByColumn = column;
+      this.sortByOrder = 'asc';
+    }
+  
+    // Ponovo učitajte kompanije sa ažuriranim sortiranjem
+    this.searchCompanies();
+  }
+  
   searchCompanies() {
     console.log('Search Term:', this.searchTerm);
+  
     this.userService.searchCompanies(this.searchTerm)
       .subscribe((data) => {
-        this.companies = data;
+        // Sortirajte kompanije pre nego što ih dodelite
+        this.companies = this.sortCompanies(data);
       });
   }
+  
+  sortCompanies(companies: CompanyReview[]): CompanyReview[] {
+    try {
+      const compareFunctions = {
+        name: (a: CompanyReview, b: CompanyReview) => a.name.localeCompare(b.name),
+        address: (a: CompanyReview, b: CompanyReview) => a.address.localeCompare(b.address),
+        averageRating: (a: CompanyReview, b: CompanyReview) => a.averageRating - b.averageRating
+      };
+  
+      return companies.sort((a, b) => {
+        const compareFunction = compareFunctions[this.sortByColumn];
+        return (this.sortByOrder === 'asc') ? compareFunction(a, b) : compareFunction(b, a);
+      });
+    } catch (error) {
+      console.error('Error sorting companies:', error);
+      return companies;
+    }
+  }
+  
 
   onSearchClick() {
    
