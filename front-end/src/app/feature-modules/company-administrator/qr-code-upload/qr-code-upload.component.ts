@@ -12,6 +12,7 @@ export class QrCodeUploadComponent {
   extractedAppoitmentDate: Date | undefined;
   extractedAppoitmentDuration: number | undefined;
   extractedEndDate: Date | undefined;
+  extractedReservationId: number | undefined;
 
   constructor(private companyAdministratorService: CompanyAdministratorService) {}
 
@@ -21,6 +22,7 @@ export class QrCodeUploadComponent {
     this.companyAdministratorService.uploadQRCodeImage(file).subscribe(
       (data: any) => {
         this.qrCodeData = data;
+        this.extractReservationId(data);
         this.extractUserId(data);
         this.extractAppoitmentDate(data);
         this.extractAppoitmentDuration(data);
@@ -32,10 +34,38 @@ export class QrCodeUploadComponent {
     );
   }
 
+  private extractReservationId(qrCodeData: string): void {
+    const reservationIdMatch = qrCodeData.match(/Reservation id: (\d+)/);
+    this.extractedReservationId = reservationIdMatch ? +reservationIdMatch[1] : undefined;
+    console.log('Extracted Reservation ID:', this.extractedReservationId);
+
+    if (this.extractedReservationId) {
+      this.companyAdministratorService.getReservationById(this.extractedReservationId).subscribe(
+        (reservationData: any) => {
+          console.log('Reservation Data:', reservationData);
+        },
+        (error: any) => {
+          console.error('Error getting reservation by ID:', error);
+        }
+      );
+    }
+  }
+
   private extractUserId(qrCodeData: string): void {
     const userIdMatch = qrCodeData.match(/User ID: (\d+)/);
     this.extractedUserId = userIdMatch ? +userIdMatch[1] : undefined;
     console.log('Extracted User ID:', this.extractedUserId);
+
+    if (this.extractedUserId) {
+      this.companyAdministratorService.getUserById(this.extractedUserId).subscribe(
+        (userData: any) => {
+          console.log('User Data:', userData);
+        },
+        (error: any) => {
+          console.error('Error getting user by ID:', error);
+        }
+      );
+    }
   }
 
   private extractAppoitmentDate(qrCodeData: string): void {
