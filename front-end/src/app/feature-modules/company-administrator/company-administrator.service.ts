@@ -85,6 +85,12 @@ export class CompanyAdministratorService {
       return this.http.get<Reservation>('http://localhost:8080/api/reservation/' + id);
     }
 
+    updateReservationStatus(reservation: Reservation): Observable<Reservation> {
+      return this.http.put<Reservation>('http://localhost:8080/api/reservation/updateStatus', reservation);
+    }
+
+
+
     /*
     getAppointment(id: number): Observable<Appointment> {
       return this.http.get<Appointment>('http://localhost:8080/api/appointments/' + id);

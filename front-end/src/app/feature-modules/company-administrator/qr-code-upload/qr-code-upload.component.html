@@ -7,4 +7,4 @@
   <p>{{ qrCodeData }}</p>
 </div>
 
-<button *ngIf="extractedEndDate && isCurrentDateBeforeEndDate()">Confirm</button>
+<button *ngIf="extractedEndDate && isCurrentDateBeforeEndDate()" (click)="onConfirmClick()">Confirm</button>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CompanyAdministratorService } from '../company-administrator.service';
+import { Reservation, ReservationStatus } from '../../company/model/reservation.model';
 
 @Component({
   selector: 'app-qr-code-upload',
@@ -13,6 +14,7 @@ export class QrCodeUploadComponent {
   extractedAppoitmentDuration: number | undefined;
   extractedEndDate: Date | undefined;
   extractedReservationId: number | undefined;
+  reservation: Reservation | undefined;
 
   constructor(private companyAdministratorService: CompanyAdministratorService) {}
 
@@ -43,6 +45,7 @@ export class QrCodeUploadComponent {
       this.companyAdministratorService.getReservationById(this.extractedReservationId).subscribe(
         (reservationData: any) => {
           console.log('Reservation Data:', reservationData);
+          this.reservation = reservationData;
         },
         (error: any) => {
           console.error('Error getting reservation by ID:', error);
@@ -96,4 +99,24 @@ export class QrCodeUploadComponent {
     }
     return false;
   }
+  
+  onConfirmClick(): void {
+    if (this.reservation) {
+      this.reservation.status = ReservationStatus.TAKEN;
+      console.log("Rezervacija koja se salje: ", this.reservation);
+  
+      this.companyAdministratorService.updateReservationStatus(this.reservation)
+        .subscribe(
+          () => {
+            console.log('Reservation status updated to TAKEN successfully.');
+          },
+          (error: any) => {
+            console.error('Error updating reservation status:', error);
+          }
+        );
+    } else {
+      console.warn('No reservation data available to update status.');
+    }
+  }
+  
 }
