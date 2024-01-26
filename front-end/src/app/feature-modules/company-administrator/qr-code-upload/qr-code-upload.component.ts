@@ -27,9 +27,14 @@ export class QrCodeUploadComponent {
 
   constructor(private companyAdministratorService: CompanyAdministratorService) {}
 
+  isShowButton(): boolean {
+    return !!this.calculatedEndDate && this.isCurrentDateBeforeEndDate();
+  }
+  
+
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-
+  
     this.companyAdministratorService.uploadQRCodeImage(file).subscribe(
       (data: any) => {
         this.qrCodeData = data;
@@ -39,12 +44,53 @@ export class QrCodeUploadComponent {
         this.extractAppoitmentDuration(data);
         this.calculateEndDate();
         this.extractUserId(data);
+  
+        // Move the reservation extraction here
+        if (this.extractedReservationId) {
+          this.companyAdministratorService.getReservationById(this.extractedReservationId).subscribe(
+            (reservationData: any) => {
+              console.log('Reservation Data:', reservationData);
+              this.reservation = reservationData;
+  
+              if (!this.isShowButton()) {
+                this.handleRejectedStatus();
+              }
+            },
+            (error: any) => {
+              console.error('Error getting reservation by ID:', error);
+            }
+          );
+        }
+  
+        if (!this.isShowButton()) {
+          alert('The deadline for taking over the equipment has passed. Reservation rejected and user penalized.');
+        }
       },
       (error: any) => {
         console.error('Error uploading QR code:', error);
       }
     );
   }
+  
+  private handleRejectedStatus(): void {
+    if (this.reservation) {
+      this.reservation.status = ReservationStatus.REJECTED;
+      console.log("Rezervacija koja se salje: ", this.reservation);
+  
+      this.companyAdministratorService.updateReservationStatus(this.reservation)
+        .subscribe(
+          () => {
+            console.log('Reservation status updated to REJECTED successfully.');
+          },
+          (error: any) => {
+            console.error('Error updating reservation status:', error);
+          }
+        );
+    } else {
+      console.warn('No reservation data available to update status.');
+    }
+  }
+  
 
 
 
@@ -89,6 +135,14 @@ export class QrCodeUploadComponent {
     }
   }
 
+  isCurrentDateBeforeEndDate(): boolean {
+    if (this.calculatedEndDate) {
+      const currentDate = new Date();
+      return currentDate < this.calculatedEndDate;
+    }
+    return false;
+  }
+
 
 
   private extractEquipmentId(qrCodeData: string): void {
@@ -131,14 +185,6 @@ export class QrCodeUploadComponent {
 
   
 
-  isCurrentDateBeforeEndDate(): boolean {
-    if (this.calculatedEndDate) {
-      const currentDate = new Date();
-      return currentDate > this.extractedAppoitmentDate! && currentDate < this.calculatedEndDate;
-    }
-    return false;
-  }
-  
   onConfirmClick(): void {
     if (this.reservation) {
       this.reservation.status = ReservationStatus.TAKEN;
