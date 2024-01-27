@@ -83,6 +83,10 @@ export class CompanyAdministratorService {
       return this.http.get<Profile>('http://localhost:8080/user/' + id);
     }
 
+    getRegularUserByUserId(userId: number): Observable<Profile> {
+      return this.http.get<Profile>('http://localhost:8080/api/regular/by-user-id/' + userId);
+    }
+
     getReservationById(id: number): Observable<Reservation> {
       return this.http.get<Reservation>('http://localhost:8080/api/reservation/' + id);
     }
@@ -103,14 +107,6 @@ export class CompanyAdministratorService {
     updateEquipment(equipment: Equipment): Observable<Equipment> {
       return this.http.put<Equipment>(`http://localhost:8080/api/equipment/update`, equipment);
     }
-
-
-
-    /*
-    getAppointment(id: number): Observable<Appointment> {
-      return this.http.get<Appointment>('http://localhost:8080/api/appointments/' + id);
-    }
-    */
 }
 
 

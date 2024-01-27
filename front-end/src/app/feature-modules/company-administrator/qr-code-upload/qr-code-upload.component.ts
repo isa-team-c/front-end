@@ -3,6 +3,7 @@ import { CompanyAdministratorService } from '../company-administrator.service';
 import { Reservation, ReservationStatus } from '../../company/model/reservation.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Equipment } from '../../user/model/equipment.model';
+import { Profile } from '../../user/model/profile.model';
 
 @Component({
   selector: 'app-qr-code-upload',
@@ -24,6 +25,8 @@ export class QrCodeUploadComponent {
 
   extractedUserId: number | undefined;
   user: User | undefined;
+
+  regularUser: Profile | undefined;
 
   constructor(private companyAdministratorService: CompanyAdministratorService) {}
 
@@ -178,6 +181,16 @@ export class QrCodeUploadComponent {
         },
         (error: any) => {
           console.error('Error getting user by ID:', error);
+        }
+      );
+
+      this.companyAdministratorService.getRegularUserByUserId(/*this.extractedUserId*/5).subscribe(
+        (userData: any) => {
+          console.log('Regular User Data:', userData);
+          this.user = userData;
+        },
+        (error: any) => {
+          console.error('Error getting regular user by user ID:', error);
         }
       );
     }
