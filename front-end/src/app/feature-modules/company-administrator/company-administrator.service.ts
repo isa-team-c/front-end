@@ -100,6 +100,10 @@ export class CompanyAdministratorService {
       return this.http.get<Equipment>(`http://localhost:8080/api/equipment/${equipmentId}`);
     }
 
+    updateEquipment(equipment: Equipment): Observable<Equipment> {
+      return this.http.put<Equipment>(`http://localhost:8080/api/equipment/update`, equipment);
+    }
+
 
 
     /*

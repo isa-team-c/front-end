@@ -187,33 +187,54 @@ export class QrCodeUploadComponent {
 
   onConfirmClick(): void {
     if (this.reservation) {
+      // Set reservation status to TAKEN
       this.reservation.status = ReservationStatus.TAKEN;
       console.log("Rezervacija koja se salje: ", this.reservation);
   
-      this.companyAdministratorService.updateReservationStatus(this.reservation)
-        .subscribe(
-          () => {
-            console.log('Reservation status updated to TAKEN successfully.');
-            const user: User = this.user!;
-            if (user) {
-              this.companyAdministratorService.sendReceiveConfirmation(user).subscribe(
-                (response) => {
-                  alert('Response has been sent via mail!');
-                },
-                (error) => {
-                  // Handle error if the response fails to send
-                  console.error('Error sending response:', error);
+      // Update reservation status
+      this.companyAdministratorService.updateReservationStatus(this.reservation).subscribe(
+        () => {
+          console.log('Reservation status updated to TAKEN successfully.');
+  
+          // Decrease equipment quantity by 1
+          if (this.equipment && this.equipment.quantity && this.equipment.quantity > 0) {
+            this.equipment.quantity -= 1;
+  
+            // Update equipment quantity
+            this.companyAdministratorService.updateEquipment(this.equipment).subscribe(
+              () => {
+                console.log('Equipment quantity updated successfully.');
+  
+                // Send receive confirmation via mail
+                const user: User = this.user!;
+                if (user) {
+                  this.companyAdministratorService.sendReceiveConfirmation(user).subscribe(
+                    (response) => {
+                      alert('Equipment taken, response sent via mail!');
+                    },
+                    (error) => {
+                      // Handle error if the response fails to send
+                      console.error('Error sending response:', error);
+                    }
+                  );
                 }
-              );
-            }
-          },
-          (error: any) => {
-            console.error('Error updating reservation status:', error);
+              },
+              (error: any) => {
+                console.error('Error updating equipment quantity:', error);
+              }
+            );
+          } else {
+            console.warn('No equipment data available to update quantity.');
           }
-        );
+        },
+        (error: any) => {
+          console.error('Error updating reservation status:', error);
+        }
+      );
     } else {
       console.warn('No reservation data available to update status.');
     }
   }
+  
   
 }
