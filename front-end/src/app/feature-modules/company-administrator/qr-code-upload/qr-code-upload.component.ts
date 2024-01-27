@@ -56,7 +56,10 @@ export class QrCodeUploadComponent {
               this.reservation = reservationData;
   
               if (!this.isShowButton()) {
+                // Extract regular user data here
+                this.extractRegularUserData();
                 this.handleRejectedStatus();
+                this.handlePenalization();
               }
             },
             (error: any) => {
@@ -75,6 +78,22 @@ export class QrCodeUploadComponent {
     );
   }
   
+  private extractRegularUserData(): void {
+    if (this.extractedUserId) {
+      this.companyAdministratorService.getRegularUserByUserId(this.extractedUserId).subscribe(
+        (userData: any) => {
+          console.log('Regular User Data:', userData);
+          this.regularUser = userData;
+          // Now that regularUser is extracted, you can proceed with penalization
+          this.handlePenalization();
+        },
+        (error: any) => {
+          console.error('Error getting regular user by user ID:', error);
+        }
+      );
+    }
+  }
+  
   private handleRejectedStatus(): void {
     if (this.reservation) {
       this.reservation.status = ReservationStatus.REJECTED;
@@ -91,6 +110,25 @@ export class QrCodeUploadComponent {
         );
     } else {
       console.warn('No reservation data available to update status.');
+    }
+  }
+
+  private handlePenalization(): void {
+    if(this.regularUser) {
+      this.regularUser.penalties += 2;
+      console.log("Regular user koji se salje: ", this.regularUser);
+
+      this.companyAdministratorService.updateRegularUser(this.regularUser)
+        .subscribe(
+          () => {
+            console.log("Regular user penalized!");
+          },
+          (error: any) => {
+            console.error("error updating regular user:", error);
+          }
+        );
+    } else {
+      console.warn('No regular user data available.');
     }
   }
   
@@ -184,7 +222,7 @@ export class QrCodeUploadComponent {
         }
       );
 
-      this.companyAdministratorService.getRegularUserByUserId(/*this.extractedUserId*/5).subscribe(
+      this.companyAdministratorService.getRegularUserByUserId(this.extractedUserId).subscribe(
         (userData: any) => {
           console.log('Regular User Data:', userData);
           this.user = userData;

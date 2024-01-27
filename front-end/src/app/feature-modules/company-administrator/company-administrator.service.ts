@@ -87,6 +87,10 @@ export class CompanyAdministratorService {
       return this.http.get<Profile>('http://localhost:8080/api/regular/by-user-id/' + userId);
     }
 
+    updateRegularUser(regularUser: Profile): Observable<Profile> {
+      return this.http.put<Profile>(`http://localhost:8080/api/regular/update`, regularUser);
+    }
+
     getReservationById(id: number): Observable<Reservation> {
       return this.http.get<Reservation>('http://localhost:8080/api/reservation/' + id);
     }
