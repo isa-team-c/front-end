@@ -223,9 +223,9 @@ export class QrCodeUploadComponent {
       );
 
       this.companyAdministratorService.getRegularUserByUserId(this.extractedUserId).subscribe(
-        (userData: any) => {
-          console.log('Regular User Data:', userData);
-          this.user = userData;
+        (regularUserData: any) => {
+          console.log('Regular User Data:', regularUserData);
+          this.regularUser = regularUserData;
         },
         (error: any) => {
           console.error('Error getting regular user by user ID:', error);
@@ -258,6 +258,7 @@ export class QrCodeUploadComponent {
   
                 // Send receive confirmation via mail
                 const user: User = this.user!;
+                console.log("OVAJ USER: ", this.user);
                 if (user) {
                   this.companyAdministratorService.sendReceiveConfirmation(user).subscribe(
                     (response) => {
