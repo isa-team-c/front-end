@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
+import { MatTable, MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-taken-reservations',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatTableModule],
   templateUrl: './taken-reservations.component.html',
   styleUrls: ['./taken-reservations.component.css']
 })
@@ -46,8 +47,10 @@ export class TakenReservationsComponent {
     try {
       const compareFunctions = {
         date: (a: Reservation, b: Reservation) => {
-          const dateA = new Date(a.appointment!.startDate).getTime();
-          const dateB = new Date(b.appointment!.startDate).getTime();
+          const dateAString = this.formatDate(a.appointment!.startDate);
+          const dateBString = this.formatDate(b.appointment!.startDate);
+          const dateA = new Date(dateAString).getTime();
+          const dateB = new Date(dateBString).getTime();
           return (this.sortByOrder === 'asc') ? dateA - dateB : dateB - dateA;
         },
         duration: (a: Reservation, b: Reservation) => {

@@ -3,7 +3,7 @@ import { Appointment } from '../../company/model/appointment.model';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { UserService } from '../user.service';
-import { Reservation } from '../../company/model/reservation.model';
+import { Reservation, ReservationStatus } from '../../company/model/reservation.model';
 
 @Component({
   selector: 'app-reserved-appointments',
@@ -13,6 +13,9 @@ import { Reservation } from '../../company/model/reservation.model';
 export class ReservedAppointmentsComponent {
   userId: number | undefined;
   userAppointments: Reservation[] = [];
+  filteredUserAppointments: Reservation[] = [];
+  selectedStatus: ReservationStatus | undefined;
+  isFilterApplied: Boolean = false;
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private service: UserService) {}
 
@@ -29,13 +32,33 @@ export class ReservedAppointmentsComponent {
   loadUserAppointments() {
     this.service.getAllAppointmentsByUserId(this.userId!).subscribe(
       (data) => {
+        //this.filteredUserAppointments = data;
         this.userAppointments = data;
+        this.filteredUserAppointments = [...data];
       },
       (error) => {
         console.error('Error loading appointments:', error);
       }
     );
   }
+
+  filterByStatus() {
+    console.log('status: ', this.selectedStatus)
+    if (this.selectedStatus) {
+      this.filteredUserAppointments = this.userAppointments.filter(
+        reservation => reservation.status === this.selectedStatus
+      );
+      this.isFilterApplied = true;
+    }
+  }
+  
+  resetFilters(): void {
+    this.loadUserAppointments();
+    this.selectedStatus = undefined;
+    console.log('status: ', this.selectedStatus)
+    this.isFilterApplied = false;
+  }
+  
 
   formatDate(date: Date | number[] | string): Date {
     let dateObj: Date;

@@ -6,6 +6,7 @@ import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { Appointment } from '../../company/model/appointment.model';
+import { transformMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'app-upcoming-reservations',
@@ -44,14 +45,29 @@ export class UpcomingReservationsComponent {
   }
 
   onCancelClicked(selectedAppointment: Appointment | undefined) {
-    this.service.cancelAppointment(selectedAppointment!.id, this.userId!).subscribe(
+    const now = new Date();
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    const startDateString = this.formatDate(selectedAppointment!.startDate);
+    const start = new Date(startDateString);
+    const twentyFourHours = tomorrow.getTime() - now.getTime()
+    const timeUntilAppointment = start.getTime() - now.getTime();
+
+    const isPossible =  timeUntilAppointment < twentyFourHours;
+    if (isPossible) {
+      alert('You cannot cancel the reservation because there are less than 24 hours left until the start.');
+      return;
+    }
+    
+      this.service.cancelAppointment(selectedAppointment!.id, this.userId!).subscribe(
       (response) => {
-        console.log('Appointment canceled:', response);
-        alert('Appointment canceled successfully!');
+        console.log('Reservation canceled:', response);
+        alert('Reservation canceled successfully!');
         this.loadReservations();
       },
       (error) => {
-        console.error('Error cancelling appointment:', error);
+        console.error('Error cancelling reservation:', error);
+
       }
     );
   }

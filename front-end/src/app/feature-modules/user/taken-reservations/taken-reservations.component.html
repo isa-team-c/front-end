@@ -6,10 +6,18 @@
 <table class="taken-reservations">
     <thead>
       <tr>
-        <th  (click)="sortReservationsByColumn('date')">Date</th>
-        <th  (click)="sortReservationsByColumn('duration')">Duration</th>
-        <th  (click)="sortReservationsByColumn('price')">Price</th>
-      </tr>
+        <th (click)="sortReservationsByColumn('date')">
+          Datum
+          <span *ngIf="sortByColumn === 'date'" [class]="sortByOrder === 'asc' ? 'arrow-up' : 'arrow-down'"></span>
+        </th>
+        <th (click)="sortReservationsByColumn('duration')">
+          Trajanje
+          <span *ngIf="sortByColumn === 'duration'" [class]="sortByOrder === 'asc' ? 'arrow-up' : 'arrow-down'"></span>
+        </th>
+        <th (click)="sortReservationsByColumn('price')">
+          Cena
+          <span *ngIf="sortByColumn === 'price'" [class]="sortByOrder === 'asc' ? 'arrow-up' : 'arrow-down'"></span>
+        </th>
     </thead>
     <tbody>
       <tr *ngFor="let reservation of reservations">
