@@ -31,12 +31,9 @@
                 </td>
                 <td>{{ equipment.price }}</td>
                 <td>
-                    <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && (!isAdmin && isLogged)" color="primary" (click)="chooseEquipment(equipment)">
-                        +
-                      </button>
-                      <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && (!isAdmin && isLogged) && equipment.isSelected" color="primary" (click)="chooseEquipment(equipment)">
-                        -
-                      </button>
+                  <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && (!isAdmin && isLogged)" color="primary" (click)="chooseEquipment(equipment)">
+                    {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
+                  </button>
                 </td>
               </tr>
             </tbody>
