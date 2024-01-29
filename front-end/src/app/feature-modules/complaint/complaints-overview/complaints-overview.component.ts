@@ -19,7 +19,7 @@ export class ComplaintsOverviewComponent {
   }
 
   loadComplaints() {
-    this.complaintService.getAllComplaints().subscribe(
+    this.complaintService.getAllNotRespondedComplaints().subscribe(
       (data) => {
         this.complaints = data;
         console.log(data)

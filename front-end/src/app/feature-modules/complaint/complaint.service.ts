@@ -13,6 +13,10 @@ export class ComplaintService {
   getAllComplaints(): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/complaint/all`);
   }
+
+  getAllNotRespondedComplaints(): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/complaint/allNotResponded`);
+  }
   
   sendResponse(user: User, text: string) {
     const requestBody = user; // Assuming user is a complete UserDto object
