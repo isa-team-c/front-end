@@ -61,8 +61,8 @@ export class UpcomingReservationsComponent {
     
       this.service.cancelAppointment(selectedAppointment!.id, this.userId!).subscribe(
       (response) => {
-        console.log('Reservation canceled:', response);
-        alert('Reservation canceled successfully!');
+        console.log('Reservation cancelled:', response);
+        alert('Reservation cancelled successfully!');
         this.loadReservations();
       },
       (error) => {
