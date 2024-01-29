@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Reservation } from './model/reservation.model';
 import { Appointment } from './model/appointment.model';
 import { Equipment } from '../user/model/equipment.model';
+import { EquipmentQuantity } from './model/equipmentQuantity.model';
 
 @Injectable({
   providedIn: 'root'
@@ -73,14 +74,9 @@ export class CompanyService {
     return this.http.get<any[]>(`http://localhost:8080/company/${companyId}/appointments`);
   }
 
-  reserveEquipment(equipmentIds: number[], appointmentId: number, userId: number): Observable<Reservation> {
-    const body = {
-      equipmentIds: equipmentIds,
-      appointmentId: appointmentId,
-      userId: userId
-    };
+  reserveEquipment(reservationRequests: EquipmentQuantity[], appointmentId: number, userId: number): Observable<Reservation> {
   
-    return this.http.post<Reservation>(`http://localhost:8080/api/reservation/reserveEquipment/${equipmentIds}/${appointmentId}/${userId}`, {});
+    return this.http.post<Reservation>(`http://localhost:8080/api/reservation/reserveEquipment/${appointmentId}/${userId}`, reservationRequests);
 
   }
 
@@ -99,13 +95,14 @@ export class CompanyService {
     return this.http.get(url, { params: params });
   }
 
-  async createAndReserveAppointment(appointment: Appointment, equipmentIds: number[], userId: number): Promise<any> {
+  async createAndReserveAppointment(appointment: Appointment, reservationRequests: EquipmentQuantity[], userId: number): Promise<any> {
     try {
       const createdAppointment = await this.http.post<any>('http://localhost:8080/api/appointments/generated', appointment).toPromise();
   
+
       if (createdAppointment && createdAppointment.id) {
         // Sačekajte da se kreira sastanak pre nego što pređete na rezervaciju opreme.
-        await this.reserveEquipment(equipmentIds, createdAppointment.id, userId).toPromise();
+        await this.reserveEquipment(reservationRequests, createdAppointment.id, userId).toPromise();
         
         // Možete dodati dodatnu logiku koja će se izvršiti nakon uspešne rezervacije opreme.
       } else {
