@@ -5,4 +5,5 @@ export interface Complaint {
     userDto: User;
     companyDto: Company;
     complaintContent: string;
+    responded: boolean;
   }
