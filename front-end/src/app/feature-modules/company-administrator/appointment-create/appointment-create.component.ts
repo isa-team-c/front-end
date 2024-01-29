@@ -59,7 +59,7 @@ export class AppointmentCreateComponent {
         isFree: true
       };
 
-      this.service.saveGeneratedAppointment(newAppointment)
+      this.service.createAppointment(newAppointment, this.administratorId)
         .subscribe(
           () => {
             alert('Appointment created successfully!');
@@ -67,6 +67,7 @@ export class AppointmentCreateComponent {
           },
           (error) => {
             console.error('Error creating appointment:', error);
+            alert('Unfortunately, the appointment overlaps with an already existing appointment.')
             // Obrada grešaka prilikom kreiranja termina
           }
         );

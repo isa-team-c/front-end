@@ -111,7 +111,7 @@
       <tr>
         <th>Start Date</th>
         <th>Duration</th>
-        <th>Is Available</th>
+        <th>Administrator</th>
         <th></th>
       </tr>
     </thead>
@@ -119,7 +119,7 @@
       <tr *ngFor="let appointment of generatedAppointments">
         <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ appointment.duration }}</td>
-        <td>{{ appointment.isFree }}</td>
+        <td>{{ appointment.companyAdministrator?.id }}</td>
         <td>
           <button class="schedule-button" (click)="bookAppointment(appointment)" >
               Schedule
