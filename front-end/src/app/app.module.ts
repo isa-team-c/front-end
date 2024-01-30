@@ -25,6 +25,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
+import { NgChartsModule } from 'ng2-charts';
+
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -48,6 +51,9 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     ReactiveFormsModule,
     LayoutModule,
     NavbarComponent,
+    NgChartsModule,
+ 
+   
   ],
   providers: [ 
     {

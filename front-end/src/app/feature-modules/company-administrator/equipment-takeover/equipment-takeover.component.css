@@ -1,0 +1,41 @@
+.upcoming-reservations {
+    width: 70%;
+    margin-top: 70px;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .upcoming-reservations th, .upcoming-reservations td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .upcoming-reservations th {
+    background-color: #f2f2f2;
+  }
+  
+  .upcoming-reservations-title-section {
+    text-align: center; /* Centrirajte naslov */
+    margin-top: 20px; /* Dodajte malo vrhunskog margina naslovu */
+    margin-bottom: 20px; /* Dodajte malo margine naslovu sa dna */
+  }
+  
+  .upcoming-reservations-title {
+    color: #333; /* Boja teksta */
+  }
+  
+  /* Dodatni stil za dugme */
+  .upcoming-reservations button {
+    border: 1px solid #3498db; /* Boja ivice dugmeta */
+    color: #3498db; /* Boja teksta dugmeta */
+    padding: 5px 10px; /* Prostor unutar dugmeta */
+    cursor: pointer; /* Pokazivač ruke kada se pređe preko dugmeta */
+    transition: background-color 0.3s; /* Glatki prelaz boje pozadine */
+  }
+  
+  .upcoming-reservations button:hover {
+    background-color: #3498db; /* Boja pozadine kada se pređe preko dugmeta */
+    color: #fff; /* Boja teksta kada se pređe preko dugmeta */
+  }
+  

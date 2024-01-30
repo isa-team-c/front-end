@@ -11,6 +11,10 @@ import { WorkCalendarComponent } from './work-calendar/work-calendar.component';
 
 //kalendar
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
+import { EquipmentTakeoverComponent } from './equipment-takeover/equipment-takeover.component';
+import { AppointmentStatisticsComponent } from './appointment-statistics/appointment-statistics.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ReservationStatisticsComponent } from './reservation-statistics/reservation-statistics.component';
 
 
 
@@ -21,12 +25,16 @@ import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular
     AppointmentCreateComponent,
     ChangePasswordCompanyAdminComponent,
     ChangePasswordFirstTimeComponent,
-    WorkCalendarComponent
+    WorkCalendarComponent,
+    EquipmentTakeoverComponent,
+    AppointmentStatisticsComponent,
+    ReservationStatisticsComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FullCalendarModule,
+    NgChartsModule
   ],
   exports: [
     FullCalendarModule,

@@ -68,6 +68,38 @@ export class CompanyAdministratorService {
       return this.http.post<Appointment>(`http://localhost:8080/api/appointments/generatedAppointment`, appointmentDto)
         
     }
+
+    getAppointmentCountByYear(companyId: number, year: number): Observable<number> {
+      return this.http.get<number>(`http://localhost:8080/api/appointments/count/year?companyId=${companyId}&year=${year}`);
+    }
+  
+    
+    getAppointmentCountsByQuarter(companyId: number, year: number): Observable<number[]> {
+      return this.http.get<number[]>(`http://localhost:8080/api/appointments/count/quarter?companyId=${companyId}&year=${year}`);
+    }
+  
+   
+    getAppointmentCountsByMonth(companyId: number, year: number, month: number): Observable<number[]> {
+      return this.http.get<number[]>(`http://localhost:8080/api/appointments/count/month?companyId=${companyId}&year=${year}&month=${month}`);
+    }
+
+    getReservationCountByYear(companyId: number, year: number): Observable<number> {
+      return this.http.get<number>(`http://localhost:8080/api/reservation/count/year?companyId=${companyId}&year=${year}`);
+    }
+  
+    
+    getReservationCountsByQuarter(companyId: number, year: number): Observable<number[]> {
+      return this.http.get<number[]>(`http://localhost:8080/api/reservation/count/quarter?companyId=${companyId}&year=${year}`);
+    }
+  
+   
+    getReservationCountsByMonth(companyId: number, year: number, month: number): Observable<number[]> {
+      return this.http.get<number[]>(`http://localhost:8080/api/reservation/count/month?companyId=${companyId}&year=${year}&month=${month}`);
+    }
+
+    getReservationPriceByYear(companyId: number, year: number): Observable<number> {
+      return this.http.get<number>(`http://localhost:8080/api/reservation/price/year?companyId=${companyId}&year=${year}`);
+    }
 }
 
 

@@ -65,6 +65,7 @@ export class CompanyOverviewComponent {
         this.getUserProfile(this.userId!);
       
       }
+      
       }
     })
     this.route.paramMap.subscribe((params) => {
@@ -78,7 +79,7 @@ export class CompanyOverviewComponent {
     })
     this.loadEquipment();
     this.loadAppointments();
-
+   
     this.userService.getAllAppointmentsByUserId(this.userId!).subscribe(
       (appointments) => {
         this.userAppointments = appointments;
@@ -318,5 +319,7 @@ getUserProfile(userId: number) {
     console.log('Uspesno dobijen profil:', this.profile);
   });
 }
+
+
 
 }

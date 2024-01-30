@@ -1,0 +1,23 @@
+<!-- Dodajte ovu sekciju u vašu HTML datoteku -->
+<div *ngIf="isAdmin && isLogged">
+    <h2 class="title">Users with Taken Reservations</h2>
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <!-- Dodajte više kolona prema informacijama o korisnicima koje želite prikazati -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of reservedUsers">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <!-- Dodajte više ćelija prema informacijama o korisnicima koje želite prikazati -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

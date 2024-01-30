@@ -13,8 +13,8 @@ export class Reservation {
 }  
 
 export enum ReservationStatus {
-	CANCELLED,
-	PENDING,
-	REJECTED,
-	TAKEN
+  CANCELLED = 'CANCELLED',
+  PENDING = 'PENDING',
+  REJECTED = 'REJECTED',
+  TAKEN = 'TAKEN'
   }
