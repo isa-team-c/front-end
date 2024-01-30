@@ -110,6 +110,7 @@ export class CompanyService {
       }
     } catch (error) {
       console.error('Došlo je do greške prilikom kreiranja sastanka ili rezervacije opreme:', error);
+      alert('Unfortunately, the appointment you are trying to schedule is no longer available.');
       // Ovde možete rukovati greškom ili je proslediti dalje.
     }}
     

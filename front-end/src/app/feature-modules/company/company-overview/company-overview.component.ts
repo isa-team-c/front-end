@@ -362,7 +362,9 @@ async bookAppointment(appointment: Appointment) {
       this.router.navigate(['/reserved-appointments']);
     } catch (error) {
       console.error('Error reserving equipment:', error);
+      alert('Unfortunately, the appointment you are trying to schedule is no longer available.');
     }
+    this.router.navigate(['/reserved-appointments']);
   } else {
     console.warn('No equipment selected for reservation.');
   }
