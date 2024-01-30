@@ -7,6 +7,7 @@ import { Reservation } from './model/reservation.model';
 import { Appointment } from './model/appointment.model';
 import { Equipment } from '../user/model/equipment.model';
 import { EquipmentQuantity } from './model/equipmentQuantity.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -132,5 +133,9 @@ export class CompanyService {
     return this.http.post<Company>(`http://localhost:8080/api/equipment/${companyId}/addToCompany`, equipment);
   }
   
+  getUsersWithTakenReservationsByCompanyId(companyId: number): Observable<User[]> {
+    
+    return this.http.get<User[]>(`http://localhost:8080/company/${companyId}/users-with-taken-reservations`);
+  }
 
 }

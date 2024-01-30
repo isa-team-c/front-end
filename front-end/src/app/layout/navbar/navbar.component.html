@@ -5,7 +5,15 @@
         <mat-menu #menu="matMenu">
             <button mat-menu-item color="primary" [routerLink]="['companies']">Companies</button>
             <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [routerLink]="['profile']">Profile</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['company-administrator-update']">Profile</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['work-calendar']">Work calendar</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['appointment-create']">Create new appointments</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['equipment-takeover']">Equipment takeover</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['users-with-equipment-reservations']">Users with equipment reservation</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['appointment-statistics']">Appointment statistics</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['reservation-statistics']">Reservation statistics</button>
             <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [matMenuTriggerFor]="reservationsMenu">
+           
                 Reservations
             </button>
             <mat-menu #reservationsMenu="matMenu">

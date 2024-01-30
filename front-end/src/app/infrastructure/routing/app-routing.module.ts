@@ -27,6 +27,10 @@ import { HomeComponent } from 'src/app/layout/home/home.component';
 import { TakenReservationsComponent } from 'src/app/feature-modules/user/taken-reservations/taken-reservations.component';
 import { UpcomingReservationsComponent } from 'src/app/feature-modules/user/upcoming-reservations/upcoming-reservations.component';
 import { QrCodeUploadComponent } from 'src/app/feature-modules/company-administrator/qr-code-upload/qr-code-upload.component';
+import { UsersWithEquipmentReservationsComponent } from 'src/app/feature-modules/company/users-with-equipment-reservations/users-with-equipment-reservations.component';
+import { EquipmentTakeoverComponent } from 'src/app/feature-modules/company-administrator/equipment-takeover/equipment-takeover.component';
+import { AppointmentStatisticsComponent } from 'src/app/feature-modules/company-administrator/appointment-statistics/appointment-statistics.component';
+import { ReservationStatisticsComponent } from 'src/app/feature-modules/company-administrator/reservation-statistics/reservation-statistics.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -56,6 +60,11 @@ const routes: Routes = [
   { path: 'pickup-history', component: TakenReservationsComponent},
   { path: 'upcoming-reservations', component: UpcomingReservationsComponent},
   { path: 'qr-code-upload', component: QrCodeUploadComponent},
+  { path: 'users-with-equipment-reservations', component: UsersWithEquipmentReservationsComponent},
+  { path: 'equipment-takeover', component: EquipmentTakeoverComponent},
+  { path: 'appointment-statistics', component: AppointmentStatisticsComponent},
+  { path: 'reservation-statistics', component: ReservationStatisticsComponent},
+
 ];
 
 @NgModule({

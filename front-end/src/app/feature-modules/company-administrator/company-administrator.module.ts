@@ -12,6 +12,10 @@ import { WorkCalendarComponent } from './work-calendar/work-calendar.component';
 //kalendar
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { QrCodeUploadComponent } from './qr-code-upload/qr-code-upload.component';
+import { EquipmentTakeoverComponent } from './equipment-takeover/equipment-takeover.component';
+import { AppointmentStatisticsComponent } from './appointment-statistics/appointment-statistics.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ReservationStatisticsComponent } from './reservation-statistics/reservation-statistics.component';
 
 
 
@@ -23,12 +27,16 @@ import { QrCodeUploadComponent } from './qr-code-upload/qr-code-upload.component
     ChangePasswordCompanyAdminComponent,
     ChangePasswordFirstTimeComponent,
     WorkCalendarComponent,
-    QrCodeUploadComponent
+    QrCodeUploadComponent,
+    EquipmentTakeoverComponent,
+    AppointmentStatisticsComponent,
+    ReservationStatisticsComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FullCalendarModule,
+    NgChartsModule
   ],
   exports: [
     FullCalendarModule,

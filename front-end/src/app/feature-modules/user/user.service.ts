@@ -8,6 +8,7 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Administrator } from 'src/app/infrastructure/auth/model/administrator.model';
 import { User2 } from 'src/app/infrastructure/auth/model/user2.model';
 import { Appointment } from '../company/model/appointment.model';
+import { Reservation, ReservationStatus } from '../company/model/reservation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +83,34 @@ export class UserService {
   cancelAppointment(appointmentId: number, userId: number): Observable<string> {
     return this.http.put(`http://localhost:8080/api/appointments/cancel/${appointmentId}/${userId}`, {}, { responseType: 'text' });
   }
+
+  getAllReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>('http://localhost:8080/api/reservation/allReservations');
+  }
+
+   getAllReservationsForCompany(companyId: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`http://localhost:8080/api/reservation/allReservationsForCompany/${companyId}`);
+  }
+
+  updateReservationStatus(reservationId: number, status: ReservationStatus): Observable<void> {
+    const url = `http://localhost:8080/api/reservation/${reservationId}/update-status?status=${status}`;
+    return this.http.put<void>(url, {});
+  }
+
+  
+
+  sendEquipmentTakeoverConfirmation(user: User) {
+    const requestBody = user;
+    return this.http.post('http://localhost:8080/user/auth/sendConfirmationForEquipmentTakeover/', requestBody);
+  }
+
+  
+
+  reduceEquipmentQuantity(companyId: number, reservation: Reservation): Observable<void> {
+    const url = `http://localhost:8080/api/equipment/reduceQuantity/${companyId}`;
+    return this.http.post<void>(url, reservation);
+  }
+
+  
   
 }

@@ -14,6 +14,7 @@ import { CompanyOverviewComponent } from './company-overview/company-overview.co
 import { EquipmentOverviewForCompanyComponent } from './equipment-overview-for-company/equipment-overview-for-company.component';
 import { CreateEquipmentComponent } from './create-equipment/create-equipment.component';
 import { UpdateEquipmentComponent } from './update-equipment/update-equipment.component';
+import { UsersWithEquipmentReservationsComponent } from './users-with-equipment-reservations/users-with-equipment-reservations.component';
 
 
 
@@ -25,6 +26,7 @@ import { UpdateEquipmentComponent } from './update-equipment/update-equipment.co
     EquipmentOverviewForCompanyComponent,
     CreateEquipmentComponent,
     UpdateEquipmentComponent,
+    UsersWithEquipmentReservationsComponent,
     
  
   ],

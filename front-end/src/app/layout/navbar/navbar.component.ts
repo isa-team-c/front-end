@@ -19,6 +19,7 @@ export class NavbarComponent {
 
   user: User | undefined;
   isRegular!: boolean;
+  isCompanyAdmin: boolean = false;
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) {}
 
@@ -28,10 +29,18 @@ export class NavbarComponent {
     this.authService.user$.subscribe(user => {
       this.user = user;
       if (user.id!=0) {
-        if(user.role.name === 'ROLE_REGULAR_USER'){
+        if (user.role.name === 'ROLE_REGULAR_USER') {
           this.isRegular = true;
         
-        }}});
+        } else if (user.role.name === 'ROLE_COMPANY_ADMIN') {
+         
+          this.isCompanyAdmin = true;
+        } else {
+          this.isRegular = false;
+          this.isCompanyAdmin = false;
+        }
+        
+        }});
   }
 
 

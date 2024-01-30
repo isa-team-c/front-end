@@ -1,0 +1,30 @@
+<div>
+    <div class="upcoming-reservations-title-section">
+      <h1 class="upcoming-reservations-title">All Reservations</h1>
+    </div>
+    <table class="upcoming-reservations">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ formatDate(reservation.appointment?.startDate || '') | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ reservation.appointment?.duration }}</td>
+          <td>{{ reservation.price }}</td>
+          <td>{{ reservation.status }}</td>
+          <td>
+            <button mat-stroked-button color="primary" (click)="allowEquipmentTakeover(reservation)">
+              Allow
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

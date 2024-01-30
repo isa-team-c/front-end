@@ -1,0 +1,57 @@
+<!-- appointment-statistics.component.html -->
+
+<form [formGroup]="filterForm">
+    <div>
+      <label for="selectedYear">Year:</label>
+      <select id="selectedYear" formControlName="selectedYear" (change)="onYearChange()">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+    
+    <div style="display: block;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [type]="barChartType">
+        </canvas>
+      </div>
+      
+      <div style="display: block; margin-top: 20px;" *ngIf="totalAppointmentsChartData.length > 0">
+        <!-- Grafikon za ukupan broj termina tokom poslednjih pet godina -->
+        <canvas baseChart
+                [datasets]="totalAppointmentsChartData"
+                [labels]="totalAppointmentsChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [type]="barChartType">
+        </canvas>
+      </div>
+      
+      <div style="display: block; margin-top: 120px;" *ngIf="monthlyChartData.length > 0">
+        <!-- Grafikon za mesečni broj termina u odabranoj godini -->
+        <canvas baseChart
+                [datasets]="monthlyChartData"
+                [labels]="monthlyChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [type]="barChartType">
+        </canvas>
+      </div>
+      
+      <div style="display: block; margin-top: 120px;" *ngIf="quarterlyChartData.length > 0">
+        <!-- Grafikon za kvartalni broj termina u odabranoj godini -->
+        <canvas baseChart
+                [datasets]="quarterlyChartData"
+                [labels]="quarterlyChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [type]="barChartType">
+        </canvas>
+      </div>
+</form>
+
+<div class="company-income-label">
+    <label>Company Income: {{ totalPrice }}</label>
+</div>
