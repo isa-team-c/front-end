@@ -19,7 +19,7 @@ export class ComplaintsOverviewComponent {
   }
 
   loadComplaints() {
-    this.complaintService.getAllComplaints().subscribe(
+    this.complaintService.getAllNotRespondedComplaints().subscribe(
       (data) => {
         this.complaints = data;
         console.log(data)
@@ -37,16 +37,43 @@ export class ComplaintsOverviewComponent {
   onSubmit(complaint: Complaint) {
     const responseText = this.responseForm.get('response')?.value;
     const user: User = complaint.userDto;
+  
     if (responseText && user) {
-      this.complaintService.sendResponse(user, responseText).subscribe(
-        (response) => {
-          alert('Response has been sent via mail!');
+      // Update the complaint locally
+      complaint.responded = true;
+      console.log("Complaint after responding", complaint);
+  
+      // Call the service to update the complaint on the server
+      this.complaintService.updateComplaint(complaint).subscribe(
+        (updatedComplaint) => {
+          // The complaint is updated on the server
+          console.log('Complaint updated successfully:', updatedComplaint);
+  
+          // Now, proceed to send the email response
+          this.complaintService.sendResponse(user, responseText).subscribe(
+            (response) => {
+              // Email sent successfully
+              alert('Response has been sent via mail!');
+              
+              // Now, refresh the page
+              this.refreshPage();
+            },
+            (error) => {
+              // Handle error if the response fails to send
+              console.error('Error sending response:', error);
+            }
+          );
         },
         (error) => {
-          // Handle error if the response fails to send
-          console.error('Error sending response:', error);
+          // Handle error if the complaint update fails
+          console.error('Error updating complaint:', error);
         }
       );
     }
+  }
+  
+  refreshPage() {
+    // You can reload the complaints here or call any other necessary function
+    this.loadComplaints();
   }
 }

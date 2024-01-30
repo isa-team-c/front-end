@@ -11,6 +11,10 @@ import { Profile } from '../../user/model/profile.model';
 import { Role } from 'src/app/infrastructure/auth/model/role.model';
 import { UserService } from '../../user/user.service';
 
+interface TemporaryQuantities {
+  [equipmentId: number]: number;
+}
+
 @Component({
   selector: 'app-company-overview',
   templateUrl: './company-overview.component.html',
@@ -38,6 +42,7 @@ export class CompanyOverviewComponent {
   shouldRenderGeneratedAppointments: boolean = false;
   selectedGeneratedAppointment: Appointment | null = null;
   userAppointments: Appointment[] = [];
+  temporaryQuantities: TemporaryQuantities = {};
 
   constructor(private route: ActivatedRoute, 
               private service: CompanyService,
@@ -115,8 +120,6 @@ export class CompanyOverviewComponent {
 
 
 
-// ...
-
 chooseEquipment(equipment: Equipment) {
   if (this.selectedEquipmentIds.includes(equipment.id)) {
     // Ako je oprema već izabrana, poništi izbor
@@ -131,7 +134,7 @@ chooseEquipment(equipment: Equipment) {
   }
 
   this.showAppointments = this.selectedEquipmentIds.length > 0;
-  }
+}
 
 // ...
 
@@ -159,6 +162,19 @@ chooseAppointment(appointment: Appointment) {
   });
 }
 
+
+onQuantityChangeClicked(equipment: Equipment, action: 'increase' | 'decrease') {
+  if (!this.temporaryQuantities[equipment.id]) {
+    this.temporaryQuantities[equipment.id] = 0;
+  }
+
+  if (action === 'increase' && this.temporaryQuantities[equipment.id] < equipment.quantity - equipment.reservedQuantity) {
+    this.temporaryQuantities[equipment.id]++;
+  } else if (action === 'decrease' && this.temporaryQuantities[equipment.id] > 0) {
+    this.temporaryQuantities[equipment.id]--;
+  }
+}
+
 reserveEquipment() {
   if (this.selectedEquipmentIds.length > 0 && this.selectedAppointment) {
     if (this.profile?.penalties! > 2) {
@@ -170,25 +186,54 @@ reserveEquipment() {
       return;
     }
 
+    const reservationRequests = this.companyEquipment
+    .filter(equipment => this.temporaryQuantities[equipment.id] > 0)
+    .map(equipment => ({
+      equipmentId: equipment.id,
+      quantity: this.temporaryQuantities[equipment.id]
+    }));
+
+    if (reservationRequests.length === 0) {
+      alert('You did not select any equipment');
+      return;
+    }
+
     this.service.reserveEquipment(
-        this.selectedEquipmentIds,
+        reservationRequests,
         this.selectedAppointment!.id,
         this.userId!
       )
       .subscribe(
         (response) => {
             alert('Equipment reserved successfully');
-            this.loadEquipment();
-            this.loadAppointments();
+            this.router.navigate(['/upcoming-reservations']);
+            //this.loadEquipment();
+            //this.loadAppointments();
+            this.temporaryQuantities = {};
         },
         (error) => {
           // Handle reservation error
           if (error.status === 400) {
-            alert('Failed to reserve equipment. Please try again.'); // or display an error message on the UI
-          } else if (error.status === 500) {
+            alert('Failed to reserve equipment. Please try again.'); 
+            this.loadEquipment();
+            this.showAppointments = false;
+          } else if (error.status === 409) {
+            alert('Equipment or appointment not available for reservation. Please try again.');
+            this.loadEquipment();
+            this.loadAppointments();
+          }
+          else if (error.status === 403) {
+            alert('The selected appointment overlaps with an existing reservation.');
+            this.selectedEquipmentIds = [];
+            this.temporaryQuantities = {};
+            this.loadEquipment();
+            this.showAppointments = false;
+          }
+          else if (error.status === 500) {
             alert('Error during equipment reservation. Please contact support.'); // or display an error message on the UI
           } else {
             alert('An unexpected error occurred.'); // or display an error message on the UI
+            this.showAppointments = false;
           }
         }
       );
@@ -293,19 +338,33 @@ async bookAppointment(appointment: Appointment) {
     }
   });
 
-  if (this.selectedEquipmentIds.length > 0 && this.selectedGeneratedAppointment) {
+  const reservationRequests = this.companyEquipment
+    .filter(equipment => this.temporaryQuantities[equipment.id] > 0)
+    .map(equipment => ({
+      equipmentId: equipment.id,
+      quantity: this.temporaryQuantities[equipment.id]
+    }));
+
+    if (reservationRequests.length === 0) {
+      alert('You did not select any equipment');
+      return;
+    }
+
+  if (reservationRequests.length > 0 && this.selectedGeneratedAppointment) {
     try {
       await this.service.createAndReserveAppointment(
         this.selectedGeneratedAppointment,
-        this.selectedEquipmentIds,
+        reservationRequests,
         this.userId!
       );
 
-      console.log('Equipment reservation successfully created.');
+      //console.log('Equipment reservation successfully created.');
       this.router.navigate(['/reserved-appointments']);
     } catch (error) {
       console.error('Error reserving equipment:', error);
+      alert('Unfortunately, the appointment you are trying to schedule is no longer available.');
     }
+    this.router.navigate(['/reserved-appointments']);
   } else {
     console.warn('No equipment selected for reservation.');
   }

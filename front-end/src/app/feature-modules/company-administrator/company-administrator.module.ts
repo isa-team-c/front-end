@@ -11,6 +11,7 @@ import { WorkCalendarComponent } from './work-calendar/work-calendar.component';
 
 //kalendar
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
+import { QrCodeUploadComponent } from './qr-code-upload/qr-code-upload.component';
 
 
 
@@ -21,7 +22,8 @@ import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular
     AppointmentCreateComponent,
     ChangePasswordCompanyAdminComponent,
     ChangePasswordFirstTimeComponent,
-    WorkCalendarComponent
+    WorkCalendarComponent,
+    QrCodeUploadComponent
   ],
   imports: [
     CommonModule,

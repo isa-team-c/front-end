@@ -5,6 +5,10 @@ import { Company } from 'src/app/infrastructure/auth/model/company.model';
 import { Router } from '@angular/router';
 import { CompanyAdministrator } from 'src/app/infrastructure/auth/model/company-administrator.model';
 import { Appointment } from 'src/app/infrastructure/auth/model/appointment.model';
+import { Reservation } from '../company/model/reservation.model';
+import { Profile } from '../user/model/profile.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Equipment } from '../user/model/equipment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +71,48 @@ export class CompanyAdministratorService {
     saveAppointment(appointmentDto: Appointment): Observable<Appointment> {
       return this.http.post<Appointment>(`http://localhost:8080/api/appointments/generatedAppointment`, appointmentDto)
         
+    }
+
+
+    // qr code
+    uploadQRCodeImage(file: File): Observable<any> {
+      const formData: FormData = new FormData();
+      formData.append('file', file);
+  
+      return this.http.post(`http://localhost:8080/api/qrcode/upload`, formData, { responseType: 'text' });
+    }
+
+    getUserById(id: number): Observable<Profile> {
+      return this.http.get<Profile>('http://localhost:8080/user/' + id);
+    }
+
+    getRegularUserByUserId(userId: number): Observable<Profile> {
+      return this.http.get<Profile>('http://localhost:8080/api/regular/by-user-id/' + userId);
+    }
+
+    updateRegularUser(regularUser: Profile): Observable<Profile> {
+      return this.http.put<Profile>(`http://localhost:8080/api/regular/update`, regularUser);
+    }
+
+    getReservationById(id: number): Observable<Reservation> {
+      return this.http.get<Reservation>('http://localhost:8080/api/reservation/' + id);
+    }
+
+    updateReservationStatus(reservation: Reservation): Observable<Reservation> {
+      return this.http.put<Reservation>('http://localhost:8080/api/reservation/updateStatus', reservation);
+    }
+
+    sendReceiveConfirmation(user: User) {
+      const requestBody = user;
+      return this.http.post('http://localhost:8080/user/auth/sendConfirmation/', requestBody);
+    }
+
+    getEquipmentById(equipmentId: number): Observable<Equipment> {
+      return this.http.get<Equipment>(`http://localhost:8080/api/equipment/${equipmentId}`);
+    }
+
+    updateEquipment(equipment: Equipment): Observable<Equipment> {
+      return this.http.put<Equipment>(`http://localhost:8080/api/equipment/update`, equipment);
     }
 }
 

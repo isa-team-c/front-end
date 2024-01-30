@@ -14,6 +14,7 @@
                 <th>Quantity</th>
                 <th>Price</th>
                 <th *ngIf="!isAdmin && isLogged">Action</th>
+                <th *ngIf="!isAdmin && isLogged">Qauntity </th>
               </tr>
             </thead>
             <tbody>
@@ -31,9 +32,14 @@
                 </td>
                 <td>{{ equipment.price }}</td>
                 <td>
-                    <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && (!isAdmin && isLogged)" color="primary" (click)="chooseEquipment(equipment)">
-                        {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
-                      </button>
+                  <button mat-stroked-button *ngIf="equipment.quantity - equipment.reservedQuantity > 0 && (!isAdmin && isLogged)" color="primary" (click)="chooseEquipment(equipment)">
+                    {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
+                  </button>
+                </td>
+                <td *ngIf="(!isAdmin && isLogged)">
+                  <button class="quantity-button" (click)="onQuantityChangeClicked(equipment, 'decrease')" >-</button>
+                  <span class="selected-quantity">{{ temporaryQuantities[equipment.id] || 0 }}</span>
+                  <button class="quantity-button" (click)="onQuantityChangeClicked(equipment, 'increase')">+</button>
                 </td>
               </tr>
             </tbody>
@@ -60,6 +66,7 @@
                       {{ appointment.isSelected ? 'Unchoose' : 'Choose' }}
                     </button>
                   </td>
+                  
                 </tr>
                 <tr *ngIf="isAdmin && isLogged" >
                   <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
@@ -111,7 +118,7 @@
       <tr>
         <th>Start Date</th>
         <th>Duration</th>
-        <th>Is Available</th>
+        <th>Administrator</th>
         <th></th>
       </tr>
     </thead>
@@ -119,7 +126,7 @@
       <tr *ngFor="let appointment of generatedAppointments">
         <td>{{ formatDate(appointment.startDate) | date: 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ appointment.duration }}</td>
-        <td>{{ appointment.isFree }}</td>
+        <td>{{ appointment.companyAdministrator?.id }}</td>
         <td>
           <button class="schedule-button" (click)="bookAppointment(appointment)" >
               Schedule

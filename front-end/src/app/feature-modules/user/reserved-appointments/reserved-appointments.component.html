@@ -2,6 +2,16 @@
   <div class="appointments-title-section">
     <h1 class="appointments-title">My reservations</h1>
 </div>
+<div class="status-filter-section">
+  <label>Status </label>
+  <select [(ngModel)]="selectedStatus">
+    <option value="PENDING">Pending</option>
+    <option value="REJECTED">Rejected</option>
+    <option value="TAKEN">Taken</option>
+  </select>
+  <button mat-raised-button color="primary" (click)="filterByStatus()">Filter</button>
+  <button mat-raised-button color="primary" *ngIf="isFilterApplied" mat-raised-button (click)="resetFilters()">Reset</button>
+</div>
     <table class="appointments-table">
         <thead>
           <tr>
@@ -12,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let reservation of userAppointments">
+          <tr *ngFor="let reservation of filteredUserAppointments">
             <td>
               <img class="qr" [src]="'http://localhost:8080/' + reservation.qrCode" alt="QR Code">
 

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Complaint } from 'src/app/infrastructure/auth/model/complaint.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Injectable({
@@ -12,6 +13,14 @@ export class ComplaintService {
 
   getAllComplaints(): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8080/complaint/all`);
+  }
+
+  getAllNotRespondedComplaints(): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/complaint/allNotResponded`);
+  }
+
+  updateComplaint(complaint: Complaint): Observable<Complaint> {
+    return this.http.put<Complaint>(`http://localhost:8080/complaint/updateResponded`, complaint);
   }
   
   sendResponse(user: User, text: string) {

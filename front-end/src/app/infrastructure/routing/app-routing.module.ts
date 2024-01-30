@@ -26,6 +26,7 @@ import { WorkCalendarComponent } from 'src/app/feature-modules/company-administr
 import { HomeComponent } from 'src/app/layout/home/home.component';
 import { TakenReservationsComponent } from 'src/app/feature-modules/user/taken-reservations/taken-reservations.component';
 import { UpcomingReservationsComponent } from 'src/app/feature-modules/user/upcoming-reservations/upcoming-reservations.component';
+import { QrCodeUploadComponent } from 'src/app/feature-modules/company-administrator/qr-code-upload/qr-code-upload.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'work-calendar', component: WorkCalendarComponent},
   { path: 'pickup-history', component: TakenReservationsComponent},
   { path: 'upcoming-reservations', component: UpcomingReservationsComponent},
+  { path: 'qr-code-upload', component: QrCodeUploadComponent},
 ];
 
 @NgModule({
