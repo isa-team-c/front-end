@@ -36,7 +36,7 @@
                     {{ equipment.isSelected ? 'Unchoose' : 'Choose' }}
                   </button>
                 </td>
-                <td *ngIf="(!isAdmin && isLogged)">
+                <td *ngIf="(!isAdmin && isLogged && equipment.isSelected )">
                   <button class="quantity-button" (click)="onQuantityChangeClicked(equipment, 'decrease')" >-</button>
                   <span class="selected-quantity">{{ temporaryQuantities[equipment.id] || 0 }}</span>
                   <button class="quantity-button" (click)="onQuantityChangeClicked(equipment, 'increase')">+</button>

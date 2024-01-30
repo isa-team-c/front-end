@@ -108,7 +108,7 @@ export class ReservationStatisticsComponent {
     const chartData: ChartDataset[] = [
       {
         data: flattenedCountsArray,
-        label: 'Appointments by Month',
+        label: 'Reservations by Month',
         backgroundColor: this.generateRandomColors(flattenedCountsArray.length)
       }
     ];
