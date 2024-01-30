@@ -68,7 +68,7 @@ export class AppointmentCreateComponent {
           (error) => {
             console.error('Error creating appointment:', error);
             alert('Unfortunately, the appointment overlaps with an already existing appointment.')
-            // Obrada grešaka prilikom kreiranja termina
+            
           }
         );
     }
