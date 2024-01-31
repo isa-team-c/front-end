@@ -12,6 +12,8 @@
             <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['users-with-equipment-reservations']">Users with equipment reservation</button>
             <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['appointment-statistics']">Appointment statistics</button>
             <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['reservation-statistics']">Reservation statistics</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isCompanyAdmin" [routerLink]="['qr-code-upload']">QR code upload</button>
+            <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isAdmin" [routerLink]="['complaints-overview']">Complaints overview</button>
             <button mat-menu-item color="primary" *ngIf="isUserLoggedIn() && isRegular" [matMenuTriggerFor]="reservationsMenu">
            
                 Reservations

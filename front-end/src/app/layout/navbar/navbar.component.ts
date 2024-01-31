@@ -20,6 +20,7 @@ export class NavbarComponent {
   user: User | undefined;
   isRegular!: boolean;
   isCompanyAdmin: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) {}
 
@@ -28,20 +29,30 @@ export class NavbarComponent {
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
-      if (user.id!=0) {
+  
+      if (user.id !== 0) {
         if (user.role.name === 'ROLE_REGULAR_USER') {
           this.isRegular = true;
-        
+          this.isCompanyAdmin = false;
+          this.isAdmin = false;
         } else if (user.role.name === 'ROLE_COMPANY_ADMIN') {
-         
+          this.isRegular = false;
           this.isCompanyAdmin = true;
-        } else {
+          this.isAdmin = false;
+        } else if (user.role.name === 'ROLE_ADMIN') {
           this.isRegular = false;
           this.isCompanyAdmin = false;
+          this.isAdmin = true;
+        } else {
+          // Handle other roles if needed
+          this.isRegular = false;
+          this.isCompanyAdmin = false;
+          this.isAdmin = false;
         }
-        
-        }});
+      }
+    });
   }
+  
 
 
   register(){
