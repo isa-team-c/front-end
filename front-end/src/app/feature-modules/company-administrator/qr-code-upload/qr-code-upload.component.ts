@@ -28,6 +28,8 @@ export class QrCodeUploadComponent {
 
   regularUser: Profile | undefined;
 
+  extractedEquipmentQuantity: number | undefined;
+
   constructor(private companyAdministratorService: CompanyAdministratorService) {}
 
   isShowButton(): boolean {
@@ -47,6 +49,7 @@ export class QrCodeUploadComponent {
         this.extractAppoitmentDuration(data);
         this.calculateEndDate();
         this.extractUserId(data);
+        this.extractEquipmentQuantity(data);
   
         // Move the reservation extraction here
         if (this.extractedReservationId) {
@@ -204,6 +207,12 @@ export class QrCodeUploadComponent {
     }
   }
 
+  private extractEquipmentQuantity(qrCodeData: string): void {
+    const equipmentQuantityMatch = qrCodeData.match(/Quantity: (\d+)/);
+    this.extractedEquipmentQuantity = equipmentQuantityMatch ? +equipmentQuantityMatch[1] : undefined;
+    console.log('Extracted Equipment Quantity:', this.extractedEquipmentQuantity);
+  }
+
 
 
   private extractUserId(qrCodeData: string): void {
@@ -249,7 +258,7 @@ export class QrCodeUploadComponent {
   
           // Decrease equipment quantity by 1
           if (this.equipment && this.equipment.quantity && this.equipment.quantity > 0) {
-            this.equipment.quantity -= 1;
+            this.equipment.quantity -= this.extractedEquipmentQuantity!;
   
             // Update equipment quantity
             this.companyAdministratorService.updateEquipment(this.equipment).subscribe(
